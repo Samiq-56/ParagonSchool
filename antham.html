@@ -1,0 +1,627 @@
+<!DOCTYPE html>
+<html lang="ur">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <title>Paragon School | قومی ترانہ - National Anthem</title>
+  <!-- Google Fonts: Elegant Urdu Support & Premium English -->
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Montserrat:wght@300;400;500;600;700;800&family=Noto+Nastaliq+Urdu&display=swap" rel="stylesheet">
+  <!-- Font Awesome 6 -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <!-- AOS Library -->
+  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+  <link rel="icon" href="https://cdn-icons-png.flaticon.com/512/3135/3135755.png" type="image/png">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    :root {
+      --royal-navy: #0A1C3A;
+      --royal-navy-light: #13294B;
+      --crimson-red: #C41E3A;
+      --crimson-dark: #9B1D2C;
+      --pure-white: #FFFFFF;
+      --off-white: #FEFCF7;
+      --soft-gray: #F5F7FA;
+      --gold-accent: #D4AF37;
+      --text-dark: #1E2A3E;
+      --text-muted: #4A5568;
+      --shadow-elegant: 0 20px 35px -12px rgba(0, 0, 0, 0.12);
+      --shadow-glow: 0 25px 40px -12px rgba(196, 30, 58, 0.25);
+      --transition-smooth: all 0.4s cubic-bezier(0.2, 0.9, 0.4, 1.1);
+    }
+
+    body {
+      font-family: 'Montserrat', sans-serif;
+      background-color: var(--pure-white);
+      color: var(--text-dark);
+      line-height: 1.5;
+      overflow-x: hidden;
+      animation: fadePage 0.6s ease;
+    }
+
+    @keyframes fadePage {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    ::selection {
+      background: var(--crimson-red);
+      color: white;
+    }
+
+
+    /* Navbar */
+    .navbar {
+      position: fixed;
+      top: 0;
+      width: 100%;
+      background: rgba(10, 28, 58, 0.85);
+      backdrop-filter: blur(18px);
+      z-index: 1000;
+      padding: 1.2rem 0;
+      transition: var(--transition-smooth);
+      border-bottom: 1px solid rgba(212, 175, 55, 0.2);
+    }
+    .navbar.scrolled {
+      padding: 0.7rem 0;
+      background: rgba(10, 28, 58, 0.95);
+      box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+    }
+    .nav-container {
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: 0 2.5rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .logo h1 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 2rem;
+      font-weight: 700;
+      background: linear-gradient(135deg, var(--pure-white) 0%, var(--gold-accent) 100%);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      letter-spacing: 1px;
+    }
+    .nav-links {
+      display: flex;
+      gap: 2.2rem;
+      align-items: center;
+    }
+    .nav-links a {
+      text-decoration: none;
+      font-weight: 500;
+      color: var(--pure-white);
+      transition: var(--transition-smooth);
+      font-size: 0.95rem;
+      letter-spacing: 0.5px;
+      position: relative;
+    }
+    .nav-links a::after {
+      content: '';
+      position: absolute;
+      bottom: -6px;
+      left: 0;
+      width: 0%;
+      height: 2px;
+      background: var(--crimson-red);
+      transition: width 0.4s cubic-bezier(0.25, 1, 0.5, 1);
+    }
+    .nav-links a:hover::after,
+    .nav-links a.active-link::after {
+      width: 100%;
+    }
+    .nav-links a:hover,
+    .nav-links a.active-link {
+      color: var(--gold-accent);
+      transform: translateY(-2px);
+    }
+    .btn-apply-nav {
+      background: var(--crimson-red);
+      padding: 0.6rem 1.8rem;
+      border-radius: 40px;
+      font-weight: 600;
+      box-shadow: 0 4px 12px rgba(196,30,58,0.4);
+    }
+    .btn-apply-nav:hover {
+      background: var(--gold-accent);
+      color: var(--royal-navy) !important;
+      transform: translateY(-3px);
+      box-shadow: 0 12px 20px -8px rgba(196,30,58,0.6);
+    }
+    .menu-icon {
+      display: none;
+      font-size: 1.8rem;
+      color: var(--pure-white);
+      cursor: pointer;
+    }
+
+    /* ========== ANTHEM HERO SECTION ========== */
+    .anthem-hero {
+      min-height: 45vh;
+      background: linear-gradient(135deg, #0A1C3A 0%, #1e2f4b 100%);
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      margin-top: 80px;
+      overflow: hidden;
+    }
+    .anthem-hero::before {
+      content: '';
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      background-image: url('https://www.transparenttextures.com/patterns/arches.png');
+      opacity: 0.08;
+      pointer-events: none;
+    }
+    .anthem-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 4rem;
+      font-weight: 800;
+      color: var(--gold-accent);
+      text-shadow: 0 4px 20px rgba(0,0,0,0.4);
+      letter-spacing: 2px;
+      position: relative;
+      z-index: 2;
+    }
+    .anthem-sub {
+      color: rgba(255,255,240,0.9);
+      font-size: 1.2rem;
+      margin-top: 0.5rem;
+      font-weight: 400;
+      letter-spacing: 1px;
+    }
+
+    /* Anthem Card */
+    .anthem-container {
+      max-width: 1000px;
+      margin: 4rem auto;
+      padding: 0 2rem;
+    }
+    .anthem-card {
+      background: var(--off-white);
+      border-radius: 48px;
+      box-shadow: var(--shadow-elegant);
+      overflow: hidden;
+      transition: transform 0.4s ease;
+      border: 1px solid rgba(196,30,58,0.15);
+    }
+    .anthem-card:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 35px 45px -20px rgba(196,30,58,0.3);
+    }
+    .anthem-header {
+      background: linear-gradient(115deg, var(--royal-navy), var(--crimson-red));
+      padding: 2rem;
+      text-align: center;
+    }
+    .anthem-header h2 {
+      font-family: 'Cormorant Garamond', serif;
+      color: white;
+      font-size: 2rem;
+      font-weight: 700;
+      margin-bottom: 0.5rem;
+    }
+    .anthem-header p {
+      color: rgba(255,255,200,0.9);
+      font-size: 0.9rem;
+    }
+    .anthem-body {
+      padding: 3rem 2rem;
+      background: var(--pure-white);
+      text-align: center;
+    }
+    .urdu-anthem {
+      font-family: 'Noto Nastaliq Urdu', 'Segoe UI', serif;
+      font-size: 1.85rem;
+      line-height: 2.6rem;
+      color: var(--royal-navy);
+      text-align: center;
+      direction: rtl;
+      font-weight: 600;
+      letter-spacing: 0.5px;
+    }
+    .urdu-anthem p {
+      margin-bottom: 1.2rem;
+      transition: all 0.3s;
+    }
+    .urdu-anthem p:hover {
+      color: var(--crimson-red);
+      transform: scale(1.01);
+    }
+    .anthem-divider {
+      width: 120px;
+      height: 3px;
+      background: var(--gold-accent);
+      margin: 1.8rem auto;
+      border-radius: 5px;
+    }
+    .legacy-quote {
+      font-style: italic;
+      font-size: 1.1rem;
+      color: var(--text-muted);
+      border-left: 4px solid var(--crimson-red);
+      padding-left: 1.5rem;
+      margin: 1.5rem auto;
+      max-width: 80%;
+      text-align: left;
+    }
+
+    /* follow-us + footer exact same as original */
+    .follow-us {
+      padding: 4rem 0;
+      background: #f8f9fa;
+      position: relative;
+      overflow: hidden;
+    }
+    .follow-us-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 20px;
+      position: relative;
+    }
+    .follow-us h3 {
+      text-align: center;
+      font-size: 1.8rem;
+      color: #333;
+      margin-bottom: 2.5rem;
+      font-weight: 600;
+    }
+    .social-carousel {
+      overflow: hidden;
+      position: relative;
+      width: 100%;
+    }
+    .social-track {
+      display: flex;
+      gap: 3rem;
+      align-items: center;
+      width: max-content;
+      animation: scroll 20s linear infinite;
+      will-change: transform;
+    }
+    .social-icon {
+      flex: 0 0 auto;
+      width: 70px;
+      height: 70px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.3s ease;
+      border-radius: 50%;
+      background: white;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    }
+    .social-icon svg {
+      width: 60%;
+      height: 60%;
+    }
+    .social-icon:hover {
+      transform: scale(1.15) translateY(-5px);
+      box-shadow: 0 8px 16px rgba(0,0,0,0.15);
+    }
+    @keyframes scroll {
+      0% { transform: translateX(0); }
+      100% { transform: translateX(-50%); }
+    }
+    @media (max-width: 768px) {
+      .social-icon { width: 60px; height: 60px; }
+      .social-track { gap: 2rem; }
+      .follow-us h3 { font-size: 1.5rem; }
+      .urdu-anthem { font-size: 1.4rem; line-height: 2.2rem; }
+      .anthem-title { font-size: 2.5rem; }
+    }
+
+    /* Footer */
+    footer {
+      background: #1a1a2e;
+      padding: 60px 0 20px;
+      border-top: 4px solid #ff6b6b;
+      font-family: 'Montserrat', sans-serif;
+    }
+    .back-to-top {
+      position: fixed;
+      bottom: 90px;
+      right: 25px;
+      background: var(--crimson-red);
+      width: 50px;
+      height: 50px;
+      border-radius: 60px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      opacity: 0;
+      visibility: hidden;
+      transition: 0.2s;
+      z-index: 99;
+      color: white;
+      text-decoration: none;
+    }
+    .whatsapp-float {
+      position: fixed;
+      bottom: 25px;
+      right: 25px;
+      background: #25D366;
+      width: 55px;
+      height: 55px;
+      border-radius: 60px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 2rem;
+      z-index: 99;
+      transition: 0.2s;
+      text-decoration: none;
+      color: white;
+    }
+    .back-to-top.show {
+      opacity: 1;
+      visibility: visible;
+    }
+    @media (max-width: 768px) {
+      .nav-links {
+        position: fixed;
+        top: 70px;
+        left: -100%;
+        width: 80%;
+        height: 100vh;
+        background: var(--royal-navy);
+        flex-direction: column;
+        padding: 2rem;
+        transition: 0.3s;
+        z-index: 999;
+      }
+      .nav-links.active { left: 0; }
+      .menu-icon { display: block; }
+      .cursor-dot, .cursor-outline { display: none; }
+      * { cursor: auto; }
+    }
+    .btn-primary-red {
+      background: var(--crimson-red);
+      color: white;
+      padding: 0.8rem 2rem;
+      border-radius: 50px;
+      font-weight: 700;
+      border: none;
+      transition: all 0.4s cubic-bezier(0.34, 1.2, 0.64, 1);
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      box-shadow: 0 12px 25px rgba(0,0,0,0.25);
+    }
+    .btn-primary-red:hover {
+      background: var(--gold-accent);
+      color: var(--royal-navy);
+      transform: translateY(-5px) scale(1.02);
+      box-shadow: 0 0 25px rgba(196,30,58,0.7);
+    }
+  </style>
+</head>
+<body>
+
+<!-- Custom Cursors -->
+<div class="cursor-dot"></div>
+<div class="cursor-outline"></div>
+
+<!-- Navbar (exact replica) -->
+<nav class="navbar" id="navbar">
+  <div class="nav-container">
+    <div class="logo"><h1>Paragon School</h1></div>
+    <div class="menu-icon" id="menuToggle"><i class="fas fa-bars"></i></div>
+    <div class="nav-links" id="navLinks">
+    <a href="index.html">Home</a>
+      <a href="announcement.html">Announcements</a>
+      <a href="index.html#academics">Academics</a>
+      <a href="index.html#admissions">Admissions</a>
+      <a href="antham.html">Anthem</a>
+      <a href="index.html#gallery">Gallery</a>
+      <a href="index.html#contact">Contact</a>
+      <a href="index.html#admissions" class="btn-apply-nav">Apply Now</a>
+    </div>
+  </div>
+</nav>
+
+<!-- ANTHEM HERO SECTION -->
+<section class="anthem-hero">
+  <div data-aos="fade-up">
+    <h1 class="anthem-title">School Anthem</h1>
+    <div class="anthem-sub">Paragon Pride · روحِ یقین · Legacy of Valor</div>
+  </div>
+</section>
+
+<!-- Anthem Main Content -->
+<div class="anthem-container">
+  <div class="anthem-card" data-aos="zoom-in-up">
+    <div class="anthem-header">
+      <h2><i class="fas fa-crown"></i> ہم پیراگون کے بچے ہیں</h2>
+      <p>Paragon's Anthem — Composed with Passion & Devotion</p>
+    </div>
+    <div class="anthem-body">
+      <div class="urdu-anthem">
+        <p>ہم پیراگون کے بچے ہیں،</p>
+        <p>ہم علم و عمل کے سچے ہیں۔</p>
+        <p>ہم عالمگیر ہدایت ہیں،</p>
+        <p>ہم عالی شان روایت ہیں۔</p>
+        <p>ہم کولے نبیؐ کے پیرو ہیں،</p>
+        <p>ہم راہِ حق کے رہرو ہیں۔</p>
+        <p>ہم پاک حسینؓ کے خادم ہیں،</p>
+        <p>ہم قنبر ہیں، ہم میثم ہیں۔</p>
+        <p>ہم حیدرؓ کی تلوار بھی ہیں،</p>
+        <p>ہم ٹیپو کی للکار بھی ہیں۔</p>
+        <p>ہم خواب بھی ہیں، تعبیر بھی ہیں،</p>
+        <p>ہم قائد کی تصویر بھی ہیں۔</p>
+        <p>ہم پیکرِ عزمِ حسینؓ بھی ہیں،</p>
+        <p>ماؤں کے دل کا چین بھی ہیں۔</p>
+        <p>ہم قلب و روح کی قوت ہیں،</p>
+        <p>ہم ضربِ کلیم کی طاقت ہیں۔</p>
+        <p>ہم قول و فعل کے پکے ہیں،</p>
+        <p>ہم سچے ہیں، ہم اچھے ہیں۔</p>
+        <p style="color: var(--crimson-red); font-weight: 800;">ہم پیراگون کے بچے ہیں۔</p>
+      </div>
+      <div class="anthem-divider"></div>
+      <div class="legacy-quote">
+        <i class="fas fa-quote-left" style="color: var(--crimson-red); margin-right: 10px;"></i> 
+        یہ ترانہ ہمیں اپنی پہچان دلاتا ہے — علم، عمل، ایثار اور محبت کی روشنی۔ پیراگون اسکول ہر بچے کو یہ عظمت بخشتا ہے۔
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Extra Brand Message -->
+<section style="padding: 2rem 0 4rem 0; background: var(--soft-gray);">
+  <div class="anthem-container" style="margin-top: 0;">
+    <div data-aos="fade-up" style="text-align: center; max-width: 800px; margin: 0 auto;">
+      <i class="fas fa-star-of-life" style="font-size: 3rem; color: var(--gold-accent); margin-bottom: 1rem;"></i>
+      <h3 style="font-family: 'Cormorant Garamond', serif; font-size: 2rem;">The Spirit of Paragon</h3>
+      <p style="color: #2d3748;">Our anthem echoes the undying spirit of loyalty, courage and intellectual enlightenment. Every verse resonates with the core values that make Paragon a global legacy of excellence.</p>
+      <div style="margin-top: 2rem;">
+        <a href="index.html#contact" class="btn-primary-red">Join the Pride <i class="fas fa-arrow-right"></i></a>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+
+<!-- FOOTER EXACT MATCH - FULL ORIGINAL FOOTER -->
+<footer>
+  <div style="max-width: 1200px; margin: 0 auto; padding: 0 20px;">
+    <!-- Footer Main Content -->
+    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 40px; margin-bottom: 50px;">
+      <!-- About Column -->
+      <div>
+        <div style="margin-bottom: 20px;">
+          <h2 style="font-size: 28px; font-weight: 700; margin: 0;">
+            <span style="color: #ff6b6b;">PARAGON</span>
+            <span style="color: white;">Schools</span>
+          </h2>
+          <p style="color: #ff6b6b; font-size: 12px; letter-spacing: 2px; margin-top: 5px;">EXCELLENCE IN EDUCATION</p>
+        </div>
+        <p style="color: rgba(255,255,255,0.7); line-height: 1.7; margin-bottom: 25px; font-size: 14px;">The purpose of Paragon Schools is to prepare students with promise to enhance their intellectual, physical, social, emotional, spiritual, and artistic growth.</p>
+        <div style="display: flex; gap: 12px;">
+          <a href="#" style="display: inline-block; width: 36px; height: 36px; background: rgba(255,255,255,0.1); border-radius: 5px; text-align: center; line-height: 36px; color: white; transition: all 0.3s ease; text-decoration: none;"><i class="fab fa-facebook-f" style="font-size: 14px;"></i></a>
+          <a href="#" style="display: inline-block; width: 36px; height: 36px; background: rgba(255,255,255,0.1); border-radius: 5px; text-align: center; line-height: 36px; color: white; transition: all 0.3s ease; text-decoration: none;"><i class="fab fa-twitter" style="font-size: 14px;"></i></a>
+          <a href="#" style="display: inline-block; width: 36px; height: 36px; background: rgba(255,255,255,0.1); border-radius: 5px; text-align: center; line-height: 36px; color: white; transition: all 0.3s ease; text-decoration: none;"><i class="fab fa-instagram" style="font-size: 14px;"></i></a>
+          <a href="#" style="display: inline-block; width: 36px; height: 36px; background: rgba(255,255,255,0.1); border-radius: 5px; text-align: center; line-height: 36px; color: white; transition: all 0.3s ease; text-decoration: none;"><i class="fab fa-youtube" style="font-size: 14px;"></i></a>
+          <a href="#" style="display: inline-block; width: 36px; height: 36px; background: rgba(255,255,255,0.1); border-radius: 5px; text-align: center; line-height: 36px; color: white; transition: all 0.3s ease; text-decoration: none;"><i class="fab fa-linkedin-in" style="font-size: 14px;"></i></a>
+        </div>
+      </div>
+      <!-- Quick Links -->
+      <div>
+        <h4 style="color: white; font-size: 18px; margin-bottom: 25px; position: relative; padding-bottom: 12px; font-weight: 600;">
+          Quick Links
+          <span style="position: absolute; bottom: 0; left: 0; width: 40px; height: 3px; background: #ff6b6b;"></span>
+        </h4>
+        <ul style="list-style: none; padding: 0;">
+          <li style="margin-bottom: 12px;"><a href="#" style="color: rgba(255,255,255,0.7); text-decoration: none; transition: all 0.3s ease; font-size: 14px; display: inline-block;"><i class="fas fa-angle-right" style="margin-right: 10px; color: #ff6b6b;"></i> Home</a></li>
+          <li style="margin-bottom: 12px;"><a href="#" style="color: rgba(255,255,255,0.7); text-decoration: none; transition: all 0.3s ease; font-size: 14px; display: inline-block;"><i class="fas fa-angle-right" style="margin-right: 10px; color: #ff6b6b;"></i> About Us</a></li>
+          <li style="margin-bottom: 12px;"><a href="#" style="color: rgba(255,255,255,0.7); text-decoration: none; transition: all 0.3s ease; font-size: 14px; display: inline-block;"><i class="fas fa-angle-right" style="margin-right: 10px; color: #ff6b6b;"></i> Admissions</a></li>
+          <li style="margin-bottom: 12px;"><a href="#" style="color: rgba(255,255,255,0.7); text-decoration: none; transition: all 0.3s ease; font-size: 14px; display: inline-block;"><i class="fas fa-angle-right" style="margin-right: 10px; color: #ff6b6b;"></i> Academics</a></li>
+          <li style="margin-bottom: 12px;"><a href="#" style="color: rgba(255,255,255,0.7); text-decoration: none; transition: all 0.3s ease; font-size: 14px; display: inline-block;"><i class="fas fa-angle-right" style="margin-right: 10px; color: #ff6b6b;"></i> Our Campuses</a></li>
+          <li style="margin-bottom: 12px;"><a href="#" style="color: rgba(255,255,255,0.7); text-decoration: none; transition: all 0.3s ease; font-size: 14px; display: inline-block;"><i class="fas fa-angle-right" style="margin-right: 10px; color: #ff6b6b;"></i> Contact Us</a></li>
+        </ul>
+      </div>
+      <!-- Resources -->
+      <div>
+        <h4 style="color: white; font-size: 18px; margin-bottom: 25px; position: relative; padding-bottom: 12px; font-weight: 600;">
+          Resources
+          <span style="position: absolute; bottom: 0; left: 0; width: 40px; height: 3px; background: #ff6b6b;"></span>
+        </h4>
+        <ul style="list-style: none; padding: 0;">
+          <li style="margin-bottom: 12px;"><a href="#" style="color: rgba(255,255,255,0.7); text-decoration: none; transition: all 0.3s ease; font-size: 14px; display: inline-block;"><i class="fas fa-angle-right" style="margin-right: 10px; color: #ff6b6b;"></i> Parent Portal</a></li>
+          <li style="margin-bottom: 12px;"><a href="#" style="color: rgba(255,255,255,0.7); text-decoration: none; transition: all 0.3s ease; font-size: 14px; display: inline-block;"><i class="fas fa-angle-right" style="margin-right: 10px; color: #ff6b6b;"></i> Student Portal</a></li>
+          <li style="margin-bottom: 12px;"><a href="#" style="color: rgba(255,255,255,0.7); text-decoration: none; transition: all 0.3s ease; font-size: 14px; display: inline-block;"><i class="fas fa-angle-right" style="margin-right: 10px; color: #ff6b6b;"></i> Academic Calendar</a></li>
+          <li style="margin-bottom: 12px;"><a href="#" style="color: rgba(255,255,255,0.7); text-decoration: none; transition: all 0.3s ease; font-size: 14px; display: inline-block;"><i class="fas fa-angle-right" style="margin-right: 10px; color: #ff6b6b;"></i> Downloads</a></li>
+          <li style="margin-bottom: 12px;"><a href="#" style="color: rgba(255,255,255,0.7); text-decoration: none; transition: all 0.3s ease; font-size: 14px; display: inline-block;"><i class="fas fa-angle-right" style="margin-right: 10px; color: #ff6b6b;"></i> FAQs</a></li>
+          <li style="margin-bottom: 12px;"><a href="#" style="color: rgba(255,255,255,0.7); text-decoration: none; transition: all 0.3s ease; font-size: 14px; display: inline-block;"><i class="fas fa-angle-right" style="margin-right: 10px; color: #ff6b6b;"></i> Careers</a></li>
+        </ul>
+      </div>
+      <!-- Contact Info -->
+      <div>
+        <h4 style="color: white; font-size: 18px; margin-bottom: 25px; position: relative; padding-bottom: 12px; font-weight: 600;">
+          Get In Touch
+          <span style="position: absolute; bottom: 0; left: 0; width: 40px; height: 3px; background: #ff6b6b;"></span>
+        </h4>
+        <ul style="list-style: none; padding: 0;">
+          <li style="margin-bottom: 18px; display: flex; align-items: flex-start; gap: 12px;">
+            <i class="fas fa-map-marker-alt" style="color: #ff6b6b; font-size: 18px; margin-top: 3px;"></i>
+            <span style="color: rgba(255,255,255,0.7); font-size: 14px; line-height: 1.5;">63 E1, Gulberg III, Lahore, Pakistan</span>
+          </li>
+          <li style="margin-bottom: 18px; display: flex; align-items: center; gap: 12px;">
+            <i class="fas fa-phone-alt" style="color: #ff6b6b; font-size: 18px;"></i>
+            <div><a href="tel:+92423576357" style="color: rgba(255,255,255,0.7); text-decoration: none; font-size: 14px;">+92 42 35756357-58</a></div>
+          </li>
+          <li style="margin-bottom: 18px; display: flex; align-items: center; gap: 12px;">
+            <i class="fas fa-fax" style="color: #ff6b6b; font-size: 18px;"></i>
+            <span style="color: rgba(255,255,255,0.7); font-size: 14px;">+92 42 35712637</span>
+          </li>
+          <li style="margin-bottom: 18px; display: flex; align-items: center; gap: 12px;">
+            <i class="fas fa-envelope" style="color: #ff6b6b; font-size: 18px;"></i>
+            <a href="mailto:info@paragonschools.edu.pk" style="color: rgba(255,255,255,0.7); text-decoration: none; font-size: 14px;">info@paragonschools.edu.pk</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+    <!-- Footer Bottom -->
+    <div style="border-top: 1px solid rgba(255,255,255,0.1); padding-top: 25px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 15px;">
+      <p style="color: rgba(255,255,255,0.5); font-size: 13px;">&copy; 2026 Paragon Schools. All Rights Reserved.</p>
+      <div style="display: flex; gap: 20px;">
+        <a href="#" style="color: rgba(255,255,255,0.5); text-decoration: none; font-size: 13px;">Privacy Policy</a>
+        <a href="#" style="color: rgba(255,255,255,0.5); text-decoration: none; font-size: 13px;">Terms of Use</a>
+        <a href="#" style="color: rgba(255,255,255,0.5); text-decoration: none; font-size: 13px;">Sitemap</a>
+      </div>
+      <p style="color: rgba(255,255,255,0.5); font-size: 13px;">Powered By: Tower Technologies (Pvt) Ltd</p>
+    </div>
+  </div>
+</footer>
+
+<a href="https://wa.me/923189669802?text=Hello%21%20Welcome%20to%20Paragon%20Public%20High%20School.%0AHow%20can%20we%20help%20you" class="whatsapp-float" target="_blank"><i class="fab fa-whatsapp"></i></a>
+<div class="back-to-top" id="backToTop"><i class="fas fa-arrow-up"></i></div>
+
+<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+<script>
+  AOS.init({ duration: 900, once: true });
+  const navbar = document.getElementById('navbar');
+  window.addEventListener('scroll', () => {
+    if (window.scrollY > 50) navbar.classList.add('scrolled');
+    else navbar.classList.remove('scrolled');
+    const backBtn = document.getElementById('backToTop');
+    if (window.scrollY > 500) backBtn.classList.add('show');
+    else backBtn.classList.remove('show');
+  });
+  document.getElementById('backToTop').onclick = () => window.scrollTo({ top: 0, behavior: 'smooth' });
+  document.getElementById('menuToggle').onclick = () => document.getElementById('navLinks').classList.toggle('active');
+  document.querySelectorAll('.nav-links a').forEach(link => link.addEventListener('click', () => document.getElementById('navLinks').classList.remove('active')));
+  // Custom cursor
+  const cursorDot = document.querySelector('.cursor-dot');
+  const cursorOutline = document.querySelector('.cursor-outline');
+  if(cursorDot && cursorOutline) {
+    window.addEventListener('mousemove', (e) => {
+      cursorDot.style.transform = `translate(${e.clientX - 4}px, ${e.clientY - 4}px)`;
+      cursorOutline.style.transform = `translate(${e.clientX - 20}px, ${e.clientY - 20}px)`;
+    });
+  }
+  const carousel = document.querySelector('.social-carousel');
+  const track = document.querySelector('.social-track');
+  if(carousel && track) {
+    carousel.addEventListener('mouseenter', () => track.style.animationPlayState = 'paused');
+    carousel.addEventListener('mouseleave', () => track.style.animationPlayState = 'running');
+  }
+</script>
+</body>
+</html>

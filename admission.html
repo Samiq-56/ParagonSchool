@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Paragon School | Admission Portal</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600;700&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+
+<style>
+body{
+  margin:0;
+  font-family:Montserrat;
+  background:#f5f7fa;
+  padding:20px;
+}
+
+.container{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:20px;
+}
+
+.card{
+  background:white;
+  padding:20px;
+  border-radius:15px;
+  box-shadow:0 10px 25px rgba(0,0,0,0.1);
+}
+
+h2{
+  font-family:"Cormorant Garamond";
+  color:#0A1C3A;
+}
+
+input,select,textarea{
+  width:100%;
+  padding:10px;
+  margin:5px 0 15px;
+  border-radius:8px;
+  border:1px solid #ccc;
+}
+
+button{
+  padding:10px 15px;
+  border:none;
+  border-radius:8px;
+  cursor:pointer;
+  margin:5px;
+}
+
+.btn{background:#C41E3A;color:white;}
+.btn2{background:#0A1C3A;color:white;}
+
+.preview{
+  background:white;
+  padding:20px;
+  border-radius:10px;
+}
+
+.header{
+  text-align:center;
+  border-bottom:2px solid #C41E3A;
+  margin-bottom:10px;
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+<!-- FORM -->
+<div class="card">
+<h2>Admission Form</h2>
+
+<input id="name" placeholder="Full Name">
+<input id="dob" type="date">
+
+<select id="gender">
+  <option>Male</option>
+  <option>Female</option>
+</select>
+
+<input id="grade" placeholder="Grade Applying For">
+<input id="email" placeholder="Email">
+<input id="phone" placeholder="Phone Number">
+<textarea id="address" placeholder="Address"></textarea>
+
+<input id="father" placeholder="Father Name">
+<input id="mother" placeholder="Mother Name">
+
+<button class="btn" onclick="updatePreview()">Preview</button>
+<button class="btn2" onclick="downloadPDF()">Download PDF</button>
+<button class="btn2" onclick="printDoc()">Print</button>
+<button class="btn" onclick="whatsapp()">WhatsApp</button>
+
+</div>
+
+<!-- PREVIEW -->
+<div class="card">
+<div id="preview" class="preview">
+<p>Fill form to generate admission preview</p>
+</div>
+</div>
+
+</div>
+
+<script>
+
+function data(){
+return{
+name:name.value,
+dob:dob.value,
+gender:gender.value,
+grade:grade.value,
+email:email.value,
+phone:phone.value,
+address:address.value,
+father:father.value,
+mother:mother.value
+};
+}
+
+function updatePreview(){
+let d=data();
+
+preview.innerHTML=`
+<div class="header">
+<h2>PARAGON SCHOOL</h2>
+<p>Official Admission Form</p>
+</div>
+
+<p><b>Name:</b> ${d.name}</p>
+<p><b>DOB:</b> ${d.dob}</p>
+<p><b>Gender:</b> ${d.gender}</p>
+<p><b>Grade:</b> ${d.grade}</p>
+<p><b>Email:</b> ${d.email}</p>
+<p><b>Phone:</b> ${d.phone}</p>
+<p><b>Address:</b> ${d.address}</p>
+<p><b>Father:</b> ${d.father}</p>
+<p><b>Mother:</b> ${d.mother}</p>
+
+<hr>
+<p style="text-align:center;font-size:12px;color:gray">
+Paragon School Official Admission System
+</p>
+`;
+}
+
+function downloadPDF(){
+updatePreview();
+html2pdf().from(preview).save("Paragon_Admission.pdf");
+}
+
+function printDoc(){
+updatePreview();
+let w=window.open("");
+w.document.write(preview.innerHTML);
+w.print();
+}
+
+function whatsapp(){
+let d=data();
+let phone = d.phone.replace(/\D/g,"");
+if(phone.startsWith("0")) phone="92"+phone.slice(1);
+
+let msg=`*Paragon Admission*%0AName:${d.name}%0AGrade:${d.grade}%0APhone:${d.phone}`;
+window.open("https://wa.me/"+phone+"?text="+msg);
+}
+
+</script>
+
+</body>
+</html>

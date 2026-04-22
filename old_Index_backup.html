@@ -1,0 +1,1299 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <link rel="icon" href="https://cdn-icons-png.flaticon.com/512/3135/3135755.png" type="image/png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <title>Paragon School | World-Class Premium | Playgroup to Grade 10</title>
+  <!-- Google Fonts: Elegant & Premium -->
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Montserrat:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <!-- Font Awesome 6 -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <!-- AOS Library for Scroll Animations -->
+  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+
+
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    :root {
+      --royal-navy: #0A1C3A;
+      --royal-navy-light: #13294B;
+      --crimson-red: #C41E3A;
+      --crimson-dark: #9B1D2C;
+      --pure-white: #FFFFFF;
+      --off-white: #FEFCF7;
+      --soft-gray: #F5F7FA;
+      --gold-accent: #D4AF37;
+      --text-dark: #1E2A3E;
+      --text-muted: #4A5568;
+      --shadow-elegant: 0 20px 35px -12px rgba(0, 0, 0, 0.12);
+      --shadow-glow: 0 25px 40px -12px rgba(196, 30, 58, 0.25);
+      --transition-smooth: all 0.4s cubic-bezier(0.2, 0.9, 0.4, 1.1);
+      --transition-bounce: all 0.5s cubic-bezier(0.34, 1.2, 0.64, 1);
+    }
+
+    body {
+      font-family: 'Montserrat', sans-serif;
+      background-color: var(--pure-white);
+      color: var(--text-dark);
+      line-height: 1.5;
+      overflow-x: hidden;
+      animation: fadePage 0.6s ease;
+    }
+
+    @keyframes fadePage {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    ::selection {
+      background: var(--crimson-red);
+      color: white;
+    }
+
+    /* ========== CUSTOM CURSOR (Peachweb Style) ========== */
+    .cursor-dot {
+      width: 8px;
+      height: 8px;
+      background: var(--crimson-red);
+      border-radius: 50%;
+      position: fixed;
+      pointer-events: none;
+      z-index: 9999;
+      transition: transform 0.1s ease;
+    }
+    .cursor-outline {
+      width: 40px;
+      height: 40px;
+      border: 2px solid var(--gold-accent);
+      border-radius: 50%;
+      position: fixed;
+      pointer-events: none;
+      z-index: 9998;
+      transition: all 0.15s ease-out;
+      backdrop-filter: blur(2px);
+    }
+
+    /* ========== NAVBAR UPGRADE ========== */
+    .navbar {
+      position: fixed;
+      top: 0;
+      width: 100%;
+      background: rgba(10, 28, 58, 0.85);
+      backdrop-filter: blur(18px);
+      z-index: 1000;
+      padding: 1.2rem 0;
+      transition: var(--transition-smooth);
+      border-bottom: 1px solid rgba(212, 175, 55, 0.2);
+    }
+    .navbar.scrolled {
+      padding: 0.7rem 0;
+      background: rgba(10, 28, 58, 0.95);
+      box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+    }
+    .nav-container {
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: 0 2.5rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .logo h1 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 2rem;
+      font-weight: 700;
+      background: linear-gradient(135deg, var(--pure-white) 0%, var(--gold-accent) 100%);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      letter-spacing: 1px;
+    }
+    .nav-links {
+      display: flex;
+      gap: 2.2rem;
+      align-items: center;
+    }
+    .nav-links a {
+      text-decoration: none;
+      font-weight: 500;
+      color: var(--pure-white);
+      transition: var(--transition-smooth);
+      font-size: 0.95rem;
+      letter-spacing: 0.5px;
+      position: relative;
+    }
+    .nav-links a::after {
+      content: '';
+      position: absolute;
+      bottom: -6px;
+      left: 0;
+      width: 0%;
+      height: 2px;
+      background: var(--crimson-red);
+      transition: width 0.4s cubic-bezier(0.25, 1, 0.5, 1);
+    }
+    .nav-links a:hover::after,
+    .nav-links a.active-link::after {
+      width: 100%;
+    }
+    .nav-links a:hover,
+    .nav-links a.active-link {
+      color: var(--gold-accent);
+      transform: translateY(-2px);
+    }
+    .btn-apply-nav {
+      background: var(--crimson-red);
+      padding: 0.6rem 1.8rem;
+      border-radius: 40px;
+      font-weight: 600;
+      box-shadow: 0 4px 12px rgba(196,30,58,0.4);
+    }
+    .btn-apply-nav:hover {
+      background: var(--gold-accent);
+      color: var(--royal-navy) !important;
+      transform: translateY(-3px);
+      box-shadow: 0 12px 20px -8px rgba(196,30,58,0.6);
+    }
+    .menu-icon {
+      display: none;
+      font-size: 1.8rem;
+      color: var(--pure-white);
+      cursor: pointer;
+    }
+
+    /* ========== HERO SECTION UPGRADE ========== */
+    .hero {
+      min-height: 100vh;
+      position: relative;
+      display: flex;
+      align-items: center;
+      overflow: hidden;
+    }
+    
+    .slideshow-container {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 0;
+    }
+    
+    .slide {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      opacity: 0;
+      transition: opacity 1.2s cubic-bezier(0.25, 0.95, 0.45, 1);
+      z-index: 1;
+    }
+    
+    .slide.active {
+      opacity: 1;
+      z-index: 2;
+      animation: subtleZoom 8s ease-out forwards;
+    }
+    
+    @keyframes subtleZoom {
+      0% { transform: scale(1); }
+      100% { transform: scale(1.08); }
+    }
+    
+    .hero-overlay {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(105deg, rgba(10, 28, 58, 0.55) 0%, rgba(0, 0, 0, 0.35) 100%);
+      z-index: 3;
+    }
+    
+    /* Floating Particles Container */
+    .floating-particles {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      top: 0;
+      left: 0;
+      z-index: 5;
+      pointer-events: none;
+      overflow: hidden;
+    }
+    .particle {
+      position: absolute;
+      background: rgba(255, 255, 255, 0.4);
+      border-radius: 50%;
+      pointer-events: none;
+      animation: floatParticle 12s infinite linear;
+    }
+    @keyframes floatParticle {
+      0% { transform: translateY(100vh) rotate(0deg); opacity: 0; }
+      10% { opacity: 0.6; }
+      90% { opacity: 0.6; }
+      100% { transform: translateY(-20vh) rotate(360deg); opacity: 0; }
+    }
+    
+    .hero-content {
+      max-width: 720px;
+      margin-left: 8%;
+      position: relative;
+      z-index: 10;
+    }
+    
+    .hero h1 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 5rem;
+      font-weight: 800;
+      color: var(--pure-white);
+      line-height: 1.2;
+      margin-bottom: 1.2rem;
+      text-shadow: 0 4px 20px rgba(0,0,0,0.3);
+      letter-spacing: -0.5px;
+      animation: fadeSlideUp 1s ease;
+    }
+    
+    @keyframes fadeSlideUp {
+      from { opacity: 0; transform: translateY(40px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    
+    .hero h1 span {
+      background: linear-gradient(120deg, #FFD166, #FF8C42);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      text-shadow: none;
+    }
+    
+    .hero p {
+      font-size: 1.25rem;
+      color: rgba(255,255,245,0.95);
+      margin-bottom: 2rem;
+      font-weight: 500;
+      line-height: 1.5;
+      text-shadow: 0 1px 8px rgba(0,0,0,0.2);
+      max-width: 580px;
+      animation: fadeSlideUp 1s ease 0.1s both;
+    }
+    
+    .btn-group {
+      display: flex;
+      gap: 1.2rem;
+      flex-wrap: wrap;
+      animation: fadeSlideUp 1s ease 0.2s both;
+    }
+    
+    .btn-primary-red {
+      background: var(--crimson-red);
+      color: white;
+      padding: 1rem 2.5rem;
+      border-radius: 50px;
+      font-weight: 700;
+      border: none;
+      transition: var(--transition-bounce);
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      box-shadow: 0 12px 25px rgba(0,0,0,0.25);
+    }
+    
+    .btn-primary-red:hover {
+      background: var(--gold-accent);
+      color: var(--royal-navy);
+      transform: translateY(-5px) scale(1.02);
+      box-shadow: 0 0 25px rgba(196,30,58,0.7);
+    }
+    
+    .btn-outline-navy {
+      background: rgba(255,255,255,0.18);
+      backdrop-filter: blur(10px);
+      border: 1.5px solid rgba(255,255,255,0.7);
+      color: white;
+      padding: 1rem 2.5rem;
+      border-radius: 50px;
+      font-weight: 600;
+      transition: var(--transition-bounce);
+      text-decoration: none;
+    }
+    
+    .btn-outline-navy:hover {
+      background: var(--pure-white);
+      color: var(--royal-navy);
+      transform: translateY(-5px);
+      border-color: var(--gold-accent);
+    }
+    
+    .slide-dots {
+      position: absolute;
+      bottom: 30px;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      gap: 14px;
+      z-index: 12;
+    }
+    .dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.5);
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+    .dot.active {
+      width: 28px;
+      border-radius: 20px;
+      background: var(--crimson-red);
+      box-shadow: 0 0 8px rgba(196,30,58,0.6);
+    }
+
+    /* ========== ABOUT SECTION UPGRADE ========== */
+    .about-img {
+      border-radius: 30px;
+      overflow: hidden;
+      box-shadow: var(--shadow-elegant);
+      transition: var(--transition-smooth);
+      will-change: transform;
+    }
+    .about-img img {
+      width: 100%;
+      transition: transform 0.6s;
+    }
+    .about-list li {
+      margin-bottom: 1.2rem;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-weight: 500;
+      transition: 0.3s;
+      cursor: default;
+    }
+    .about-list li:hover {
+      transform: translateX(10px);
+    }
+    .about-list i {
+      color: var(--crimson-red);
+      font-size: 1.4rem;
+    }
+
+    /* ========== CARDS 3D EFFECT UPGRADE ========== */
+    .premium-card {
+      background: var(--pure-white);
+      border-radius: 28px;
+      padding: 2rem 1.8rem;
+      box-shadow: 0 12px 28px rgba(0,0,0,0.05);
+      transition: transform 0.4s cubic-bezier(0.2, 0.9, 0.4, 1.1), box-shadow 0.4s, border 0.3s;
+      text-align: center;
+      border: 1px solid rgba(196,30,58,0.1);
+      position: relative;
+      overflow: hidden;
+    }
+    .premium-card:hover {
+      transform: rotateY(5deg) translateY(-15px);
+      box-shadow: 0 30px 45px -12px rgba(196,30,58,0.3);
+      border: 1px solid var(--crimson-red);
+    }
+    .premium-card .card-icon {
+      font-size: 3rem;
+      color: var(--crimson-red);
+      margin-bottom: 1.2rem;
+      transition: 0.3s;
+      display: inline-block;
+    }
+    .premium-card:hover .card-icon {
+      transform: scale(1.2) rotate(5deg);
+    }
+
+    /* ========== FACILITIES UPGRADE ========== */
+    .facility-card {
+      background: var(--pure-white);
+      border-radius: 28px;
+      overflow: hidden;
+      transition: var(--transition-bounce);
+      box-shadow: var(--shadow-elegant);
+    }
+    .facility-card .content {
+      padding: 1.5rem;
+      transform: translateY(20px);
+      opacity: 0;
+      transition: 0.4s;
+    }
+    .facility-card:hover .content {
+      transform: translateY(0);
+      opacity: 1;
+    }
+    .facility-card img {
+      width: 100%;
+      height: 220px;
+      object-fit: cover;
+      transition: transform 0.6s;
+    }
+    .facility-card:hover img {
+      transform: scale(1.08);
+    }
+
+    /* ========== GALLERY UPGRADE ========== */
+    .gallery-item:hover img {
+      transform: scale(1.1) rotate(2deg);
+    }
+    .lightbox img {
+      animation: zoomIn 0.4s ease;
+    }
+    @keyframes zoomIn {
+      from { transform: scale(0.7); opacity: 0; }
+      to { transform: scale(1); opacity: 1; }
+    }
+
+    /* ========== ADMISSIONS UPGRADE ========== */
+    .steps {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 2rem;
+      justify-content: center;
+    }
+    .step-card {
+      background: var(--off-white);
+      padding: 2rem;
+      border-radius: 30px;
+      flex: 1;
+      text-align: center;
+      transition: 0.3s;
+      position: relative;
+    }
+    .step-card:hover {
+      transform: scale(1.05);
+      background: white;
+      box-shadow: var(--shadow-elegant);
+    }
+    .step-card i {
+      font-size: 2.5rem;
+      background: var(--crimson-red);
+      width: 70px;
+      height: 70px;
+      line-height: 70px;
+      border-radius: 50%;
+      color: white;
+      margin-bottom: 1rem;
+      display: inline-block;
+    }
+
+    /* ========== CONTACT UPGRADE ========== */
+    .contact-form input, .contact-form textarea {
+      width: 100%;
+      padding: 1rem;
+      margin-bottom: 1rem;
+      border: 1px solid #e2e8f0;
+      border-radius: 20px;
+      transition: 0.3s;
+    }
+    .contact-form input:focus, .contact-form textarea:focus {
+      border-color: var(--crimson-red);
+      outline: none;
+      box-shadow: 0 0 0 3px rgba(196,30,58,0.2);
+      transform: scale(1.02);
+    }
+    .btn-ripple {
+      position: relative;
+      overflow: hidden;
+    }
+    .btn-ripple::after {
+      content: '';
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 0;
+      height: 0;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.5);
+      transform: translate(-50%, -50%);
+      transition: width 0.6s, height 0.6s;
+    }
+    .btn-ripple:active::after {
+      width: 300px;
+      height: 300px;
+    }
+
+    /* General Sections */
+    section {
+      padding: 6rem 0;
+      position: relative;
+    }
+    .section-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 3.2rem;
+      font-weight: 700;
+      text-align: center;
+      color: var(--royal-navy);
+      margin-bottom: 1rem;
+      position: relative;
+    }
+    .section-title:after {
+      content: '';
+      display: block;
+      width: 80px;
+      height: 4px;
+      background: var(--crimson-red);
+      margin: 1rem auto 0;
+      border-radius: 2px;
+    }
+    .section-sub {
+      text-align: center;
+      max-width: 700px;
+      margin: 0 auto 3rem auto;
+      color: var(--text-muted);
+    }
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 3.5rem;
+      align-items: center;
+    }
+    .card-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(270px, 1fr));
+      gap: 2rem;
+    }
+    .gallery-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 1.8rem;
+    }
+    .gallery-item {
+      border-radius: 24px;
+      overflow: hidden;
+      cursor: pointer;
+      position: relative;
+      aspect-ratio: 1 / 0.9;
+    }
+    .gallery-item img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.5s;
+    }
+    .gallery-overlay {
+      position: absolute;
+      inset: 0;
+      background: rgba(10,28,58,0.6);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      opacity: 0;
+      transition: 0.3s;
+    }
+    .gallery-item:hover .gallery-overlay {
+      opacity: 1;
+    }
+    .lightbox {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0,0,0,0.95);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 2000;
+      opacity: 0;
+      visibility: hidden;
+      transition: 0.3s;
+    }
+    .lightbox.active {
+      opacity: 1;
+      visibility: visible;
+    }
+    .lightbox img {
+      max-width: 90%;
+      max-height: 85%;
+      border-radius: 20px;
+      border: 3px solid var(--gold-accent);
+    }
+    .contact-wrapper {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 3rem;
+    }
+    footer {
+      background: var(--royal-navy);
+      color: #ccc;
+      padding: 3rem 0 1rem;
+    }
+    .back-to-top {
+      position: fixed;
+      bottom: 90px;
+      right: 25px;
+      background: var(--crimson-red);
+      width: 50px;
+      height: 50px;
+      border-radius: 60px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      opacity: 0;
+      visibility: hidden;
+      transition: 0.2s;
+      z-index: 99;
+    }
+    .whatsapp-float {
+      position: fixed;
+      bottom: 25px;
+      right: 25px;
+      background: #25D366;
+      width: 55px;
+      height: 55px;
+      border-radius: 60px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 2rem;
+      z-index: 99;
+      transition: 0.2s;
+      text-decoration: none;
+      color: white;
+    }
+    .back-to-top.show {
+      opacity: 1;
+      visibility: visible;
+    }
+    @media (max-width: 768px) {
+      .nav-links {
+        position: fixed;
+        top: 70px;
+        left: -100%;
+        width: 80%;
+        height: 100vh;
+        background: var(--royal-navy);
+        flex-direction: column;
+        padding: 2rem;
+        transition: 0.3s;
+        z-index: 999;
+      }
+      .nav-links.active { left: 0; }
+      .menu-icon { display: block; }
+      .about-grid, .contact-wrapper { grid-template-columns: 1fr; }
+      .section-title { font-size: 2.3rem; }
+      .hero h1 { font-size: 2.5rem; }
+      .cursor-dot, .cursor-outline { display: none; }
+      * { cursor: auto; }
+    }
+    #parallaxImg img {
+  transform: none !important;
+}
+
+
+  </style>
+</head>
+<body>
+
+  <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+
+<!-- Custom Cursors -->
+<div class="cursor-dot"></div>
+<div class="cursor-outline"></div>
+
+<nav class="navbar" id="navbar">
+  <div class="nav-container">
+    <div class="logo"><h1>Paragon School</h1></div>
+    <div class="menu-icon" id="menuToggle"><i class="fas fa-bars"></i></div>
+    <div class="nav-links" id="navLinks">
+      <a href="#home">Home</a>
+      <a href="announcement.html">Announcements</a>
+      <a href="#academics">Academics</a>
+      <a href="#admissions">Admissions</a>
+      <a href="antham.html">Anthem</a>
+      <a href="#gallery">Gallery</a>
+      <a href="#contact">Contact</a>
+      <a href="#admissions" class="btn-apply-nav">Apply Now</a>
+    </div>
+  </div>
+</nav>
+
+<!-- HERO SECTION with Floating Particles -->
+<section id="home" class="hero">
+  <div class="slideshow-container" id="heroSlideshow">
+  <div class="slide" style="background-image: url('https://images.unsplash.com/photo-1503676260728-1c00da094a0b?auto=format&fit=crop&w=1600&q=80');"></div>
+
+<div class="slide" style="background-image: url('https://images.unsplash.com/photo-1524178232363-1fb2b075b655?auto=format&fit=crop&w=1600&q=80');"></div>
+
+<div class="slide" style="background-image: url('https://images.unsplash.com/photo-1509062522246-3755977927d7?auto=format&fit=crop&w=1600&q=80');"></div>
+
+<div class="slide" style="background-image: url('https://images.unsplash.com/photo-1524995997946-a1c2e315a42f?auto=format&fit=crop&w=1600&q=80');"></div>
+
+<div class="slide" style="background-image: url('https://images.unsplash.com/photo-1506869640319-fe1a24fd76dc?auto=format&fit=crop&w=1600&q=80');"></div>
+  </div>
+  <div class="hero-overlay"></div>
+  <div class="floating-particles" id="particles"></div>
+  <div class="hero-content">
+    <h1>Where Brilliance Meets <br> <span>Royal Legacy</span></h1>
+    <p>Welcome to Paragon School — a sanctuary of holistic education from Playgroup to Grade 10. Ranked among the world's most inspiring institutions, we shape leaders, innovators, and kind hearts.</p>
+    <div class="btn-group">
+      <a href="#academics" class="btn-primary-red">Discover Excellence <i class="fas fa-arrow-right"></i></a>
+      <a href="virtualtour.html" class="btn-outline-navy">Virtual Tour</a>
+    </div>
+  </div>
+  <div class="slide-dots" id="slideDots"></div>
+</section>
+
+<!-- About Section with Parallax -->
+<section id="about">
+  <div class="container" style="max-width:1300px; margin:auto; padding:0 2rem;">
+    <div class="about-grid" data-aos="fade-up">
+  <div class="about-img" id="parallaxImg">
+<img src="https://images.unsplash.com/photo-1509062522246-3755977927d7?auto=format&fit=crop&w=800&q=80" alt="School Children Learning">
+</div>
+      <div>
+        <h2 class="section-title" style="text-align:left;">About Paragon</h2>
+        <p style="font-size:1.1rem; margin-bottom:1rem;">Established with a vision to blend academic rigor with royal values, Paragon School offers an unparalleled journey from Playgroup to Grade 10. Our crimson & navy legacy stands for courage, wisdom, and holistic growth.</p>
+        <ul class="about-list">
+          <li><i class="fas fa-crown"></i> Legacy of Excellence since 2005</li>
+          <li><i class="fas fa-chalkboard-user"></i> Handpicked Faculty & Mentors</li>
+          <li><i class="fas fa-shield-heart"></i> State-of-the-art Safety Protocols</li>
+          <li><i class="fas fa-globe"></i> Global Curriculum with Indian Values</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Academics -->
+<section id="academics" style="background: var(--soft-gray);">
+  <div class="container" style="max-width:1300px; margin:auto; padding:0 2rem;">
+    <h2 class="section-title" data-aos="fade-down">Our Academic Pathways</h2>
+    <p class="section-sub" data-aos="fade-up">A structured, world-class curriculum designed for every developmental stage.</p>
+    <div class="card-grid">
+      <div class="premium-card" data-aos="zoom-in"><i class="fas fa-child card-icon"></i><h3>Playgroup</h3><p>Exploratory learning, sensory activities & foundational social skills.</p></div>
+      <div class="premium-card" data-aos="zoom-in" data-aos-delay="100"><i class="fas fa-book-open card-icon"></i><h3>Primary (1-5)</h3><p>Literacy, numeracy, creativity & collaborative projects.</p></div>
+      <div class="premium-card" data-aos="zoom-in" data-aos-delay="200"><i class="fas fa-flask card-icon"></i><h3>Middle (6-8)</h3><p>STEM, analytical thinking & innovation labs.</p></div>
+      <div class="premium-card" data-aos="zoom-in" data-aos-delay="300"><i class="fas fa-graduation-cap card-icon"></i><h3>Secondary (9-10)</h3><p>Board prep, career mentorship & leadership.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- Why Choose Us -->
+<section id="why-choose-us">
+  <div class="container" style="max-width:1300px; margin:auto; padding:0 2rem;">
+    <h2 class="section-title" data-aos="fade-up">Why Choose Paragon?</h2>
+    <div class="card-grid">
+      <div class="premium-card" data-aos="flip-left"><i class="fas fa-shield-alt card-icon"></i><h3>Safe Campus</h3><p>Biometric security, CCTV & trained guards.</p></div>
+      <div class="premium-card" data-aos="flip-left" data-aos-delay="100"><i class="fas fa-chalkboard card-icon"></i><h3>Elite Faculty</h3><p>National award-winning educators.</p></div>
+      <div class="premium-card" data-aos="flip-left" data-aos-delay="200"><i class="fas fa-laptop-code card-icon"></i><h3>Smart Classes</h3><p>AI-integrated digital boards & VR modules.</p></div>
+      <div class="premium-card" data-aos="flip-left" data-aos-delay="300"><i class="fas fa-futbol card-icon"></i><h3>Holistic Growth</h3><p>Sports, arts, public speaking & life skills.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- Facilities -->
+<section id="facilities" style="background: var(--soft-gray);">
+  <div class="container" style="max-width:1300px; margin:auto; padding:0 2rem;">
+    <h2 class="section-title" data-aos="fade-up">Royal Facilities</h2>
+    <div class="card-grid">
+      <div class="facility-card" data-aos="fade-up"><img src="https://images.pexels.com/photos/8618081/pexels-photo-8618081.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Classroom"><div class="content"><h3>Luxury Classrooms</h3><p>Ergonomic furniture, natural light & smartboards.</p></div></div>
+      <div class="facility-card" data-aos="fade-up" data-aos-delay="100"><img src="https://images.pexels.com/photos/256490/pexels-photo-256490.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Lab"><div class="content"><h3>Advanced Labs</h3><p>Physics, Chem, Bio & Robotics Lab.</p></div></div>
+      <div class="facility-card" data-aos="fade-up" data-aos-delay="200"><img src="https://images.pexels.com/photos/5904932/pexels-photo-5904932.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Library"><div class="content"><h3>Grand Library</h3><p>10,000+ books & digital archives.</p></div></div>
+      <div class="facility-card" data-aos="fade-up" data-aos-delay="300"><img src="https://images.pexels.com/photos/4320592/pexels-photo-4320592.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Playground"><div class="content"><h3>Olympic Playfield</h3><p>Cricket, football, basketball courts.</p></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- Gallery -->
+<section id="gallery">
+  <div class="container" style="max-width:1300px; margin:auto; padding:0 2rem;">
+    <h2 class="section-title" data-aos="fade-up">Campus Chronicles</h2>
+    <div class="gallery-grid" id="galleryGrid">
+      <div class="gallery-item" data-aos="zoom-in"><img src="https://images.pexels.com/photos/8618045/pexels-photo-8618045.jpeg?auto=compress&cs=tinysrgb&w=600" alt="event"><div class="gallery-overlay"><i class="fas fa-search-plus" style="color:white;font-size:2rem;"></i></div></div>
+      <div class="gallery-item" data-aos="zoom-in" data-aos-delay="100"><img src="https://images.pexels.com/photos/8618022/pexels-photo-8618022.jpeg?auto=compress&cs=tinysrgb&w=600" alt="class"><div class="gallery-overlay"><i class="fas fa-search-plus"></i></div></div>
+      <div class="gallery-item" data-aos="zoom-in" data-aos-delay="200"><img src="https://images.pexels.com/photos/8618072/pexels-photo-8618072.jpeg?auto=compress&cs=tinysrgb&w=600" alt="sports"><div class="gallery-overlay"><i class="fas fa-search-plus"></i></div></div>
+      <div class="gallery-item" data-aos="zoom-in" data-aos-delay="300"><img src="https://images.pexels.com/photos/8618100/pexels-photo-8618100.jpeg?auto=compress&cs=tinysrgb&w=600" alt="art"><div class="gallery-overlay"><i class="fas fa-search-plus"></i></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- Admissions -->
+<section id="admissions" style="background: linear-gradient(145deg, #fff8f0, #ffffff);">
+  <div class="container" style="max-width:1200px; margin:auto; padding:0 2rem;">
+    <h2 class="section-title" data-aos="fade-up">Admissions Open 2025-26</h2>
+    <div class="steps" data-aos="fade-up">
+      <div class="step-card"><i class="fas fa-file-alt"></i><h3>Step 1: Apply Online</h3><p>Fill the registration form</p></div>
+      <div class="step-card"><i class="fas fa-school"></i><h3>Step 2: Campus Tour</h3><p>Experience the legacy</p></div>
+      <div class="step-card"><i class="fas fa-handshake"></i><h3>Step 3: Confirmation</h3><p>Secure your child's seat</p></div>
+    </div>
+    <div style="text-align:center; margin-top:2rem;"><a href="#contact" class="btn-primary-red">Apply Now <i class="fas fa-arrow-right"></i></a></div>
+  </div>
+</section>
+
+<!-- Contact -->
+<!-- Contact -->
+<section id="contact">
+  <div class="container" style="max-width:1200px; margin:auto; padding:0 2rem;">
+    <h2 class="section-title" data-aos="fade-up">Connect With Us</h2>
+    <div class="contact-wrapper">
+      <div data-aos="fade-right">
+        <p><i class="fas fa-map-marker-alt" style="color:var(--crimson-red);"></i> Paragon Palace, Civil Lines, Jaipur - 302001</p>
+        <p><i class="fas fa-phone-alt"></i> +91 9988776655</p>
+        <p><i class="fas fa-envelope"></i> samiqbukhari51214@gmail.com</p>
+        <div style="margin-top:1rem; border-radius:20px; overflow:hidden; height:220px;">
+          <iframe src="https://www.google.com/maps?q=31.408032,73.104593&z=15&output=embed" width="100%" height="100%" style="border:0;" loading="lazy"></iframe>
+        </div>
+      </div>
+      <div data-aos="fade-left">
+    <div data-aos="fade-left">
+  <form id="contactForm" class="contact-form">
+    <input type="text" id="name" placeholder="Full Name" required>
+    <input type="email" id="email" placeholder="Email Address" required>
+    <textarea id="message" rows="4" placeholder="Your Message" required></textarea>
+    <button type="submit" class="btn-primary-red" style="width:100%; border:none; cursor:pointer;">
+      Send Message <i class="fas fa-paper-plane"></i>
+    </button>
+  </form>
+  <div id="status" style="margin-top: 20px; padding: 12px 16px; border-radius: 12px; display: none; font-weight: 500; text-align: center;"></div>
+</div>
+
+<p id="status"></p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Trust Logos -->
+<section class="follow-us">
+  <div class="follow-us-inner">
+    <h3>Follow Us On</h3>
+    <div class="social-carousel">
+      <div class="social-track">
+        <!-- Social Media Icons - First Set -->
+        <a href="https://instagram.com" class="social-icon" target="_blank" rel="noopener noreferrer">
+          <svg viewBox="0 0 24 24" fill="#E1306C">
+            <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/>
+          </svg>
+        </a>
+        <a href="https://facebook.com" class="social-icon" target="_blank" rel="noopener noreferrer">
+          <svg viewBox="0 0 24 24" fill="#1877F2">
+            <path d="M22 12c0-5.523-4.477-10-10-10S2 6.477 2 12c0 4.991 3.657 9.128 8.438 9.878v-6.987h-2.54V12h2.54V9.797c0-2.506 1.492-3.89 3.777-3.89 1.094 0 2.238.195 2.238.195v2.46h-1.26c-1.243 0-1.63.771-1.63 1.562V12h2.773l-.443 2.89h-2.33v6.988C18.343 21.128 22 16.991 22 12z"/>
+          </svg>
+        </a>
+        <a href="https://linkedin.com" class="social-icon" target="_blank" rel="noopener noreferrer">
+          <svg viewBox="0 0 24 24" fill="#0A66C2">
+            <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
+          </svg>
+        </a>
+        <a href="https://fiverr.com" class="social-icon" target="_blank" rel="noopener noreferrer">
+          <svg viewBox="0 0 24 24" fill="#1DBF73">
+            <path d="M22.5 12.5c0-1.58-.875-2.95-2.148-3.6.154-.435.238-.905.238-1.4 0-2.21-1.71-3.998-3.818-3.998-.47 0-.92.084-1.336.25C14.818 2.415 13.51 1.5 12 1.5s-2.816.917-3.437 2.25c-.415-.165-.866-.25-1.336-.25-2.11 0-3.818 1.79-3.818 4 0 .494.083.964.237 1.4-1.272.65-2.147 2.018-2.147 3.6 0 1.495.782 2.798 1.942 3.486-.02.17-.032.34-.032.514 0 2.21 1.708 4 3.818 4 .47 0 .92-.086 1.335-.25.62 1.334 1.926 2.25 3.437 2.25 1.512 0 2.818-.916 3.437-2.25.415.163.865.248 1.336.248 2.11 0 3.818-1.79 3.818-4 0-.174-.012-.344-.033-.513 1.158-.687 1.943-1.99 1.943-3.484zm-6.616-3.334l-4.334 6.5c-.145.217-.382.334-.625.334-.143 0-.288-.04-.416-.126l-.115-.094-2.415-2.415c-.293-.293-.293-.768 0-1.06s.768-.294 1.06 0l1.77 1.767 3.825-5.74c.23-.345.696-.436 1.04-.207.346.23.44.696.21 1.04z"/>
+          </svg>
+        </a>
+        <a href="https://upwork.com" class="social-icon" target="_blank" rel="noopener noreferrer">
+          <svg viewBox="0 0 24 24" fill="#6FDA44">
+            <path d="M18.561 13.158c-1.102 0-2.135-.467-3.074-1.227l.228-1.076.008-.042c.207-1.143.849-3.06 2.839-3.06 1.492 0 2.703 1.212 2.703 2.703-.001 1.489-1.212 2.702-2.704 2.702zm0-8.14c-2.539 0-4.51 1.649-5.31 4.366-1.22-1.834-2.148-4.036-2.687-5.892H7.828v7.112c-.002 1.406-1.141 2.546-2.547 2.548-1.406-.002-2.543-1.143-2.545-2.548V3.492H0v7.112c0 2.914 2.37 5.303 5.281 5.303 2.913 0 5.283-2.389 5.283-5.303v-1.19c.529 1.107 1.182 2.229 1.974 3.221l-1.673 7.873h2.797l1.213-5.71c1.063.679 2.285 1.109 3.686 1.109 3 0 5.439-2.452 5.439-5.45 0-3-2.439-5.439-5.439-5.439z"/>
+          </svg>
+        </a>
+        <a href="https://wa.me/923189669802?text=Hello!%20How%20can%20I%20help%20you%20%3A%29" class="social-icon" target="_blank" rel="noopener noreferrer">
+          <svg viewBox="0 0 24 24" fill="#25D366">
+            <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
+          </svg>
+        </a>
+        <a href="https://tiktok.com" class="social-icon" target="_blank" rel="noopener noreferrer">
+          <svg viewBox="0 0 24 24" fill="#000000">
+            <path d="M12.525.02c1.31-.02 2.61-.01 3.91-.02.08 1.53.63 3.09 1.75 4.17 1.12 1.11 2.7 1.62 4.24 1.79v4.03c-1.44-.05-2.89-.35-4.2-.97-.57-.26-1.1-.59-1.62-.93-.01 2.92.01 5.84-.02 8.75-.08 1.4-.54 2.79-1.35 3.94-1.31 1.92-3.58 3.17-5.91 3.21-1.43.08-2.86-.31-4.08-1.03-2.02-1.19-3.44-3.37-3.65-5.71-.02-.5-.03-1-.01-1.49.18-1.9 1.12-3.72 2.58-4.96 1.66-1.44 3.98-2.13 6.15-1.72.02 1.48-.04 2.96-.04 4.44-.99-.32-2.15-.23-3.02.37-.63.41-1.11 1.04-1.36 1.75-.21.51-.15 1.07-.14 1.61.24 1.64 1.82 3.02 3.5 2.87 1.12-.01 2.19-.66 2.77-1.61.19-.33.4-.67.41-1.06.1-1.79.06-3.57.07-5.36.01-4.03-.01-8.05.02-12.07z"/>
+          </svg>
+        </a>
+        
+        <!-- Duplicate Set for Seamless Looping -->
+        <a href="https://instagram.com" class="social-icon" target="_blank" rel="noopener noreferrer">
+          <svg viewBox="0 0 24 24" fill="#E1306C">
+            <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/>
+          </svg>
+        </a>
+        <a href="https://facebook.com" class="social-icon" target="_blank" rel="noopener noreferrer">
+          <svg viewBox="0 0 24 24" fill="#1877F2">
+            <path d="M22 12c0-5.523-4.477-10-10-10S2 6.477 2 12c0 4.991 3.657 9.128 8.438 9.878v-6.987h-2.54V12h2.54V9.797c0-2.506 1.492-3.89 3.777-3.89 1.094 0 2.238.195 2.238.195v2.46h-1.26c-1.243 0-1.63.771-1.63 1.562V12h2.773l-.443 2.89h-2.33v6.988C18.343 21.128 22 16.991 22 12z"/>
+          </svg>
+        </a>
+        <a href="https://linkedin.com" class="social-icon" target="_blank" rel="noopener noreferrer">
+          <svg viewBox="0 0 24 24" fill="#0A66C2">
+            <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
+          </svg>
+        </a>
+        <a href="https://fiverr.com" class="social-icon" target="_blank" rel="noopener noreferrer">
+          <svg viewBox="0 0 24 24" fill="#1DBF73">
+            <path d="M22.5 12.5c0-1.58-.875-2.95-2.148-3.6.154-.435.238-.905.238-1.4 0-2.21-1.71-3.998-3.818-3.998-.47 0-.92.084-1.336.25C14.818 2.415 13.51 1.5 12 1.5s-2.816.917-3.437 2.25c-.415-.165-.866-.25-1.336-.25-2.11 0-3.818 1.79-3.818 4 0 .494.083.964.237 1.4-1.272.65-2.147 2.018-2.147 3.6 0 1.495.782 2.798 1.942 3.486-.02.17-.032.34-.032.514 0 2.21 1.708 4 3.818 4 .47 0 .92-.086 1.335-.25.62 1.334 1.926 2.25 3.437 2.25 1.512 0 2.818-.916 3.437-2.25.415.163.865.248 1.336.248 2.11 0 3.818-1.79 3.818-4 0-.174-.012-.344-.033-.513 1.158-.687 1.943-1.99 1.943-3.484zm-6.616-3.334l-4.334 6.5c-.145.217-.382.334-.625.334-.143 0-.288-.04-.416-.126l-.115-.094-2.415-2.415c-.293-.293-.293-.768 0-1.06s.768-.294 1.06 0l1.77 1.767 3.825-5.74c.23-.345.696-.436 1.04-.207.346.23.44.696.21 1.04z"/>
+          </svg>
+        </a>
+        <a href="https://upwork.com" class="social-icon" target="_blank" rel="noopener noreferrer">
+          <svg viewBox="0 0 24 24" fill="#6FDA44">
+            <path d="M18.561 13.158c-1.102 0-2.135-.467-3.074-1.227l.228-1.076.008-.042c.207-1.143.849-3.06 2.839-3.06 1.492 0 2.703 1.212 2.703 2.703-.001 1.489-1.212 2.702-2.704 2.702zm0-8.14c-2.539 0-4.51 1.649-5.31 4.366-1.22-1.834-2.148-4.036-2.687-5.892H7.828v7.112c-.002 1.406-1.141 2.546-2.547 2.548-1.406-.002-2.543-1.143-2.545-2.548V3.492H0v7.112c0 2.914 2.37 5.303 5.281 5.303 2.913 0 5.283-2.389 5.283-5.303v-1.19c.529 1.107 1.182 2.229 1.974 3.221l-1.673 7.873h2.797l1.213-5.71c1.063.679 2.285 1.109 3.686 1.109 3 0 5.439-2.452 5.439-5.45 0-3-2.439-5.439-5.439-5.439z"/>
+          </svg>
+        </a>
+        <a href="https://wa.me/923189669802?text=Hello!%20How%20can%20I%20help%20you%20%3A%29" class="social-icon" target="_blank" rel="noopener noreferrer">
+          <svg viewBox="0 0 24 24" fill="#25D366">
+            <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
+          </svg>
+        </a>
+        <a href="https://tiktok.com" class="social-icon" target="_blank" rel="noopener noreferrer">
+          <svg viewBox="0 0 24 24" fill="#000000">
+            <path d="M12.525.02c1.31-.02 2.61-.01 3.91-.02.08 1.53.63 3.09 1.75 4.17 1.12 1.11 2.7 1.62 4.24 1.79v4.03c-1.44-.05-2.89-.35-4.2-.97-.57-.26-1.1-.59-1.62-.93-.01 2.92.01 5.84-.02 8.75-.08 1.4-.54 2.79-1.35 3.94-1.31 1.92-3.58 3.17-5.91 3.21-1.43.08-2.86-.31-4.08-1.03-2.02-1.19-3.44-3.37-3.65-5.71-.02-.5-.03-1-.01-1.49.18-1.9 1.12-3.72 2.58-4.96 1.66-1.44 3.98-2.13 6.15-1.72.02 1.48-.04 2.96-.04 4.44-.99-.32-2.15-.23-3.02.37-.63.41-1.11 1.04-1.36 1.75-.21.51-.15 1.07-.14 1.61.24 1.64 1.82 3.02 3.5 2.87 1.12-.01 2.19-.66 2.77-1.61.19-.33.4-.67.41-1.06.1-1.79.06-3.57.07-5.36.01-4.03-.01-8.05.02-12.07z"/>
+          </svg>
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .follow-us {
+    padding: 4rem 0;
+    background: #f8f9fa;
+    position: relative;
+    overflow: hidden;
+  }
+  
+  .follow-us-inner {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+    position: relative;
+  }
+  
+  .follow-us h3 {
+    text-align: center;
+    font-size: 1.8rem;
+    color: #333;
+    margin-bottom: 2.5rem;
+    font-weight: 600;
+  }
+  
+  .social-carousel {
+    overflow: hidden;
+    position: relative;
+    width: 100%;
+  }
+  
+  .social-track {
+    display: flex;
+    gap: 3rem;
+    align-items: center;
+    width: max-content;
+    animation: scroll 20s linear infinite;
+    will-change: transform;
+  }
+  
+  .social-icon {
+    flex: 0 0 auto;
+    width: 70px;
+    height: 70px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+    border-radius: 50%;
+    background: white;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  }
+  .social-icon svg {
+    width: 60%;
+    height: 60%;
+  }
+  
+  .social-icon:hover {
+    transform: scale(1.15) translateY(-5px);
+    box-shadow: 0 8px 16px rgba(0,0,0,0.15);
+  }
+  
+  @keyframes scroll {
+    0% {
+      transform: translateX(0);
+    }
+    100% {
+      transform: translateX(-50%);
+    }
+  }
+  
+  @media (max-width: 768px) {
+    .social-icon {
+      width: 60px;
+      height: 60px;
+    }
+    
+    .social-track {
+      gap: 2rem;
+    }
+    
+    .follow-us h3 {
+      font-size: 1.5rem;
+    }
+  }
+</style>
+
+<script>
+  // Pause animation on hover
+  const carousel = document.querySelector('.social-carousel');
+  const track = document.querySelector('.social-track');
+  
+  carousel.addEventListener('mouseenter', () => {
+    track.style.animationPlayState = 'paused';
+  });
+  
+  carousel.addEventListener('mouseleave', () => {
+    track.style.animationPlayState = 'running';
+  });
+</script>
+
+
+<!-- Footer -->
+<!-- Footer for Paragon Schools -->
+<footer style="background: #1a1a2e; padding: 60px 0 20px; border-top: 4px solid #ff6b6b; font-family: 'Poppins', 'Segoe UI', sans-serif;">
+    <div style="max-width: 1200px; margin: 0 auto; padding: 0 20px;">
+        
+        <!-- Footer Main Content -->
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 40px; margin-bottom: 50px;">
+            
+            <!-- About Column -->
+            <div>
+                <div style="margin-bottom: 20px;">
+                    <h2 style="font-size: 28px; font-weight: 700; margin: 0;">
+                        <span style="color: #ff6b6b;">PARAGON</span>
+                        <span style="color: white;">Schools</span>
+                    </h2>
+                    <p style="color: #ff6b6b; font-size: 12px; letter-spacing: 2px; margin-top: 5px;">EXCELLENCE IN EDUCATION</p>
+                </div>
+                <p style="color: rgba(255,255,255,0.7); line-height: 1.7; margin-bottom: 25px; font-size: 14px;">The purpose of Paragon Schools is to prepare students with promise to enhance their intellectual, physical, social, emotional, spiritual, and artistic growth.</p>
+                <div style="display: flex; gap: 12px;">
+                    <a href="#" style="display: inline-block; width: 36px; height: 36px; background: rgba(255,255,255,0.1); border-radius: 5px; text-align: center; line-height: 36px; color: white; transition: all 0.3s ease; text-decoration: none;"><i class="fab fa-facebook-f" style="font-size: 14px;"></i></a>
+                    <a href="#" style="display: inline-block; width: 36px; height: 36px; background: rgba(255,255,255,0.1); border-radius: 5px; text-align: center; line-height: 36px; color: white; transition: all 0.3s ease; text-decoration: none;"><i class="fab fa-twitter" style="font-size: 14px;"></i></a>
+                    <a href="#" style="display: inline-block; width: 36px; height: 36px; background: rgba(255,255,255,0.1); border-radius: 5px; text-align: center; line-height: 36px; color: white; transition: all 0.3s ease; text-decoration: none;"><i class="fab fa-instagram" style="font-size: 14px;"></i></a>
+                    <a href="#" style="display: inline-block; width: 36px; height: 36px; background: rgba(255,255,255,0.1); border-radius: 5px; text-align: center; line-height: 36px; color: white; transition: all 0.3s ease; text-decoration: none;"><i class="fab fa-youtube" style="font-size: 14px;"></i></a>
+                    <a href="#" style="display: inline-block; width: 36px; height: 36px; background: rgba(255,255,255,0.1); border-radius: 5px; text-align: center; line-height: 36px; color: white; transition: all 0.3s ease; text-decoration: none;"><i class="fab fa-linkedin-in" style="font-size: 14px;"></i></a>
+                </div>
+            </div>
+
+            <!-- Quick Links -->
+            <div>
+                <h4 style="color: white; font-size: 18px; margin-bottom: 25px; position: relative; padding-bottom: 12px; font-weight: 600;">
+                    Quick Links
+                    <span style="position: absolute; bottom: 0; left: 0; width: 40px; height: 3px; background: #ff6b6b;"></span>
+                </h4>
+                <ul style="list-style: none; padding: 0;">
+                    <li style="margin-bottom: 12px;"><a href="index.html" style="color: rgba(255,255,255,0.7); text-decoration: none; transition: all 0.3s ease; font-size: 14px; display: inline-block;"><i class="fas fa-angle-right" style="margin-right: 10px; color: #ff6b6b;"></i> Home</a></li>
+                    <li style="margin-bottom: 12px;"><a href="about.html" style="color: rgba(255,255,255,0.7); text-decoration: none; transition: all 0.3s ease; font-size: 14px; display: inline-block;"><i class="fas fa-angle-right" style="margin-right: 10px; color: #ff6b6b;"></i> About Us</a></li>
+                    <li style="margin-bottom: 12px;"><a href="admissions.html" style="color: rgba(255,255,255,0.7); text-decoration: none; transition: all 0.3s ease; font-size: 14px; display: inline-block;"><i class="fas fa-angle-right" style="margin-right: 10px; color: #ff6b6b;"></i> Admissions</a></li>
+                    <li style="margin-bottom: 12px;"><a href="academics.html" style="color: rgba(255,255,255,0.7); text-decoration: none; transition: all 0.3s ease; font-size: 14px; display: inline-block;"><i class="fas fa-angle-right" style="margin-right: 10px; color: #ff6b6b;"></i> Academics</a></li>
+                    <li style="margin-bottom: 12px;"><a href="campus.html" style="color: rgba(255,255,255,0.7); text-decoration: none; transition: all 0.3s ease; font-size: 14px; display: inline-block;"><i class="fas fa-angle-right" style="margin-right: 10px; color: #ff6b6b;"></i> Our Campuses</a></li>
+                    <li style="margin-bottom: 12px;"><a href="contact.html" style="color: rgba(255,255,255,0.7); text-decoration: none; transition: all 0.3s ease; font-size: 14px; display: inline-block;"><i class="fas fa-angle-right" style="margin-right: 10px; color: #ff6b6b;"></i> Contact Us</a></li>
+                </ul>
+            </div>
+
+            <!-- Resources -->
+            <div>
+                <h4 style="color: white; font-size: 18px; margin-bottom: 25px; position: relative; padding-bottom: 12px; font-weight: 600;">
+                    Resources
+                    <span style="position: absolute; bottom: 0; left: 0; width: 40px; height: 3px; background: #ff6b6b;"></span>
+                </h4>
+                <ul style="list-style: none; padding: 0;">
+                    <li style="margin-bottom: 12px;"><a href="parent-portal.html" style="color: rgba(255,255,255,0.7); text-decoration: none; transition: all 0.3s ease; font-size: 14px; display: inline-block;"><i class="fas fa-angle-right" style="margin-right: 10px; color: #ff6b6b;"></i> Parent Portal</a></li>
+                    <li style="margin-bottom: 12px;"><a href="student-portal.html" style="color: rgba(255,255,255,0.7); text-decoration: none; transition: all 0.3s ease; font-size: 14px; display: inline-block;"><i class="fas fa-angle-right" style="margin-right: 10px; color: #ff6b6b;"></i> Student Portal</a></li>
+                    <li style="margin-bottom: 12px;"><a href="calendar.html" style="color: rgba(255,255,255,0.7); text-decoration: none; transition: all 0.3s ease; font-size: 14px; display: inline-block;"><i class="fas fa-angle-right" style="margin-right: 10px; color: #ff6b6b;"></i> Academic Calendar</a></li>
+                    <li style="margin-bottom: 12px;"><a href="downloads.html" style="color: rgba(255,255,255,0.7); text-decoration: none; transition: all 0.3s ease; font-size: 14px; display: inline-block;"><i class="fas fa-angle-right" style="margin-right: 10px; color: #ff6b6b;"></i> Downloads</a></li>
+                    <li style="margin-bottom: 12px;"><a href="faq.html" style="color: rgba(255,255,255,0.7); text-decoration: none; transition: all 0.3s ease; font-size: 14px; display: inline-block;"><i class="fas fa-angle-right" style="margin-right: 10px; color: #ff6b6b;"></i> FAQs</a></li>
+                    <li style="margin-bottom: 12px;"><a href="careers.html" style="color: rgba(255,255,255,0.7); text-decoration: none; transition: all 0.3s ease; font-size: 14px; display: inline-block;"><i class="fas fa-angle-right" style="margin-right: 10px; color: #ff6b6b;"></i> Careers</a></li>
+                </ul>
+            </div>
+
+            <!-- Contact Info -->
+            <div>
+                <h4 style="color: white; font-size: 18px; margin-bottom: 25px; position: relative; padding-bottom: 12px; font-weight: 600;">
+                    Get In Touch
+                    <span style="position: absolute; bottom: 0; left: 0; width: 40px; height: 3px; background: #ff6b6b;"></span>
+                </h4>
+                <ul style="list-style: none; padding: 0;">
+                    <li style="margin-bottom: 18px; display: flex; align-items: flex-start; gap: 12px;">
+                        <i class="fas fa-map-marker-alt" style="color: #ff6b6b; font-size: 18px; margin-top: 3px;"></i>
+                        <span style="color: rgba(255,255,255,0.7); font-size: 14px; line-height: 1.5;">63 E1, Gulberg III, Lahore, Pakistan</span>
+                    </li>
+                    <li style="margin-bottom: 18px; display: flex; align-items: center; gap: 12px;">
+                        <i class="fas fa-phone-alt" style="color: #ff6b6b; font-size: 18px;"></i>
+                        <div>
+                            <a href="tel:+92423576357" style="color: rgba(255,255,255,0.7); text-decoration: none; transition: all 0.3s ease; font-size: 14px; display: block;">+92 42 35756357-58</a>
+                        </div>
+                    </li>
+                    <li style="margin-bottom: 18px; display: flex; align-items: center; gap: 12px;">
+                        <i class="fas fa-fax" style="color: #ff6b6b; font-size: 18px;"></i>
+                        <span style="color: rgba(255,255,255,0.7); font-size: 14px;">+92 42 35712637</span>
+                    </li>
+                    <li style="margin-bottom: 18px; display: flex; align-items: center; gap: 12px;">
+                        <i class="fas fa-envelope" style="color: #ff6b6b; font-size: 18px;"></i>
+                        <a href="mailto:info@paragonschools.edu.pk" style="color: rgba(255,255,255,0.7); text-decoration: none; transition: all 0.3s ease; font-size: 14px;">info@paragonschools.edu.pk</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Footer Bottom -->
+        <div style="border-top: 1px solid rgba(255,255,255,0.1); padding-top: 25px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 15px;">
+            <p style="color: rgba(255,255,255,0.5); font-size: 13px;">&copy; 2026 Paragon Schools. All Rights Reserved.</p>
+            <div style="display: flex; gap: 20px;">
+                <a href="#" style="color: rgba(255,255,255,0.5); text-decoration: none; font-size: 13px; transition: all 0.3s ease;">Privacy Policy</a>
+                <a href="#" style="color: rgba(255,255,255,0.5); text-decoration: none; font-size: 13px; transition: all 0.3s ease;">Terms of Use</a>
+                <a href="#" style="color: rgba(255,255,255,0.5); text-decoration: none; font-size: 13px; transition: all 0.3s ease;">Sitemap</a>
+            </div>
+            <p style="color: rgba(255,255,255,0.5); font-size: 13px;">Powered By: Tower Technologies (Pvt) Ltd</p>
+        </div>
+    </div>
+
+    <!-- Hover Effects -->
+    <style>
+        .footer-links a:hover {
+            color: #ff6b6b !important;
+            padding-left: 5px;
+        }
+        .social-icons a:hover {
+            background: #ff6b6b !important;
+            transform: translateY(-3px);
+        }
+        .footer-contact a:hover {
+            color: #ff6b6b !important;
+        }
+
+            .whatsapp-float:hover {
+  background-color: #1ebe5d;
+  transform: scale(1.15);
+  box-shadow: 0 0 15px #25D366, 0 0 30px #25D366;
+}
+    </style>
+</footer>
+<a href="#ai.html" 
+   onclick="window.scrollTo(0, 0); window.location.href = 'ai.html'; return false;"
+   style="position: fixed; bottom: 20px; left: 20px; z-index: 999; width: 56px; height: 56px; background-color: #7c3aed; border-radius: 50%; display: flex; align-items: center; justify-content: center; box-shadow: 0 4px 10px rgba(0,0,0,0.3); transition: 0.3s; cursor: pointer;"
+   onmouseover="this.style.transform='scale(1.1)'; this.style.backgroundColor='#6d28d9';"
+   onmouseout="this.style.transform='scale(1)'; this.style.backgroundColor='#7c3aed';">
+   <i class="fas fa-robot" style="color: white; font-size: 24px;"></i>
+</a>
+
+<a href="https://wa.me/919988776655?text=I%20want%20to%20enroll%20my%20child" class="whatsapp-float" target="_blank"><i class="fab fa-whatsapp"></i></a>
+<div class="back-to-top" id="backToTop"><i class="fas fa-arrow-up"></i></div>
+<div id="lightbox" class="lightbox"><span class="close-lightbox" style="position:absolute;top:30px;right:40px;color:white;font-size:2rem;cursor:pointer;">&times;</span><img id="lightboxImg" src=""></div>
+
+<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+<script>
+  // Custom cursor
+  const cursorDot = document.querySelector('.cursor-dot');
+  const cursorOutline = document.querySelector('.cursor-outline');
+  if(cursorDot && cursorOutline) {
+    window.addEventListener('mousemove', (e) => {
+      cursorDot.style.transform = `translate(${e.clientX - 4}px, ${e.clientY - 4}px)`;
+      cursorOutline.style.transform = `translate(${e.clientX - 20}px, ${e.clientY - 20}px)`;
+    });
+  }
+
+  // Hero Slideshow
+  const slides = document.querySelectorAll('.slide');
+  const dotsContainer = document.getElementById('slideDots');
+  let currentIndex = 0, slideInterval;
+  if(slides.length) {
+    slides.forEach((_, i) => { let d = document.createElement('div'); d.classList.add('dot'); if(i===0) d.classList.add('active'); d.onclick = () => { clearInterval(slideInterval); goToSlide(i); startInterval(); }; dotsContainer.appendChild(d); });
+    const dots = document.querySelectorAll('.dot');
+    function goToSlide(i) { slides.forEach((s,idx)=>{ s.classList.remove('active'); if(dots[idx]) dots[idx].classList.remove('active'); }); slides[i].classList.add('active'); if(dots[i]) dots[i].classList.add('active'); currentIndex=i; }
+    function nextSlide() { goToSlide((currentIndex+1)%slides.length); }
+    function startInterval() { slideInterval = setInterval(nextSlide, 4000); }
+    goToSlide(0); startInterval();
+    const heroSection = document.querySelector('.hero');
+    heroSection.addEventListener('mouseenter',()=>clearInterval(slideInterval));
+    heroSection.addEventListener('mouseleave',startInterval);
+  }
+
+  // Floating Particles
+  const particlesContainer = document.getElementById('particles');
+  if(particlesContainer) {
+    for(let i=0;i<50;i++){ let p=document.createElement('div'); p.classList.add('particle'); p.style.left=Math.random()*100+'%'; p.style.width=p.style.height=Math.random()*6+2+'px'; p.style.animationDelay=Math.random()*12+'s'; p.style.animationDuration=Math.random()*10+8+'s'; particlesContainer.appendChild(p); }
+  }
+
+  // Parallax About Image
+  const parallaxImg = document.querySelector('#parallaxImg img');
+  window.addEventListener('scroll',()=>{ if(parallaxImg) parallaxImg.style.transform=`translateY(${window.scrollY*0.05}px)`; });
+
+  // Active Nav Link Highlight
+  const sections = document.querySelectorAll('section');
+  const navLinksA = document.querySelectorAll('.nav-links a');
+  window.addEventListener('scroll',()=>{
+    let current=''; sections.forEach(section=>{ const sectionTop=section.offsetTop-150; if(scrollY>=sectionTop) current=section.getAttribute('id'); });
+    navLinksA.forEach(link=>{ link.classList.remove('active-link'); if(link.getAttribute('href')===`#${current}`) link.classList.add('active-link'); });
+    const navbar=document.getElementById('navbar'); if(window.scrollY>50) navbar.classList.add('scrolled'); else navbar.classList.remove('scrolled');
+    const backBtn=document.getElementById('backToTop'); if(window.scrollY>500) backBtn.classList.add('show'); else backBtn.classList.remove('show');
+  });
+  document.getElementById('backToTop').onclick=()=>window.scrollTo({top:0,behavior:'smooth'});
+  
+  // Lightbox Gallery
+  document.querySelectorAll('.gallery-item').forEach(item=>{ item.onclick=()=>{ document.getElementById('lightboxImg').src=item.querySelector('img').src; document.getElementById('lightbox').classList.add('active'); }; });
+  document.querySelector('.close-lightbox').onclick=()=>document.getElementById('lightbox').classList.remove('active');
+  document.getElementById('lightbox').onclick=e=>{ if(e.target===document.getElementById('lightbox')) document.getElementById('lightbox').classList.remove('active'); };
+  
+  // Contact Form
+  document.getElementById('contactForm').onsubmit=e=>{ e.preventDefault(); alert('Thank you! Paragon School team will contact you.'); e.target.reset(); };
+  
+  // AOS Enhanced
+  AOS.init({ duration: 1000, easing: 'ease-in-out', once: true });
+  
+  // Mobile Menu
+  document.getElementById('menuToggle').onclick=()=>document.getElementById('navLinks').classList.toggle('active');
+  document.querySelectorAll('.nav-links a').forEach(l=>l.addEventListener('click',()=>document.getElementById('navLinks').classList.remove('active')));
+
+
+
+  //contact Form
+  
+</script>
+<script type="text/javascript">
+  (function() {
+    // Apni Public Key yahan daalein
+    emailjs.init("tuTlkJ7ddappyfR01");
+  })();
+
+  document.getElementById("contactForm").addEventListener("submit", function(event) {
+    event.preventDefault(); // Page reload rokne ke liye
+
+    // Loading status show karein
+    const statusDiv = document.getElementById("status");
+    statusDiv.style.display = "block";
+    statusDiv.innerHTML = "📧 Sending message...";
+    statusDiv.style.backgroundColor = "#e0f2fe";
+
+    // Form data lein
+    const templateParams = {
+      from_name: document.getElementById("name").value,
+      from_email: document.getElementById("email").value,
+      message: document.getElementById("message").value,
+      to_email: "samiqbukhari51214@gmail.com"
+    };
+
+    // Email send karein
+    emailjs.send("service_fgt9gny", "template_n3go5r5", templateParams)
+      .then(function(response) {
+        statusDiv.style.backgroundColor = "#d1fae5";
+        statusDiv.innerHTML = "✅ Message sent successfully!";
+        document.getElementById("contactForm").reset();
+      }, function(error) {
+        statusDiv.style.backgroundColor = "#fee2e2";
+        statusDiv.innerHTML = "❌ Failed to send message. Please try again.";
+        console.error("FAILED...", error);
+      });
+  });
+</script>
+</body>
+</html>
