@@ -371,7 +371,6 @@
     .send-btn {
       background: linear-gradient(145deg, var(--crimson-red), #a51d35);
       border: none;
-      min-width: 52px;
       width: 52px;
       height: 52px;
       border-radius: 50%;
@@ -381,9 +380,6 @@
       transition: 0.2s;
       box-shadow: 0 6px 12px rgba(196,30,58,0.3);
       flex-shrink: 0;
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
     }
     .send-btn:active {
       transform: scale(0.96);
@@ -421,8 +417,6 @@
       background-color: #1ebe5d;
       transform: scale(1.08);
     }
-    
-    /* ========== ENHANCED MOBILE RESPONSIVENESS - FIXED SEND BUTTON VISIBILITY ========== */
     @media (max-width: 768px) {
       .nav-links {
         position: fixed;
@@ -463,140 +457,34 @@
         font-size: 0.7rem;
         padding: 0.3rem 0.8rem;
       }
-      /* Send button remains fully visible - no shrinking that hides it */
       .send-btn {
-        min-width: 46px;
         width: 46px;
         height: 46px;
         font-size: 1.2rem;
       }
       .mic-btn {
-        min-width: 40px;
         width: 40px;
         height: 40px;
-        font-size: 1rem;
-      }
-      .input-area {
-        padding: 0.8rem 1rem;
-        gap: 0.5rem;
-      }
-      .input-wrapper {
-        padding-left: 0.8rem;
-      }
-      #chatInput {
-        font-size: 0.85rem;
-        padding: 0.6rem 0.2rem;
       }
     }
-    
-    /* Extra small phones (Galaxy Fold, iPhone SE, small Android) */
     @media (max-width: 480px) {
       .chat-header {
         flex-direction: column;
         align-items: stretch;
         text-align: center;
-        padding: 0.8rem 1rem;
       }
       .mode-switch {
         justify-content: center;
       }
       .input-area {
-        gap: 0.4rem;
-        padding: 0.7rem 0.8rem;
-      }
-      .suggestion-chip {
-        font-size: 0.65rem;
-        padding: 0.3rem 0.7rem;
-      }
-      .suggestions {
-        gap: 0.4rem;
-        padding: 0.5rem 0.8rem;
-      }
-      /* CRITICAL: Send button always visible - proper size for small screens */
-      .send-btn {
-        min-width: 42px !important;
-        width: 42px !important;
-        height: 42px !important;
-        font-size: 1.1rem !important;
-        flex-shrink: 0 !important;
-      }
-      .mic-btn {
-        min-width: 38px !important;
-        width: 38px !important;
-        height: 38px !important;
-        font-size: 0.9rem !important;
-        flex-shrink: 0 !important;
-      }
-      .input-wrapper {
-        padding-left: 0.6rem;
-      }
-      #chatInput {
-        font-size: 0.8rem;
-        padding: 0.5rem 0.2rem;
-      }
-      .chat-window {
-        min-height: 280px;
+        gap: 0.5rem;
         padding: 0.8rem;
       }
-      .message {
-        padding: 0.6rem 1rem;
-        font-size: 0.8rem;
-      }
-      .chat-brand i {
-        font-size: 1.5rem;
-      }
-      .chat-brand h3 {
-        font-size: 0.95rem;
-      }
-      .mode-btn {
-        font-size: 0.65rem;
-        padding: 0.25rem 0.6rem;
-      }
-    }
-    
-    /* For very narrow screens (like Galaxy Fold folded - 280px) */
-    @media (max-width: 360px) {
-      .send-btn {
-        min-width: 38px !important;
-        width: 38px !important;
-        height: 38px !important;
-        font-size: 1rem !important;
-      }
-      .mic-btn {
-        min-width: 34px !important;
-        width: 34px !important;
-        height: 34px !important;
-        font-size: 0.8rem !important;
-      }
-      .input-area {
-        gap: 0.3rem;
-        padding: 0.5rem 0.6rem;
-      }
-      .input-wrapper {
-        padding-left: 0.5rem;
-      }
-      #chatInput {
-        font-size: 0.75rem;
-        padding: 0.4rem 0.2rem;
-      }
-      .message {
-        max-width: 95%;
-        padding: 0.5rem 0.8rem;
-        font-size: 0.75rem;
-      }
       .suggestion-chip {
-        font-size: 0.6rem;
-        padding: 0.2rem 0.6rem;
-      }
-      .chat-brand h3 {
-        font-size: 0.85rem;
-      }
-      .mode-btn {
-        font-size: 0.6rem;
-        padding: 0.2rem 0.5rem;
+        font-size: 0.65rem;
+        padding: 0.3rem 0.9rem;
       }
     }
-    
     /* Footer grid responsiveness */
     footer .grid-footer {
       display: grid;
@@ -605,27 +493,8 @@
     }
     @media (max-width: 600px) {
       .ai-chat-section {
-        padding: 6rem 0.6rem 3rem;
+        padding: 6rem 0.8rem 3rem;
       }
-      .chat-container {
-        border-radius: 1.2rem;
-      }
-    }
-    
-    /* Ensure horizontal scroll never happens on any device */
-    body, .chat-container, .input-area, .nav-container {
-      overflow-x: hidden;
-    }
-    
-    /* Make sure buttons don't get pushed off screen */
-    .input-area {
-      flex-wrap: nowrap !important;
-    }
-    .input-wrapper {
-      min-width: 0; /* Allows flex shrinking */
-    }
-    .send-btn, .mic-btn {
-      flex-shrink: 0;
     }
   </style>
 </head>
@@ -639,7 +508,7 @@
     <div class="logo"><h1>Paragon School</h1></div>
     <div class="menu-icon" id="menuToggle"><i class="fas fa-bars"></i></div>
     <div class="nav-links" id="navLinks">
-     <a href="index.html">Home</a>
+      <a href="index.html">Home</a>
       <a href="announcement.html">Announcements</a>
       <a href="index.html#academics">Academics</a>
       <a href="index.html#admissions">Admissions</a>
@@ -952,6 +821,16 @@ Keep answers concise (max 3 sentences), encouraging, and helpful. Use a friendly
       });
     }
   })();
+
+
+//chatbot security
+
+// if (document.referrer && document.referrer.includes("your-site.web.app")) {
+//     // chatbot load karo
+// } else {
+//     document.body.innerHTML = "<h1> We Have Blocked you. Access Denied</h1>";
+// }
+
 </script>
 </body>
 </html>

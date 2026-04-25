@@ -1719,17 +1719,17 @@
 <!-- ═══════════════════════ NAVBAR ═══════════════════════ -->
 <nav class="navbar" id="navbar">
   <div class="nav-inner">
-    <a href="#home" class="nav-logo">PARAGON<span>.</span></a>
+    <a href="index.html" class="nav-logo">PARAGON<span>.</span></a>
     <div class="hamburger" id="hamburger"><span></span><span></span><span></span></div>
     <div class="nav-links" id="navLinks">
-      <a href="#home">Home</a>
+      <a href="index.html">Home</a>
       <a href="announcement.html">Announcements</a>
-      <a href="#academics">Academics</a>
-      <a href="admission.html">Admissions</a>
+        <a href="index.html#academics">Academics</a>
+      <a href="index.html#admissions">Admissions</a>
       <a href="antham.html">Anthem</a>
-      <a href="virtualtour.html">Virtual tour</a>
-      <a href="#contact">Contact</a>
-      <a href="#admissions" class="nav-cta">Apply Now</a>
+      <a href="index.html#gallery">Gallery</a>
+      <a href="index.html#contact">Contact</a>
+      <a href="index.html#admissions" class="btn-apply-nav">Apply Now</a>
     </div>
   </div>
 </nav>
@@ -2242,11 +2242,114 @@
 <div class="fab-group">
   <button class="fab fab-top" id="fabTop"><i class="fas fa-arrow-up"></i></button>
   <a href="ai.html" class="fab fab-ai"><i class="fas fa-robot"></i></a>
-<a href="https://wa.me/923189669802?text=I%20want%20to%20enroll%20my%20child" class="fab fab-whatsapp" target="_blank"><i class="fab fa-whatsapp"></i></a>
+  <a href="https://wa.me/923189669802?text=I%20want%20to%20enroll%20my%20child" class="fab fab-whatsapp" target="_blank"><i class="fab fa-whatsapp"></i></a>
 </div>
 
 <!-- ═══════════════════════ JAVASCRIPT ═══════════════════════ -->
+<script type="module">
+  // 🔹 Firebase Imports
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/12.12.1/firebase-app.js";
+  import { getFirestore, collection, addDoc } from "https://www.gstatic.com/firebasejs/12.12.1/firebase-firestore.js";
+
+  // 🔹 Firebase Config
+  const firebaseConfig = {
+    apiKey:            "AIzaSyDIQGRG3pihRz5EVEKFe6JFuO_eF0Fj6xE",
+    authDomain:        "paragon-school-a3d1d.firebaseapp.com",
+    projectId:         "paragon-school-a3d1d",
+    storageBucket:     "paragon-school-a3d1d.firebasestorage.app",
+    messagingSenderId: "885395830398",
+    appId:             "1:885395830398:web:5276ee7615972508f94a2f"
+  };
+
+  const app = initializeApp(firebaseConfig);
+  const db  = getFirestore(app);
+
+  // 🔹 Word Filter Moderation (No AI needed)
+function isSafeMessage(message) {
+  const badWords = [
+    // 🔴 English — Sexual
+    'fuck', 'fucking', 'fucker', 'fuck off',
+    'sex', 'sexy', 'porn', 'porno', 'pornography', 'nude', 'naked', 'boobs',
+    'penis', 'vagina', 'dick', 'cock', 'pussy', 'ass', 'asshole', 'butt',
+    'slut', 'whore', 'hoe', 'bitch', 'bastard', 'cunt', 'blowjob', 'handjob',
+    'rape', 'molest', 'horny', 'masturbate', 'orgasm', 'dildo', 'condom',
+
+    // 🔴 English — Violence / Threats
+    'kill', 'killing', 'killer', 'die', 'dead', 'death', 'murder', 'shoot',
+    'bomb', 'blast', 'terrorist', 'terrorism', 'jihad', 'attack', 'threat',
+    'stab', 'knife', 'gun', 'weapon', 'suicide', 'hang yourself',
+
+    // 🔴 English — Hate / Abuse
+    'idiot', 'stupid', 'moron', 'loser', 'ugly', 'dumb', 'retard',
+    'hate', 'racist', 'nigger', 'faggot',
+
+    // 🟠 Urdu/Hindi — Sexual
+    'chutiya', 'chut', 'lund', 'loda', 'gaand', 'gandu', 'randi', 'randwa',
+    'madarchod', 'maderchod', 'madarchodd', 'benchod', 'behenchod', 'bhenchod',
+    'bhenchodd', 'harami', 'haramzada', 'haramzadi', 'kamina', 'kaminay',
+    'kuta', 'kutiya', 'kutti', 'sali', 'sala', 'saali', 'saala',
+    'besharam', 'besharmi', 'badmaash', 'awara', 'dhoti', 'lanat',
+    'launda', 'laundi', 'chakka', 'hijra', 'khusra', 'chhinal',
+    'maal', 'item', 'pataka', 'jism', 'joban',
+
+    // 🟠 Urdu/Hindi — Violence / Abuse
+    'maar', 'marunga', 'marungi', 'jaan se marunga', 'khatam kar dunga',
+    'jalao', 'jala dunga', 'tod dunga', 'phek dunga', 'dhoka', 'dhokebaaz',
+    'zalim', 'zulm', 'dushman', 'gaddar', 'ghaddaar', 'nashedi', 'nashe',
+    'ullu', 'ullu ka pattha', 'bakwaas', 'bakwas', 'chup kar', 'nikal',
+    'bhaag', 'bhaago', 'pagal', 'pagli', 'diwana', 'diwani'
+  ];
+
+  const lowerMsg = message.toLowerCase();
+  return !badWords.some(word => lowerMsg.includes(word));
+}
+
+  // 🔹 Form Submit
+  const contactForm = document.getElementById('contactForm');
+
+  if (contactForm) {
+    contactForm.addEventListener('submit', async (e) => {
+      e.preventDefault();
+
+      const name    = document.getElementById('name').value.trim();
+      const email   = document.getElementById('email').value.trim();
+      const phone   = document.getElementById('phone').value.trim();
+      const message = document.getElementById('message').value.trim();
+
+      if (message.length < 1 || message.length > 200) {
+        alert("Message must be between 1 and 200 characters!");
+        return;
+      }
+
+      const safe = isSafeMessage(message);
+
+      if (safe) {
+        try {
+          await addDoc(collection(db, "messages"), {
+            name,
+            email,
+            phone,
+            message,
+            createdAt: new Date()
+          });
+          alert("✅ Message sent successfully!");
+          contactForm.reset();
+        } catch (error) {
+          console.error("Firebase error:", error);
+          alert("Something went wrong: " + error.message);
+        }
+      } else {
+        alert("❌ Inappropriate message. Please keep it respectful.");
+      }
+    });
+  }
+</script>
+
+
 <script>
+
+
+  
 (function() {
   'use strict';
 
@@ -2525,37 +2628,9 @@
       themeIcon.className = 'fas fa-moon';
     }
   });
-
-  /* ── EMAILJS CONTACT FORM ── */
-  emailjs.init("tuTlkJ7ddappyfR01");
-  document.getElementById('contactForm').addEventListener('submit', function(e) {
-    e.preventDefault();
-    const statusDiv = document.getElementById('status');
-    statusDiv.style.display = 'block';
-    statusDiv.style.background = '#e0f2fe';
-    statusDiv.style.color = '#0369a1';
-    statusDiv.innerHTML = '📧 Sending your message...';
-    const params = {
-      from_name: document.getElementById('name').value,
-      from_email: document.getElementById('email').value,
-      message: document.getElementById('message').value,
-      to_email: 'samiqbukhari51214@gmail.com'
-    };
-    emailjs.send('service_fgt9gny', 'template_n3go5r5', params)
-      .then(() => {
-        statusDiv.style.background = '#d1fae5';
-        statusDiv.style.color = '#065f46';
-        statusDiv.innerHTML = '✅ Message sent! We\'ll be in touch soon.';
-        document.getElementById('contactForm').reset();
-      })
-      .catch(() => {
-        statusDiv.style.background = '#fee2e2';
-        statusDiv.style.color = '#991b1b';
-        statusDiv.innerHTML = '❌ Failed to send. Please try again.';
-      });
-  });
-
 })();
 </script>
 </body>
 </html>
+
+
