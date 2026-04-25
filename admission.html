@@ -3,175 +3,1942 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Paragon School | Admission Portal</title>
+<title>Paragon School — Admission Portal</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400&family=DM+Sans:wght@300;400;500;600;700&family=Playfair+Display:wght@700;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/qrcodejs@1.0.0/qrcode.min.js"></script>
+  <link rel="icon" href="https://cdn-icons-png.flaticon.com/512/3135/3135755.png" type="image/png">
 
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600;700&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
-
-<script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
 
 <style>
-body{
-  margin:0;
-  font-family:Montserrat;
-  background:#f5f7fa;
-  padding:20px;
+:root {
+  --navy: #060e1f;
+  --crimson: #C41E3A;
+  --crimson-light: #f5e6e9;
+  --gold: #D4AF37;
+  --gold-light: #fdf6dc;
+  --white: #ffffff;
+  --off-white: #F9F7F4;
+  --surface: #ffffff;
+  --surface-2: #f4f6fb;
+  --border: #e2e8f0;
+  --border-focus: #C41E3A;
+  --text-dark: #0d1f3c;
+  --text-body: #3a4a6b;
+  --text-muted: #7a8aaa;
+  --shadow-sm: 0 2px 12px rgba(6,14,31,0.07);
+  --shadow-md: 0 8px 32px rgba(6,14,31,0.10);
+  --shadow-lg: 0 24px 64px rgba(6,14,31,0.13);
+  --radius: 16px;
+  --radius-sm: 10px;
+  --transition: all 0.35s cubic-bezier(0.23, 1, 0.32, 1);
+  --crimson-rgb: 196,30,58;
+  --gold-rgb: 212,175,55;
 }
 
-.container{
-  display:grid;
-  grid-template-columns:1fr 1fr;
-  gap:20px;
+*, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
+html { scroll-behavior: smooth; }
+body {
+  font-family: 'DM Sans', sans-serif;
+  background: var(--off-white);
+  color: var(--text-body);
+  min-height: 100vh;
+  overflow-x: hidden;
 }
 
-.card{
-  background:white;
-  padding:20px;
-  border-radius:15px;
-  box-shadow:0 10px 25px rgba(0,0,0,0.1);
+/* ── TOAST ── */
+#toast-container {
+  position: fixed; top: 24px; right: 24px;
+  z-index: 99999; display: flex; flex-direction: column; gap: 10px;
+}
+.toast {
+  padding: 14px 22px; border-radius: 12px;
+  font-size: 0.88rem; font-weight: 500;
+  display: flex; align-items: center; gap: 10px;
+  box-shadow: var(--shadow-lg);
+  animation: toastIn 0.4s cubic-bezier(0.23,1,0.32,1) forwards;
+  max-width: 320px;
+}
+.toast.success { background: #e8f9f0; color: #1a7a45; border: 1px solid #a8e6c6; }
+.toast.error   { background: #fef0f0; color: #c41e3a; border: 1px solid #f5c6cc; }
+.toast.info    { background: #eef3ff; color: #2a56c6; border: 1px solid #b8cef0; }
+@keyframes toastIn { from { opacity:0; transform: translateX(40px); } to { opacity:1; transform: translateX(0); } }
+
+/* ── HEADER ── */
+.site-header {
+  background: linear-gradient(135deg, var(--navy) 0%, #0d1f3c 60%, #1a0a0f 100%);
+  padding: 0;
+  position: relative;
+  overflow: hidden;
+}
+.site-header::before {
+  content: '';
+  position: absolute; inset: 0;
+  background: radial-gradient(ellipse at 20% 50%, rgba(196,30,58,0.18) 0%, transparent 60%),
+              radial-gradient(ellipse at 80% 30%, rgba(212,175,55,0.12) 0%, transparent 50%);
+  pointer-events: none;
+}
+.header-inner {
+  max-width: 1200px; margin: 0 auto;
+  padding: 2.2rem 2rem 2rem;
+  display: flex; align-items: center; justify-content: space-between;
+  position: relative; z-index: 1;
+}
+.school-brand { display: flex; align-items: center; gap: 18px; }
+.school-crest {
+  width: 64px; height: 64px; border-radius: 14px;
+  background: linear-gradient(135deg, var(--crimson), #a01428);
+  display: flex; align-items: center; justify-content: center;
+  box-shadow: 0 8px 24px rgba(196,30,58,0.4);
+}
+.school-crest i { color: var(--gold); font-size: 1.7rem; }
+.school-name-group { }
+.school-name {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 2rem; font-weight: 700;
+  color: white; letter-spacing: 1px;
+  line-height: 1;
+}
+.school-name span { color: var(--gold); }
+.school-tagline {
+  font-size: 0.7rem; letter-spacing: 3px;
+  text-transform: uppercase; color: rgba(255,255,255,0.45);
+  margin-top: 4px;
+}
+.header-badge {
+  background: rgba(255,255,255,0.07);
+  border: 1px solid rgba(255,255,255,0.15);
+  border-radius: 50px; padding: 10px 22px;
+  color: rgba(255,255,255,0.85); font-size: 0.82rem;
+  letter-spacing: 1px; text-transform: uppercase;
+  backdrop-filter: blur(10px);
+}
+.header-hero {
+  text-align: center; padding: 3rem 2rem 4rem;
+  position: relative; z-index: 1;
+}
+.header-hero h1 {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(2rem, 5vw, 3.2rem);
+  color: white; font-weight: 900;
+  line-height: 1.15;
+  margin-bottom: 12px;
+}
+.header-hero h1 span {
+  background: linear-gradient(135deg, var(--gold), #f0d060);
+  -webkit-background-clip: text; background-clip: text;
+  color: transparent;
+}
+.header-hero p { color: rgba(255,255,255,0.55); font-size: 1rem; max-width: 480px; margin: 0 auto 2rem; }
+.header-steps {
+  display: flex; justify-content: center; gap: 0;
+  background: rgba(255,255,255,0.06);
+  border: 1px solid rgba(255,255,255,0.1);
+  border-radius: 60px; padding: 6px;
+  max-width: 520px; margin: 0 auto;
+  backdrop-filter: blur(12px);
+}
+.step-pill {
+  padding: 8px 20px; border-radius: 50px;
+  font-size: 0.78rem; font-weight: 600;
+  letter-spacing: 0.5px; color: rgba(255,255,255,0.4);
+  transition: var(--transition); cursor: default;
+  display: flex; align-items: center; gap: 7px;
+}
+.step-pill.active {
+  background: linear-gradient(135deg, var(--crimson), #a01428);
+  color: white; box-shadow: 0 4px 16px rgba(196,30,58,0.5);
+}
+.step-pill.done { color: var(--gold); }
+
+/* ── MAIN LAYOUT ── */
+.main-wrap {
+  max-width: 900px; margin: 0 auto;
+  padding: 3rem 1.5rem 6rem;
 }
 
-h2{
-  font-family:"Cormorant Garamond";
-  color:#0A1C3A;
+/* ── PROGRESS BAR ── */
+.progress-wrap {
+  background: white; border-radius: 14px;
+  padding: 20px 24px; margin-bottom: 28px;
+  box-shadow: var(--shadow-sm);
+  border: 1px solid var(--border);
+}
+.progress-label {
+  display: flex; justify-content: space-between;
+  margin-bottom: 10px;
+}
+.progress-label span { font-size: 0.82rem; font-weight: 600; color: var(--text-muted); }
+.progress-label strong { color: var(--crimson); font-size: 0.9rem; }
+.progress-track {
+  height: 6px; background: var(--surface-2); border-radius: 6px; overflow: hidden;
+}
+.progress-fill {
+  height: 100%; border-radius: 6px;
+  background: linear-gradient(90deg, var(--crimson), var(--gold));
+  transition: width 0.6s cubic-bezier(0.23,1,0.32,1);
+  box-shadow: 0 0 12px rgba(196,30,58,0.4);
 }
 
-input,select,textarea{
-  width:100%;
-  padding:10px;
-  margin:5px 0 15px;
-  border-radius:8px;
-  border:1px solid #ccc;
+/* ── FORM CARD ── */
+.form-card {
+  background: white; border-radius: 20px;
+  box-shadow: var(--shadow-md);
+  border: 1px solid var(--border);
+  overflow: hidden;
+}
+.form-section {
+  display: none;
+  animation: fadeSlideIn 0.45s cubic-bezier(0.23,1,0.32,1);
+}
+.form-section.active { display: block; }
+@keyframes fadeSlideIn {
+  from { opacity:0; transform: translateY(20px); }
+  to   { opacity:1; transform: translateY(0); }
+}
+.section-header {
+  padding: 28px 36px 20px;
+  border-bottom: 1px solid var(--border);
+  display: flex; align-items: center; gap: 16px;
+  background: linear-gradient(135deg, rgba(196,30,58,0.03), rgba(212,175,55,0.04));
+}
+.section-icon {
+  width: 48px; height: 48px; border-radius: 12px;
+  background: linear-gradient(135deg, var(--crimson-light), #fce8ec);
+  display: flex; align-items: center; justify-content: center;
+  flex-shrink: 0;
+}
+.section-icon i { color: var(--crimson); font-size: 1.2rem; }
+.section-title { font-family: 'Playfair Display', serif; font-size: 1.35rem; font-weight: 700; color: var(--text-dark); }
+.section-subtitle { font-size: 0.8rem; color: var(--text-muted); margin-top: 2px; }
+
+.form-body { padding: 32px 36px; }
+
+/* ── FORM FIELDS ── */
+.form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+.form-grid.cols-3 { grid-template-columns: 1fr 1fr 1fr; }
+.form-grid.cols-1 { grid-template-columns: 1fr; }
+.field-group { display: flex; flex-direction: column; gap: 6px; }
+.field-group.span-2 { grid-column: span 2; }
+.field-group.span-3 { grid-column: span 3; }
+
+.field-label {
+  font-size: 0.78rem; font-weight: 600;
+  color: var(--text-body); letter-spacing: 0.3px;
+  display: flex; align-items: center; gap: 6px;
+}
+.field-label .required { color: var(--crimson); font-size: 0.9rem; }
+.field-label .optional {
+  font-size: 0.68rem; color: var(--text-muted);
+  background: var(--surface-2); padding: 2px 8px;
+  border-radius: 20px; font-weight: 400;
 }
 
-button{
-  padding:10px 15px;
-  border:none;
-  border-radius:8px;
-  cursor:pointer;
-  margin:5px;
+.form-input, .form-select, .form-textarea {
+  width: 100%; padding: 13px 16px;
+  border: 1.5px solid var(--border);
+  border-radius: var(--radius-sm); font-family: 'DM Sans', sans-serif;
+  font-size: 0.9rem; color: var(--text-dark);
+  background: var(--surface); transition: var(--transition);
+  outline: none; appearance: none;
+}
+.form-input:focus, .form-select:focus, .form-textarea:focus {
+  border-color: var(--crimson);
+  box-shadow: 0 0 0 3px rgba(var(--crimson-rgb), 0.1);
+  background: white;
+}
+.form-input.invalid { border-color: #e53e3e; box-shadow: 0 0 0 3px rgba(229,62,62,0.1); }
+.form-input.valid { border-color: #38a169; }
+.form-select {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%237a8aaa' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
+  background-repeat: no-repeat; background-position: right 14px center;
+  padding-right: 40px; cursor: pointer;
+}
+.form-textarea { resize: vertical; min-height: 90px; }
+.field-hint { font-size: 0.73rem; color: var(--text-muted); display: flex; align-items: center; gap: 4px; }
+.field-error { font-size: 0.73rem; color: #c41e3a; display: none; align-items: center; gap: 4px; }
+.field-error.show { display: flex; }
+
+/* Readonly / auto fields */
+.form-input[readonly] {
+  background: var(--surface-2); color: var(--text-muted);
+  cursor: default; border-style: dashed;
 }
 
-.btn{background:#C41E3A;color:white;}
-.btn2{background:#0A1C3A;color:white;}
+/* ── CHECKBOX ── */
+.checkbox-wrap {
+  display: flex; align-items: flex-start; gap: 12px;
+  padding: 16px 20px; border-radius: 12px;
+  background: linear-gradient(135deg, rgba(196,30,58,0.03), rgba(212,175,55,0.03));
+  border: 1.5px solid var(--border);
+  cursor: pointer; transition: var(--transition);
+}
+.checkbox-wrap:hover { border-color: var(--crimson); background: rgba(196,30,58,0.04); }
+.checkbox-wrap input[type="checkbox"] { display: none; }
+.checkbox-custom {
+  width: 20px; height: 20px; border-radius: 6px;
+  border: 2px solid var(--border); background: white;
+  display: flex; align-items: center; justify-content: center;
+  flex-shrink: 0; margin-top: 2px; transition: var(--transition);
+}
+.checkbox-wrap input:checked ~ .checkbox-label .checkbox-custom,
+.checkbox-custom.checked {
+  background: var(--crimson); border-color: var(--crimson);
+}
+.checkbox-custom i { color: white; font-size: 0.65rem; display: none; }
+.checkbox-custom.checked i { display: block; }
+.checkbox-text { font-size: 0.85rem; color: var(--text-body); line-height: 1.5; }
+.checkbox-text a { color: var(--crimson); font-weight: 600; }
 
-.preview{
-  background:white;
-  padding:20px;
-  border-radius:10px;
+/* ── NAV BUTTONS ── */
+.form-nav {
+  padding: 24px 36px;
+  border-top: 1px solid var(--border);
+  display: flex; justify-content: space-between; align-items: center;
+  background: var(--surface-2);
+}
+.btn {
+  padding: 13px 28px; border-radius: 10px;
+  font-family: 'DM Sans', sans-serif; font-size: 0.9rem; font-weight: 600;
+  cursor: pointer; border: none; transition: var(--transition);
+  display: inline-flex; align-items: center; gap: 8px;
+}
+.btn-outline {
+  background: white; color: var(--text-body);
+  border: 1.5px solid var(--border);
+}
+.btn-outline:hover { border-color: var(--crimson); color: var(--crimson); }
+.btn-primary {
+  background: linear-gradient(135deg, var(--crimson), #a01428);
+  color: white; box-shadow: 0 6px 20px rgba(196,30,58,0.35);
+}
+.btn-primary:hover { transform: translateY(-2px); box-shadow: 0 10px 28px rgba(196,30,58,0.45); }
+.btn-gold {
+  background: linear-gradient(135deg, var(--gold), #b8962e);
+  color: white; box-shadow: 0 6px 20px rgba(212,175,55,0.4);
+}
+.btn-gold:hover { transform: translateY(-2px); }
+.btn-ghost { background: transparent; color: var(--text-muted); font-size: 0.85rem; }
+.btn:disabled { opacity: 0.6; cursor: not-allowed; transform: none !important; }
+
+/* ── LOADING SPINNER ── */
+.spinner {
+  width: 18px; height: 18px; border: 2px solid rgba(255,255,255,0.3);
+  border-top-color: white; border-radius: 50%;
+  animation: spin 0.8s linear infinite; display: none;
+}
+.spinner.show { display: block; }
+@keyframes spin { to { transform: rotate(360deg); } }
+
+/* ── SUCCESS SCREEN ── */
+#successScreen {
+  display: none; text-align: center;
+  padding: 60px 40px;
+  animation: fadeSlideIn 0.6s cubic-bezier(0.23,1,0.32,1);
+}
+#successScreen.show { display: block; }
+.success-icon {
+  width: 80px; height: 80px; border-radius: 50%;
+  background: linear-gradient(135deg, #e8f9f0, #c6f0d9);
+  display: flex; align-items: center; justify-content: center;
+  margin: 0 auto 24px; font-size: 2.2rem;
+  animation: popIn 0.5s cubic-bezier(0.23,1,0.32,1) 0.3s both;
+}
+@keyframes popIn { from { transform: scale(0); opacity:0; } to { transform: scale(1); opacity:1; } }
+.success-icon i { color: #1a7a45; }
+.success-title { font-family: 'Playfair Display', serif; font-size: 2rem; font-weight: 900; color: var(--text-dark); margin-bottom: 10px; }
+.success-sub { color: var(--text-muted); font-size: 0.95rem; margin-bottom: 32px; max-width: 400px; margin-left: auto; margin-right: auto; }
+.success-id {
+  display: inline-flex; align-items: center; gap: 10px;
+  background: var(--gold-light); border: 1px solid rgba(var(--gold-rgb),0.3);
+  padding: 12px 24px; border-radius: 50px;
+  font-weight: 700; color: var(--text-dark); font-size: 1.1rem;
+  margin-bottom: 32px; letter-spacing: 1px;
+}
+.success-id i { color: var(--gold); }
+.success-actions { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
+
+/* ── ADMISSION CARD ── */
+#admissionCard {
+  display: none;
+  max-width: 720px; margin: 40px auto 0;
+  background: white; border-radius: 20px;
+  overflow: hidden; box-shadow: var(--shadow-lg);
+  border: 1px solid var(--border);
+}
+#admissionCard.show { display: block; animation: fadeSlideIn 0.6s cubic-bezier(0.23,1,0.32,1); }
+
+.card-header-band {
+  background: linear-gradient(135deg, var(--navy) 0%, #0d1f3c 50%, #1a0a10 100%);
+  padding: 28px 36px;
+  position: relative; overflow: hidden;
+  display: flex; align-items: center; justify-content: space-between; gap: 20px;
+}
+.card-header-band::before {
+  content: '';
+  position: absolute; top: -40px; right: -40px;
+  width: 180px; height: 180px; border-radius: 50%;
+  background: radial-gradient(circle, rgba(212,175,55,0.15), transparent 70%);
+}
+.card-school-info { display: flex; align-items: center; gap: 14px; }
+.card-logo-box {
+  width: 52px; height: 52px; border-radius: 12px;
+  background: linear-gradient(135deg, var(--crimson), #a01428);
+  display: flex; align-items: center; justify-content: center;
+  box-shadow: 0 6px 18px rgba(196,30,58,0.4); flex-shrink: 0;
+}
+.card-logo-box i { color: var(--gold); font-size: 1.4rem; }
+.card-school-name { font-family: 'Cormorant Garamond', serif; font-size: 1.5rem; font-weight: 700; color: white; }
+.card-school-name span { color: var(--gold); }
+.card-school-sub { font-size: 0.65rem; color: rgba(255,255,255,0.4); letter-spacing: 2px; text-transform: uppercase; margin-top: 2px; }
+.card-badge-wrap { text-align: right; }
+.card-badge-title { font-size: 0.65rem; color: rgba(255,255,255,0.4); letter-spacing: 2px; text-transform: uppercase; }
+.card-admission-id { font-size: 1.1rem; font-weight: 700; color: var(--gold); letter-spacing: 1.5px; font-family: 'Cormorant Garamond', serif; }
+.card-year { font-size: 0.72rem; color: rgba(255,255,255,0.35); }
+
+.card-gold-strip {
+  height: 4px;
+  background: linear-gradient(90deg, var(--crimson), var(--gold), var(--crimson));
 }
 
-.header{
-  text-align:center;
-  border-bottom:2px solid #C41E3A;
-  margin-bottom:10px;
+.card-body { padding: 32px 36px; }
+.card-student-name {
+  font-family: 'Playfair Display', serif;
+  font-size: 2rem; font-weight: 900; color: var(--text-dark);
+  margin-bottom: 4px;
+}
+.card-class-badge {
+  display: inline-flex; align-items: center; gap: 7px;
+  background: linear-gradient(135deg, var(--crimson-light), #fce8ec);
+  color: var(--crimson); padding: 6px 16px; border-radius: 50px;
+  font-size: 0.82rem; font-weight: 700; margin-bottom: 28px;
+  border: 1px solid rgba(var(--crimson-rgb),0.2);
+}
+
+.card-info-grid {
+  display: grid; grid-template-columns: 1fr 1fr;
+  gap: 16px; margin-bottom: 24px;
+}
+.card-info-item {
+  padding: 14px 18px; border-radius: 12px;
+  background: var(--surface-2); border: 1px solid var(--border);
+}
+.card-info-label { font-size: 0.68rem; color: var(--text-muted); letter-spacing: 1px; text-transform: uppercase; font-weight: 600; margin-bottom: 4px; }
+.card-info-value { font-size: 0.9rem; font-weight: 600; color: var(--text-dark); }
+
+.card-divider { height: 1px; background: var(--border); margin: 20px 0; }
+
+.card-bottom-row {
+  display: flex; justify-content: space-between; align-items: flex-end;
+  flex-wrap: wrap; gap: 20px;
+}
+.card-qr { text-align: center; }
+.card-qr-label { font-size: 0.65rem; color: var(--text-muted); letter-spacing: 1px; text-transform: uppercase; margin-top: 8px; }
+#qrCode canvas, #qrCode img { border-radius: 8px; }
+
+.card-footer-info { }
+.card-status-chip {
+  display: inline-flex; align-items: center; gap: 6px;
+  background: #e8f9f0; color: #1a7a45; padding: 6px 14px;
+  border-radius: 50px; font-size: 0.78rem; font-weight: 700;
+  border: 1px solid #a8e6c6; margin-bottom: 10px;
+}
+.card-status-chip::before { content: ''; width: 7px; height: 7px; border-radius: 50%; background: #1a7a45; }
+.card-contact-row { font-size: 0.82rem; color: var(--text-muted); display: flex; flex-direction: column; gap: 4px; }
+.card-contact-row span { display: flex; align-items: center; gap: 6px; }
+.card-contact-row i { color: var(--crimson); width: 14px; }
+
+.card-footer-band {
+  background: var(--surface-2); border-top: 1px solid var(--border);
+  padding: 16px 36px;
+  display: flex; justify-content: space-between; align-items: center;
+  flex-wrap: wrap; gap: 10px;
+}
+.card-footer-band p { font-size: 0.72rem; color: var(--text-muted); }
+.card-footer-band .stamp {
+  font-size: 0.68rem; color: var(--crimson); font-weight: 700;
+  letter-spacing: 1px; text-transform: uppercase;
+  border: 1.5px solid var(--crimson); padding: 4px 12px; border-radius: 6px;
+  opacity: 0.7;
+}
+
+/* ── CARD ACTION BUTTONS ── */
+.card-actions {
+  display: flex; gap: 12px; justify-content: center;
+  padding: 24px; flex-wrap: wrap;
+}
+
+/* ── DASHBOARD ── */
+.dashboard-section {
+  margin-top: 60px;
+}
+.dashboard-header {
+  display: flex; align-items: center; justify-content: space-between;
+  margin-bottom: 24px; flex-wrap: wrap; gap: 12px;
+}
+.dashboard-title {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.6rem; font-weight: 900; color: var(--text-dark);
+  display: flex; align-items: center; gap: 12px;
+}
+.dashboard-title::before {
+  content: '';
+  display: block; width: 4px; height: 28px;
+  background: linear-gradient(180deg, var(--crimson), var(--gold));
+  border-radius: 4px;
+}
+.dashboard-count {
+  background: white; border: 1px solid var(--border);
+  border-radius: 50px; padding: 8px 18px;
+  font-size: 0.82rem; color: var(--text-muted); font-weight: 500;
+}
+.dashboard-count strong { color: var(--crimson); }
+
+.submissions-grid { display: flex; flex-direction: column; gap: 14px; }
+
+.submission-card {
+  background: white; border-radius: 14px;
+  border: 1px solid var(--border);
+  padding: 20px 24px;
+  display: flex; align-items: center; justify-content: space-between;
+  gap: 20px; flex-wrap: wrap;
+  box-shadow: var(--shadow-sm);
+  transition: var(--transition);
+  animation: fadeSlideIn 0.4s cubic-bezier(0.23,1,0.32,1) both;
+}
+.submission-card:hover {
+  border-color: rgba(var(--crimson-rgb), 0.3);
+  box-shadow: var(--shadow-md);
+  transform: translateY(-2px);
+}
+.sub-left { display: flex; align-items: center; gap: 16px; }
+.sub-avatar {
+  width: 46px; height: 46px; border-radius: 12px;
+  background: linear-gradient(135deg, var(--crimson), #a01428);
+  display: flex; align-items: center; justify-content: center;
+  color: white; font-weight: 700; font-size: 1rem; flex-shrink: 0;
+  font-family: 'Cormorant Garamond', serif;
+}
+.sub-name { font-weight: 700; color: var(--text-dark); font-size: 0.95rem; }
+.sub-meta { font-size: 0.78rem; color: var(--text-muted); margin-top: 2px; display: flex; gap: 10px; flex-wrap: wrap; }
+.sub-meta span { display: flex; align-items: center; gap: 4px; }
+.sub-right { display: flex; align-items: center; gap: 12px; flex-wrap: wrap; }
+.sub-id { font-size: 0.75rem; font-weight: 700; color: var(--text-muted); letter-spacing: 1px; background: var(--surface-2); padding: 5px 12px; border-radius: 20px; }
+.sub-class-tag {
+  background: var(--crimson-light); color: var(--crimson);
+  padding: 5px 12px; border-radius: 20px;
+  font-size: 0.75rem; font-weight: 700;
+}
+.sub-date { font-size: 0.72rem; color: var(--text-muted); }
+
+.empty-state {
+  text-align: center; padding: 60px 20px;
+  background: white; border-radius: 14px;
+  border: 1px solid var(--border);
+}
+.empty-state i { font-size: 3rem; color: var(--border); margin-bottom: 16px; display: block; }
+.empty-state p { color: var(--text-muted); font-size: 0.9rem; }
+
+/* ── LOADING ── */
+#pageLoader {
+  position: fixed; inset: 0; background: white; z-index: 99999;
+  display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 20px;
+  transition: opacity 0.4s ease;
+}
+#pageLoader.hidden { opacity: 0; pointer-events: none; display: none; }
+.loader-brand {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 2rem; font-weight: 700; color: var(--text-dark); letter-spacing: 2px;
+}
+.loader-brand span { color: var(--crimson); }
+.loader-bar { width: 200px; height: 3px; background: var(--border); border-radius: 3px; overflow: hidden; }
+.loader-fill { height: 100%; background: linear-gradient(90deg, var(--crimson), var(--gold)); animation: loaderFill 1.2s ease forwards; }
+@keyframes loaderFill { from { width:0; } to { width:100%; } }
+
+/* ── RESPONSIVE ── */
+@media (max-width: 768px) {
+  .header-inner { flex-direction: column; text-align: center; gap: 14px; }
+  .form-grid { grid-template-columns: 1fr; }
+  .form-grid.cols-3 { grid-template-columns: 1fr; }
+  .field-group.span-2, .field-group.span-3 { grid-column: span 1; }
+  .form-body { padding: 24px 20px; }
+  .section-header { padding: 20px; }
+  .form-nav { padding: 18px 20px; }
+  .card-info-grid { grid-template-columns: 1fr; }
+  .card-body { padding: 24px 20px; }
+  .card-header-band { flex-direction: column; text-align: center; }
+  .card-badge-wrap { text-align: center; }
+  .card-bottom-row { justify-content: center; }
+  .header-steps { flex-wrap: wrap; gap: 6px; }
+  .step-pill { font-size: 0.72rem; padding: 6px 14px; }
+}
+
+/* Print / PDF styles */
+@media print {
+  body > *:not(#admissionCard) { display: none !important; }
+  #admissionCard { display: block !important; box-shadow: none !important; }
+}
+
+/* ── PDF PRINT CARD (hidden, B&W only) ── */
+#pdfCard {
+  position: absolute;
+  left: -9999px; top: 0;
+  width: 680px;
+  background: #fff;
+  font-family: 'DM Sans', Arial, sans-serif;
+  color: #000;
+  border: 2px solid #000;
+  padding: 0;
+}
+#pdfCard * { color: #000 !important; background: #fff !important; box-shadow: none !important; }
+#pdfCard .pdf-title-band { background: #000 !important; }
+#pdfCard .pdf-title-band span { color: #fff !important; background: transparent !important; }
+.pdf-header {
+  border-bottom: 3px double #000;
+  padding: 22px 28px 16px;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+.pdf-school-left { }
+.pdf-school-name {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 26px; font-weight: 900;
+  letter-spacing: 2px;
+  border-bottom: 1px solid #000;
+  padding-bottom: 4px;
+  margin-bottom: 4px;
+}
+.pdf-school-tagline { font-size: 9px; letter-spacing: 3px; text-transform: uppercase; }
+.pdf-school-address { font-size: 9px; margin-top: 6px; line-height: 1.5; }
+.pdf-right-box {
+  text-align: right;
+  border: 1.5px solid #000;
+  padding: 8px 14px;
+  min-width: 160px;
+}
+.pdf-right-box .pdf-id-label { font-size: 8px; letter-spacing: 2px; text-transform: uppercase; }
+.pdf-right-box .pdf-id-val { font-size: 18px; font-weight: 900; letter-spacing: 1px; font-family: 'Cormorant Garamond', serif; }
+.pdf-right-box .pdf-yr { font-size: 9px; }
+
+.pdf-title-band {
+  background: #000 !important;
+  padding: 8px 28px;
+  text-align: center;
+}
+.pdf-title-band span {
+  color: #fff !important;
+  font-size: 11px; letter-spacing: 4px; text-transform: uppercase; font-weight: 700;
+}
+
+.pdf-student-section { padding: 18px 28px 10px; border-bottom: 1px solid #ccc; }
+.pdf-student-name { font-size: 24px; font-weight: 900; font-family: 'Playfair Display', serif; margin-bottom: 4px; }
+.pdf-class-row { font-size: 11px; letter-spacing: 1px; text-transform: uppercase; font-weight: 700; border: 1px solid #000; display: inline-block; padding: 3px 12px; }
+
+.pdf-info-section { padding: 14px 28px; }
+.pdf-info-grid {
+  display: grid; grid-template-columns: 1fr 1fr;
+  gap: 0;
+  border: 1px solid #000;
+}
+.pdf-info-cell {
+  padding: 8px 12px;
+  border-right: 1px solid #ccc;
+  border-bottom: 1px solid #ccc;
+}
+.pdf-info-cell:nth-child(even) { border-right: none; }
+.pdf-info-cell:nth-last-child(-n+2) { border-bottom: none; }
+.pdf-cell-label { font-size: 7.5px; text-transform: uppercase; letter-spacing: 1.5px; font-weight: 700; margin-bottom: 2px; opacity: 0.6; }
+.pdf-cell-val { font-size: 12px; font-weight: 600; }
+
+.pdf-contact-section {
+  padding: 10px 28px 14px;
+  border-top: 1px solid #ccc;
+  display: flex; justify-content: space-between; align-items: flex-start;
+  gap: 20px;
+}
+.pdf-contact-left { font-size: 10px; line-height: 2; }
+.pdf-contact-left b { font-size: 8px; letter-spacing: 1px; text-transform: uppercase; display: block; margin-bottom: 4px; }
+.pdf-qr-right { text-align: center; }
+.pdf-qr-right .pdf-qr-label { font-size: 8px; letter-spacing: 1px; text-transform: uppercase; margin-top: 4px; }
+
+.pdf-footer {
+  border-top: 2px solid #000;
+  padding: 10px 28px;
+  display: flex; justify-content: space-between; align-items: center;
+}
+.pdf-footer-note { font-size: 8.5px; }
+.pdf-stamp {
+  border: 2px solid #000;
+  padding: 4px 14px;
+  font-size: 9px; font-weight: 900;
+  letter-spacing: 3px; text-transform: uppercase;
+}
+.pdf-status-line {
+  padding: 6px 28px;
+  border-top: 1px solid #ccc;
+  font-size: 9px; text-align: center; letter-spacing: 1px;
 }
 </style>
 </head>
-
 <body>
 
-<div class="container">
-
-<!-- FORM -->
-<div class="card">
-<h2>Admission Form</h2>
-
-<input id="name" placeholder="Full Name">
-<input id="dob" type="date">
-
-<select id="gender">
-  <option>Male</option>
-  <option>Female</option>
-</select>
-
-<input id="grade" placeholder="Grade Applying For">
-<input id="email" placeholder="Email">
-<input id="phone" placeholder="Phone Number">
-<textarea id="address" placeholder="Address"></textarea>
-
-<input id="father" placeholder="Father Name">
-<input id="mother" placeholder="Mother Name">
-
-<button class="btn" onclick="updatePreview()">Preview</button>
-<button class="btn2" onclick="downloadPDF()">Download PDF</button>
-<button class="btn2" onclick="printDoc()">Print</button>
-<button class="btn" onclick="whatsapp()">WhatsApp</button>
-
+<!-- Page Loader -->
+<div id="pageLoader">
+  <div class="loader-brand">PARAGON <span>SCHOOL</span></div>
+  <div class="loader-bar"><div class="loader-fill"></div></div>
+  <p style="font-size:0.8rem;color:#7a8aaa;letter-spacing:2px;">LOADING ADMISSION PORTAL</p>
 </div>
 
-<!-- PREVIEW -->
-<div class="card">
-<div id="preview" class="preview">
-<p>Fill form to generate admission preview</p>
+<!-- Toast Container -->
+<div id="toast-container"></div>
+
+<!-- SITE HEADER -->
+<header class="site-header">
+  <div class="header-inner">
+    <div class="school-brand">
+      <div class="school-crest"><i class="fas fa-crown"></i></div>
+      <div class="school-name-group">
+        <div class="school-name">PARAGON <span>SCHOOL</span></div>
+        <div class="school-tagline">World-Class Premium Education</div>
+      </div>
+    </div>
+    <div class="header-badge"><i class="fas fa-shield-alt" style="color:var(--gold);margin-right:6px"></i>Admissions 2025–26</div>
+  </div>
+  <div class="header-hero">
+    <h1>Begin Your Child's<br><span>Royal Academic Journey</span></h1>
+    <p>Complete the form below — your child's future starts here at Paragon School.</p>
+    <div class="header-steps">
+      <div class="step-pill active" id="pill-1"><i class="fas fa-user-graduate"></i> Student</div>
+      <div class="step-pill" id="pill-2"><i class="fas fa-users"></i> Parents</div>
+      <div class="step-pill" id="pill-3"><i class="fas fa-school"></i> Academic</div>
+      <div class="step-pill" id="pill-4"><i class="fas fa-check-circle"></i> Submit</div>
+    </div>
+  </div>
+</header>
+
+<!-- MAIN CONTENT -->
+<div class="main-wrap">
+
+  <!-- Progress Bar -->
+  <div class="progress-wrap">
+    <div class="progress-label">
+      <span id="stepLabel">Step 1 of 4 — Student Information</span>
+      <strong id="pctLabel">25%</strong>
+    </div>
+    <div class="progress-track">
+      <div class="progress-fill" id="progressFill" style="width:25%"></div>
+    </div>
+  </div>
+
+  <!-- FORM CARD -->
+  <div class="form-card" id="formCard">
+
+    <!-- SECTION 1: Student Info -->
+    <div class="form-section active" id="sec1">
+      <div class="section-header">
+        <div class="section-icon"><i class="fas fa-user-graduate"></i></div>
+        <div>
+          <div class="section-title">Student Information</div>
+          <div class="section-subtitle">Personal details of the student applying for admission</div>
+        </div>
+      </div>
+      <div class="form-body">
+        <div class="form-grid">
+          <div class="field-group span-2">
+            <label class="field-label">Full Name (as per B-Form) <span class="required">*</span></label>
+            <input type="text" class="form-input" id="studentName" placeholder="e.g. Muhammad Ali Khan" oninput="validateField(this,'name')">
+            <span class="field-error" id="err-studentName"><i class="fas fa-exclamation-circle"></i> Please enter full name</span>
+          </div>
+          <div class="field-group">
+            <label class="field-label">Gender <span class="required">*</span></label>
+            <select class="form-select" id="gender">
+              <option value="">Select Gender</option>
+              <option value="Male">Male</option>
+              <option value="Female">Female</option>
+              <option value="Other">Other</option>
+            </select>
+            <span class="field-error" id="err-gender"><i class="fas fa-exclamation-circle"></i> Please select gender</span>
+          </div>
+          <div class="field-group">
+            <label class="field-label">Date of Birth <span class="required">*</span></label>
+            <input type="date" class="form-input" id="dob" onchange="calcAge()" max="">
+            <span class="field-error" id="err-dob"><i class="fas fa-exclamation-circle"></i> Please select date of birth</span>
+          </div>
+          <div class="field-group">
+            <label class="field-label">Age (Auto Calculated)</label>
+            <input type="text" class="form-input" id="age" placeholder="Auto calculated" readonly>
+          </div>
+          <div class="field-group">
+            <label class="field-label">B-Form / Birth Certificate No. <span class="required">*</span></label>
+            <input type="text" class="form-input" id="bform" placeholder="e.g. 35201-1234567-1" oninput="formatBform(this)">
+            <span class="field-hint"><i class="fas fa-info-circle"></i> Format: XXXXX-XXXXXXX-X</span>
+            <span class="field-error" id="err-bform"><i class="fas fa-exclamation-circle"></i> Please enter valid B-Form number</span>
+          </div>
+          <div class="field-group span-2">
+            <label class="field-label">Class Applying For <span class="required">*</span></label>
+            <select class="form-select" id="classApplying">
+              <option value="">Select Class</option>
+              <option value="Playgroup">Playgroup</option>
+              <option value="Nursery">Nursery</option>
+              <option value="Prep / KG">Prep / KG</option>
+              <option value="Class 1">Class 1</option>
+              <option value="Class 2">Class 2</option>
+              <option value="Class 3">Class 3</option>
+              <option value="Class 4">Class 4</option>
+              <option value="Class 5">Class 5</option>
+              <option value="Class 6">Class 6</option>
+              <option value="Class 7">Class 7</option>
+              <option value="Class 8">Class 8</option>
+              <option value="Class 9 (Matric Part 1)">Class 9 (Matric Part 1)</option>
+              <option value="Class 10 (Matric Part 2)">Class 10 (Matric Part 2)</option>
+            </select>
+            <span class="field-error" id="err-classApplying"><i class="fas fa-exclamation-circle"></i> Please select class</span>
+          </div>
+        </div>
+      </div>
+      <div class="form-nav">
+        <div></div>
+        <button class="btn btn-primary" onclick="goNext(1)">Next: Parent Details <i class="fas fa-arrow-right"></i></button>
+      </div>
+    </div>
+
+    <!-- SECTION 2: Parent/Guardian -->
+    <div class="form-section" id="sec2">
+      <div class="section-header">
+        <div class="section-icon"><i class="fas fa-users"></i></div>
+        <div>
+          <div class="section-title">Parent / Guardian Details</div>
+          <div class="section-subtitle">Information of parent or legal guardian</div>
+        </div>
+      </div>
+      <div class="form-body">
+        <div class="form-grid">
+          <div class="field-group">
+            <label class="field-label">Father's Full Name <span class="required">*</span></label>
+            <input type="text" class="form-input" id="fatherName" placeholder="e.g. Muhammad Khan" oninput="validateField(this,'name')">
+            <span class="field-error" id="err-fatherName"><i class="fas fa-exclamation-circle"></i> Required</span>
+          </div>
+          <div class="field-group">
+            <label class="field-label">Mother's Full Name <span class="required">*</span></label>
+            <input type="text" class="form-input" id="motherName" placeholder="e.g. Ayesha Khan" oninput="validateField(this,'name')">
+            <span class="field-error" id="err-motherName"><i class="fas fa-exclamation-circle"></i> Required</span>
+          </div>
+          <div class="field-group">
+            <label class="field-label">Father's CNIC <span class="required">*</span></label>
+            <input type="text" class="form-input" id="cnic" placeholder="e.g. 35201-1234567-1" oninput="formatCNIC(this)">
+            <span class="field-hint"><i class="fas fa-info-circle"></i> Format: XXXXX-XXXXXXX-X</span>
+            <span class="field-error" id="err-cnic"><i class="fas fa-exclamation-circle"></i> Enter valid CNIC</span>
+          </div>
+          <div class="field-group">
+            <label class="field-label">WhatsApp / Phone Number <span class="required">*</span></label>
+            <input type="tel" class="form-input" id="phone" placeholder="e.g. 0300-1234567" oninput="formatPhone(this)">
+            <span class="field-hint"><i class="fab fa-whatsapp" style="color:#25d366"></i> WhatsApp preferred</span>
+            <span class="field-error" id="err-phone"><i class="fas fa-exclamation-circle"></i> Enter valid phone number</span>
+          </div>
+          <div class="field-group span-2">
+            <label class="field-label">Email Address <span class="required">*</span></label>
+            <input type="email" class="form-input" id="email" placeholder="e.g. parent@email.com" oninput="validateField(this,'email')">
+            <span class="field-error" id="err-email"><i class="fas fa-exclamation-circle"></i> Enter valid email</span>
+          </div>
+          <div class="field-group span-2">
+            <label class="field-label">Home Address <span class="required">*</span></label>
+            <textarea class="form-textarea" id="address" placeholder="House No., Street, Area, City..."></textarea>
+            <span class="field-error" id="err-address"><i class="fas fa-exclamation-circle"></i> Please enter address</span>
+          </div>
+        </div>
+      </div>
+      <div class="form-nav">
+        <button class="btn btn-outline" onclick="goBack(2)"><i class="fas fa-arrow-left"></i> Back</button>
+        <button class="btn btn-primary" onclick="goNext(2)">Next: Academic History <i class="fas fa-arrow-right"></i></button>
+      </div>
+    </div>
+
+    <!-- SECTION 3: Academic -->
+    <div class="form-section" id="sec3">
+      <div class="section-header">
+        <div class="section-icon"><i class="fas fa-school"></i></div>
+        <div>
+          <div class="section-title">Academic History & Additional</div>
+          <div class="section-subtitle">Previous school details and any additional information</div>
+        </div>
+      </div>
+      <div class="form-body">
+        <div class="form-grid">
+          <div class="field-group span-2">
+            <label class="field-label">Previous School Name <span class="required">*</span></label>
+            <input type="text" class="form-input" id="prevSchool" placeholder="e.g. City Public School, Faisalabad or 'None' if first time">
+          </div>
+          <div class="field-group span-2">
+            <label class="field-label">Last Class Attended <span class="optional">Optional</span></label>
+            <select class="form-select" id="lastClass">
+              <option value="N/A">N/A — First time admission</option>
+              <option value="Playgroup">Playgroup</option>
+              <option value="Nursery">Nursery</option>
+              <option value="Prep / KG">Prep / KG</option>
+              <option value="Class 1">Class 1</option>
+              <option value="Class 2">Class 2</option>
+              <option value="Class 3">Class 3</option>
+              <option value="Class 4">Class 4</option>
+              <option value="Class 5">Class 5</option>
+              <option value="Class 6">Class 6</option>
+              <option value="Class 7">Class 7</option>
+              <option value="Class 8">Class 8</option>
+              <option value="Class 9">Class 9</option>
+            </select>
+          </div>
+          <div class="field-group span-2">
+            <label class="field-label">Special Needs / Disabilities <span class="optional">Optional</span></label>
+            <textarea class="form-textarea" id="specialNeeds" placeholder="Please describe any special educational needs, medical conditions, or disabilities (if any). Leave blank if none." style="min-height:80px"></textarea>
+          </div>
+          <div class="field-group span-2">
+            <label class="field-label">How did you hear about Paragon School? <span class="optional">Optional</span></label>
+            <select class="form-select" id="referral">
+              <option value="">Select</option>
+              <option value="Friend/Family">Friend / Family Recommendation</option>
+              <option value="Social Media">Social Media (Facebook/Instagram)</option>
+              <option value="Google">Google Search</option>
+              <option value="Banner/Poster">Banner / Poster</option>
+              <option value="Walk-in">Walk-in / Drove Past</option>
+              <option value="Other">Other</option>
+            </select>
+          </div>
+          <div class="field-group span-2">
+            <div class="checkbox-wrap" onclick="toggleCheck('agree')">
+              <div class="checkbox-custom" id="agree-box"><i class="fas fa-check"></i></div>
+              <div class="checkbox-text">
+                I confirm that all information provided is accurate and complete. I have read and agree to Paragon School's <a href="#" onclick="return false">Privacy Policy</a> and <a href="#" onclick="return false">Admission Terms</a>. I understand that submitting this form does not guarantee admission.
+              </div>
+            </div>
+            <span class="field-error" id="err-agree"><i class="fas fa-exclamation-circle"></i> Please agree to terms before proceeding</span>
+          </div>
+        </div>
+      </div>
+      <div class="form-nav">
+        <button class="btn btn-outline" onclick="goBack(3)"><i class="fas fa-arrow-left"></i> Back</button>
+        <button class="btn btn-primary" id="submitBtn" onclick="submitForm()">
+          <span id="submitText">Submit Application</span>
+          <div class="spinner" id="submitSpinner"></div>
+          <i class="fas fa-paper-plane" id="submitIcon"></i>
+        </button>
+      </div>
+    </div>
+
+  </div><!-- end form-card -->
+
+  <!-- SUCCESS SCREEN -->
+  <div id="successScreen" class="form-card">
+    <div class="success-icon"><i class="fas fa-check-circle"></i></div>
+    <div class="success-title">Application Submitted!</div>
+    <div class="success-sub">Congratulations! Your child's admission application has been successfully received by Paragon School.</div>
+    <div class="success-id"><i class="fas fa-id-badge"></i> <span id="displayAdmissionId">ADM-2025-0001</span></div>
+    <div class="success-actions">
+      <button class="btn btn-primary" onclick="downloadPDF()"><i class="fas fa-download"></i> Download PDF</button>
+      <button class="btn btn-gold" onclick="shareWhatsApp()"><i class="fab fa-whatsapp"></i> Share on WhatsApp</button>
+      <button class="btn btn-outline" onclick="newApplication()"><i class="fas fa-plus"></i> New Application</button>
+    </div>
+  </div>
+
+  <!-- ADMISSION CARD -->
+  <div id="admissionCard">
+    <div class="card-header-band">
+      <div class="card-school-info">
+        <div class="card-logo-box"><i class="fas fa-crown"></i></div>
+        <div>
+          <div class="card-school-name">PARAGON <span>SCHOOL</span></div>
+          <div class="card-school-sub">World-Class Premium Education</div>
+        </div>
+      </div>
+      <div class="card-badge-wrap">
+        <div class="card-badge-title">Admission ID</div>
+        <div class="card-admission-id" id="cardAdmissionId">ADM-2025-0001</div>
+        <div class="card-year">Academic Year 2025–26</div>
+      </div>
+    </div>
+    <div class="card-gold-strip"></div>
+    <div class="card-body">
+      <div class="card-student-name" id="cardStudentName">Student Name</div>
+      <div class="card-class-badge"><i class="fas fa-graduation-cap"></i> <span id="cardClass">Class</span></div>
+      <div class="card-info-grid">
+        <div class="card-info-item">
+          <div class="card-info-label">Date of Birth</div>
+          <div class="card-info-value" id="cardDob">—</div>
+        </div>
+        <div class="card-info-item">
+          <div class="card-info-label">Gender</div>
+          <div class="card-info-value" id="cardGender">—</div>
+        </div>
+        <div class="card-info-item">
+          <div class="card-info-label">B-Form Number</div>
+          <div class="card-info-value" id="cardBform">—</div>
+        </div>
+        <div class="card-info-item">
+          <div class="card-info-label">Age</div>
+          <div class="card-info-value" id="cardAge">—</div>
+        </div>
+        <div class="card-info-item">
+          <div class="card-info-label">Father's Name</div>
+          <div class="card-info-value" id="cardFather">—</div>
+        </div>
+        <div class="card-info-item">
+          <div class="card-info-label">Mother's Name</div>
+          <div class="card-info-value" id="cardMother">—</div>
+        </div>
+        <div class="card-info-item">
+          <div class="card-info-label">Previous School</div>
+          <div class="card-info-value" id="cardPrevSchool">—</div>
+        </div>
+        <div class="card-info-item">
+          <div class="card-info-label">Submission Date</div>
+          <div class="card-info-value" id="cardDate">—</div>
+        </div>
+      </div>
+      <div class="card-divider"></div>
+      <div class="card-bottom-row">
+        <div class="card-footer-info">
+          <div class="card-status-chip">Application Received</div>
+          <div class="card-contact-row">
+            <span><i class="fas fa-phone"></i> <span id="cardPhone">—</span></span>
+            <span><i class="fas fa-envelope"></i> <span id="cardEmail">—</span></span>
+            <span><i class="fas fa-map-marker-alt"></i> Paragon School, Faisalabad, Punjab</span>
+          </div>
+        </div>
+        <div class="card-qr">
+          <div id="qrCode"></div>
+          <div class="card-qr-label">Scan to Verify</div>
+        </div>
+      </div>
+    </div>
+    <div class="card-footer-band">
+      <p>This is a computer-generated application receipt. For queries: 0300-XXXXXXX</p>
+      <div class="stamp">RECEIVED</div>
+    </div>
+  </div>
+
+  <!-- Card Action Buttons -->
+  <div class="card-actions" id="cardActions" style="display:none">
+    <button class="btn btn-primary" onclick="downloadPDF()"><i class="fas fa-download"></i> Download PDF</button>
+    <button class="btn btn-gold" onclick="shareWhatsApp()"><i class="fab fa-whatsapp"></i> WhatsApp Share</button>
+
+  </div>
+
+  <!-- DASHBOARD -->
+  <div class="dashboard-section" id="dashboardSection">
+    <div class="dashboard-header">
+      <div class="dashboard-title">Recent Submissions</div>
+      <div class="dashboard-count">Total: <strong id="totalCount">0</strong> applications</div>
+    </div>
+    <div class="submissions-grid" id="submissionsGrid">
+      <div class="empty-state">
+        <i class="fas fa-inbox"></i>
+        <p>No submissions yet. Submit an application to see it here.</p>
+      </div>
+    </div>
+  </div>
+
+</div><!-- end main-wrap -->
+
+<!-- ═══ HIDDEN PDF CARD — B&W CLEAN LAYOUT ═══ -->
+<div id="pdfCard">
+  <div class="pdf-header">
+    <div class="pdf-school-left">
+      <div class="pdf-school-name">PARAGON SCHOOL</div>
+      <div class="pdf-school-tagline">World-Class Premium Education</div>
+      <div class="pdf-school-address">
+        Faisalabad, Punjab, Pakistan<br>
+        Tel: 0300-XXXXXXX &nbsp;|&nbsp; Email: info@paragonschool.edu.pk
+      </div>
+    </div>
+    <div class="pdf-right-box">
+      <div class="pdf-id-label">Admission ID</div>
+      <div class="pdf-id-val" id="pdf-admissionId">ADM-2025-0000</div>
+      <div class="pdf-yr">Academic Year 2025–26</div>
+    </div>
+  </div>
+
+  <div class="pdf-title-band">
+    <span>Student Admission Application — Receipt</span>
+  </div>
+
+  <div class="pdf-student-section">
+    <div class="pdf-student-name" id="pdf-studentName">Student Name</div>
+    <div class="pdf-class-row" id="pdf-class">Class Applied: —</div>
+  </div>
+
+  <div class="pdf-info-section">
+    <div class="pdf-info-grid">
+      <div class="pdf-info-cell">
+        <div class="pdf-cell-label">Date of Birth</div>
+        <div class="pdf-cell-val" id="pdf-dob">—</div>
+      </div>
+      <div class="pdf-info-cell">
+        <div class="pdf-cell-label">Gender</div>
+        <div class="pdf-cell-val" id="pdf-gender">—</div>
+      </div>
+      <div class="pdf-info-cell">
+        <div class="pdf-cell-label">Age</div>
+        <div class="pdf-cell-val" id="pdf-age">—</div>
+      </div>
+      <div class="pdf-info-cell">
+        <div class="pdf-cell-label">B-Form / Birth Cert. No.</div>
+        <div class="pdf-cell-val" id="pdf-bform">—</div>
+      </div>
+      <div class="pdf-info-cell">
+        <div class="pdf-cell-label">Father's Name</div>
+        <div class="pdf-cell-val" id="pdf-father">—</div>
+      </div>
+      <div class="pdf-info-cell">
+        <div class="pdf-cell-label">Mother's Name</div>
+        <div class="pdf-cell-val" id="pdf-mother">—</div>
+      </div>
+      <div class="pdf-info-cell">
+        <div class="pdf-cell-label">Father's CNIC</div>
+        <div class="pdf-cell-val" id="pdf-cnic">—</div>
+      </div>
+      <div class="pdf-info-cell">
+        <div class="pdf-cell-label">Previous School</div>
+        <div class="pdf-cell-val" id="pdf-prevSchool">—</div>
+      </div>
+      <div class="pdf-info-cell">
+        <div class="pdf-cell-label">Last Class Attended</div>
+        <div class="pdf-cell-val" id="pdf-lastClass">—</div>
+      </div>
+      <div class="pdf-info-cell">
+        <div class="pdf-cell-label">Submission Date</div>
+        <div class="pdf-cell-val" id="pdf-date">—</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="pdf-contact-section">
+    <div class="pdf-contact-left">
+      <b>Contact Details</b>
+      📞 &nbsp;<span id="pdf-phone">—</span><br>
+      ✉ &nbsp;<span id="pdf-email">—</span><br>
+      🏠 &nbsp;<span id="pdf-address">—</span>
+    </div>
+    <div class="pdf-qr-right">
+      <div id="pdfQrCode"></div>
+      <div class="pdf-qr-label">Scan to Verify</div>
+    </div>
+  </div>
+
+  <div class="pdf-status-line">
+    ✔ Application Successfully Received &nbsp;|&nbsp; Status: PENDING REVIEW &nbsp;|&nbsp; Paragon School Admissions Office
+  </div>
+
+  <div class="pdf-footer">
+    <div class="pdf-footer-note">
+      This is a computer-generated receipt. No signature required.<br>
+      For queries contact: admissions@paragonschool.edu.pk
+    </div>
+    <div class="pdf-stamp">RECEIVED</div>
+  </div>
 </div>
-</div>
 
-</div>
 
-<script>
 
-function data(){
-return{
-name:name.value,
-dob:dob.value,
-gender:gender.value,
-grade:grade.value,
-email:email.value,
-phone:phone.value,
-address:address.value,
-father:father.value,
-mother:mother.value
-};
-}
 
-function updatePreview(){
-let d=data();
+<!-- Firebase -->
+<script type="module">
+  // 🔹 Firebase Imports
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
+  import { getFirestore, collection, addDoc, getDocs, getDocs as _gd, query, orderBy, serverTimestamp, deleteDoc, doc } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
 
-preview.innerHTML=`
-<div class="header">
-<h2>PARAGON SCHOOL</h2>
-<p>Official Admission Form</p>
-</div>
+  // 🔹 Firebase Config
+  const firebaseConfig = {
+    apiKey:            "AIzaSyDIQGRG3pihRz5EVEKFe6JFuO_eF0Fj6xE",
+    authDomain:        "paragon-school-a3d1d.firebaseapp.com",
+    projectId:         "paragon-school-a3d1d",
+    storageBucket:     "paragon-school-a3d1d.firebasestorage.app",
+    messagingSenderId: "885395830398",
+    appId:             "1:885395830398:web:5276ee7615972508f94a2f"
+  };
 
-<p><b>Name:</b> ${d.name}</p>
-<p><b>DOB:</b> ${d.dob}</p>
-<p><b>Gender:</b> ${d.gender}</p>
-<p><b>Grade:</b> ${d.grade}</p>
-<p><b>Email:</b> ${d.email}</p>
-<p><b>Phone:</b> ${d.phone}</p>
-<p><b>Address:</b> ${d.address}</p>
-<p><b>Father:</b> ${d.father}</p>
-<p><b>Mother:</b> ${d.mother}</p>
+  const app = initializeApp(firebaseConfig);
+  const db  = getFirestore(app);
 
-<hr>
-<p style="text-align:center;font-size:12px;color:gray">
-Paragon School Official Admission System
-</p>
-`;
-}
+  // 🔹 Firebase globals expose karo
+  window._db              = db;
+  window._collection      = collection;
+  window._addDoc          = addDoc;
+  window._getDocs         = getDocs;
+  window._query           = query;
+  window._orderBy         = orderBy;
+  window._serverTimestamp = serverTimestamp;
+  window._deleteDoc       = deleteDoc;
+  window._doc             = doc;
+  window._firebaseReady   = true;
+  document.dispatchEvent(new Event('firebaseReady'));
 
-function downloadPDF(){
-updatePreview();
-html2pdf().from(preview).save("Paragon_Admission.pdf");
-}
-
-function printDoc(){
-updatePreview();
-let w=window.open("");
-w.document.write(preview.innerHTML);
-w.print();
-}
-
-function whatsapp(){
-let d=data();
-let phone = d.phone.replace(/\D/g,"");
-if(phone.startsWith("0")) phone="92"+phone.slice(1);
-
-let msg=`*Paragon Admission*%0AName:${d.name}%0AGrade:${d.grade}%0APhone:${d.phone}`;
-window.open("https://wa.me/"+phone+"?text="+msg);
-}
-
+  // 🔹 Right Click Disable
+  document.addEventListener('contextmenu', e => e.preventDefault());
 </script>
 
+
+
+
+
+
+<script>
+// ══════════════════════════════════════════
+// STATE
+// ══════════════════════════════════════════
+let currentStep = 1;
+let agreeChecked = false;
+let lastSubmissionData = null;
+
+// ══════════════════════════════════════════
+// INIT
+// ══════════════════════════════════════════
+// Always hide loader — no matter what happens
+function hideLoader() {
+  const loader = document.getElementById('pageLoader');
+  if (loader) loader.classList.add('hidden');
+}
+// Fallback: force hide after 3s even if load event never fires
+setTimeout(hideLoader, 3000);
+
+window.addEventListener('load', () => {
+  try {
+    const maxDate = new Date().toISOString().split('T')[0];
+    const dobEl = document.getElementById('dob');
+    if (dobEl) dobEl.max = maxDate;
+  } catch(e) {}
+
+  // Hide loader after animation (1.4s), but guaranteed
+  setTimeout(hideLoader, 1400);
+
+  // Poll for Firebase
+  let fbTries = 0;
+  const fbPoll = setInterval(() => {
+    fbTries++;
+    if (window._firebaseReady) {
+      clearInterval(fbPoll);
+      try { fetchSubmissions(); } catch(e) { console.error('fetchSubmissions error:', e); }
+    } else if (fbTries > 80) {
+      clearInterval(fbPoll);
+      console.warn('Firebase did not initialize in time.');
+    }
+  }, 100);
+});
+
+// Catch any uncaught errors and still hide loader
+window.addEventListener('error', (e) => {
+  console.error('Global error:', e.message, e.filename, e.lineno);
+  hideLoader();
+});
+
+// ══════════════════════════════════════════
+// STEP NAVIGATION
+// ══════════════════════════════════════════
+function updateProgress(step) {
+  const labels = ['', 'Student Information', 'Parent / Guardian Details', 'Academic History & Additional'];
+  const pct = [0, 25, 50, 75, 100];
+  document.getElementById('progressFill').style.width = pct[step] + '%';
+  document.getElementById('pctLabel').textContent = pct[step] + '%';
+  document.getElementById('stepLabel').textContent = `Step ${step} of 4 — ${labels[step] || 'Review'}`;
+  for (let i = 1; i <= 4; i++) {
+    const pill = document.getElementById('pill-' + i);
+    pill.classList.remove('active', 'done');
+    if (i < step) pill.classList.add('done');
+    if (i === step) pill.classList.add('active');
+  }
+}
+
+function showSection(step) {
+  document.querySelectorAll('.form-section').forEach(s => s.classList.remove('active'));
+  const sec = document.getElementById('sec' + step);
+  if (sec) sec.classList.add('active');
+  updateProgress(step);
+  currentStep = step;
+  window.scrollTo({ top: 200, behavior: 'smooth' });
+}
+
+function goBack(from) { showSection(from - 1); }
+
+function goNext(from) {
+  if (!validateSection(from)) return;
+  showSection(from + 1);
+}
+
+// ══════════════════════════════════════════
+// VALIDATION
+// ══════════════════════════════════════════
+function showErr(id, show) {
+  const el = document.getElementById('err-' + id);
+  if (el) el.classList.toggle('show', show);
+  const input = document.getElementById(id);
+  if (input) {
+    input.classList.toggle('invalid', show);
+    input.classList.toggle('valid', !show && input.value.trim() !== '');
+  }
+}
+
+function validateField(el, type) {
+  if (type === 'name') showErr(el.id, el.value.trim().length < 2);
+  if (type === 'email') showErr(el.id, !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(el.value));
+}
+
+function validateSection(step) {
+  let valid = true;
+  if (step === 1) {
+    if (!document.getElementById('studentName').value.trim()) { showErr('studentName', true); valid = false; }
+    if (!document.getElementById('gender').value) { showErr('gender', true); valid = false; }
+    if (!document.getElementById('dob').value) { showErr('dob', true); valid = false; }
+    if (!document.getElementById('bform').value.trim()) { showErr('bform', true); valid = false; }
+    if (!document.getElementById('classApplying').value) { showErr('classApplying', true); valid = false; }
+  }
+  if (step === 2) {
+    if (!document.getElementById('fatherName').value.trim()) { showErr('fatherName', true); valid = false; }
+    if (!document.getElementById('motherName').value.trim()) { showErr('motherName', true); valid = false; }
+    if (!document.getElementById('cnic').value.trim()) { showErr('cnic', true); valid = false; }
+    if (!document.getElementById('phone').value.trim()) { showErr('phone', true); valid = false; }
+    if (!document.getElementById('email').value.trim() || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(document.getElementById('email').value)) { showErr('email', true); valid = false; }
+    if (!document.getElementById('address').value.trim()) { showErr('address', true); valid = false; }
+  }
+  if (!valid) showToast('Please fill all required fields correctly.', 'error');
+  return valid;
+}
+
+// ══════════════════════════════════════════
+// FORMATTERS
+// ══════════════════════════════════════════
+function calcAge() {
+  const dob = document.getElementById('dob').value;
+  if (!dob) return;
+  const today = new Date(), birth = new Date(dob);
+  let years = today.getFullYear() - birth.getFullYear();
+  let months = today.getMonth() - birth.getMonth();
+  if (months < 0 || (months === 0 && today.getDate() < birth.getDate())) { years--; months += 12; }
+  document.getElementById('age').value = years > 0 ? `${years} years ${months} months` : `${months} months`;
+  showErr('dob', false);
+}
+
+function formatBform(el) {
+  let v = el.value.replace(/[^0-9]/g, '');
+  if (v.length > 5) v = v.slice(0,5) + '-' + v.slice(5);
+  if (v.length > 13) v = v.slice(0,13) + '-' + v.slice(13);
+  el.value = v.slice(0, 15);
+}
+
+function formatCNIC(el) { formatBform(el); }
+
+function formatPhone(el) {
+  let v = el.value.replace(/[^0-9]/g, '');
+  if (v.length > 4) v = v.slice(0,4) + '-' + v.slice(4);
+  el.value = v.slice(0, 12);
+}
+
+// ══════════════════════════════════════════
+// CHECKBOX
+// ══════════════════════════════════════════
+function toggleCheck(id) {
+  agreeChecked = !agreeChecked;
+  const box = document.getElementById(id + '-box');
+  box.classList.toggle('checked', agreeChecked);
+  showErr('agree', false);
+}
+
+// ══════════════════════════════════════════
+// GENERATE ADMISSION ID
+// ══════════════════════════════════════════
+function genAdmissionId() {
+  const yr = new Date().getFullYear();
+  const rand = Math.floor(Math.random() * 9000) + 1000;
+  return `ADM-${yr}-${rand}`;
+}
+
+// ══════════════════════════════════════════
+// SUBMIT FORM
+// ══════════════════════════════════════════
+async function submitForm() {
+  if (!agreeChecked) {
+    showErr('agree', true);
+    showToast('Please agree to the terms and conditions.', 'error');
+    return;
+  }
+  if (!validateSection(3)) return;
+  if (!document.getElementById('prevSchool').value.trim()) {
+    showToast('Please enter previous school name (or "None").', 'error');
+    return;
+  }
+
+  const btn = document.getElementById('submitBtn');
+  const spinner = document.getElementById('submitSpinner');
+  const icon = document.getElementById('submitIcon');
+  const text = document.getElementById('submitText');
+
+  btn.disabled = true;
+  spinner.classList.add('show');
+  icon.style.display = 'none';
+  text.textContent = 'Submitting...';
+
+  const admissionId = genAdmissionId();
+  const now = new Date();
+  const dateStr = now.toLocaleDateString('en-PK', { day:'2-digit', month:'long', year:'numeric' });
+
+  const formData = {
+    admissionId,
+    studentName: document.getElementById('studentName').value.trim(),
+    gender: document.getElementById('gender').value,
+    dob: document.getElementById('dob').value,
+    age: document.getElementById('age').value,
+    bform: document.getElementById('bform').value.trim(),
+    classApplying: document.getElementById('classApplying').value,
+    fatherName: document.getElementById('fatherName').value.trim(),
+    motherName: document.getElementById('motherName').value.trim(),
+    cnic: document.getElementById('cnic').value.trim(),
+    phone: document.getElementById('phone').value.trim(),
+    email: document.getElementById('email').value.trim(),
+    address: document.getElementById('address').value.trim(),
+    prevSchool: document.getElementById('prevSchool').value.trim(),
+    lastClass: document.getElementById('lastClass').value,
+    specialNeeds: document.getElementById('specialNeeds').value.trim() || 'None',
+    referral: document.getElementById('referral').value || 'Not specified',
+    submittedAt: dateStr,
+    status: 'Received'
+  };
+
+  lastSubmissionData = formData;
+
+  try {
+    if (window._firebaseReady) {
+      const db = window._db;
+      const col = window._collection;
+      const addDoc = window._addDoc;
+      const st = window._serverTimestamp;
+      await addDoc(col(db, 'admissions'), { ...formData, timestamp: st() });
+      showToast('Application saved to database successfully!', 'success');
+    } else {
+      showToast('Firebase not configured — showing preview only.', 'info');
+    }
+  } catch (e) {
+    console.error(e);
+    showToast('Firebase save failed. Showing preview anyway.', 'error');
+  }
+
+  // Show success
+  document.getElementById('formCard').style.display = 'none';
+  document.getElementById('progressFill').style.width = '100%';
+  document.getElementById('pctLabel').textContent = '100%';
+
+  const successScreen = document.getElementById('successScreen');
+  successScreen.classList.add('show');
+  document.getElementById('displayAdmissionId').textContent = admissionId;
+
+  // Fill admission card
+  fillAdmissionCard(formData, admissionId, dateStr);
+  document.getElementById('admissionCard').classList.add('show');
+  document.getElementById('cardActions').style.display = 'flex';
+
+  // Generate QR
+  document.getElementById('qrCode').innerHTML = '';
+  try {
+    new QRCode(document.getElementById('qrCode'), {
+      text: `Paragon School | ${formData.studentName} | ${admissionId} | ${formData.classApplying}`,
+      width: 80, height: 80,
+      colorDark: '#060e1f', colorLight: '#ffffff',
+      correctLevel: QRCode.CorrectLevel.M
+    });
+  } catch(e) {}
+
+  // Refresh dashboard
+  setTimeout(() => fetchSubmissions(), 2000);
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+function fillAdmissionCard(d, id, date) {
+  // ── Main visible card ──
+  document.getElementById('cardAdmissionId').textContent = id;
+  document.getElementById('cardStudentName').textContent = d.studentName;
+  document.getElementById('cardClass').textContent = d.classApplying;
+  document.getElementById('cardDob').textContent = d.dob ? new Date(d.dob).toLocaleDateString('en-PK', { day:'2-digit', month:'long', year:'numeric' }) : '—';
+  document.getElementById('cardGender').textContent = d.gender;
+  document.getElementById('cardBform').textContent = d.bform;
+  document.getElementById('cardAge').textContent = d.age;
+  document.getElementById('cardFather').textContent = d.fatherName;
+  document.getElementById('cardMother').textContent = d.motherName;
+  document.getElementById('cardPrevSchool').textContent = d.prevSchool;
+  document.getElementById('cardDate').textContent = date;
+  document.getElementById('cardPhone').textContent = d.phone;
+  document.getElementById('cardEmail').textContent = d.email;
+  document.getElementById('displayAdmissionId').textContent = id;
+
+  // ── Hidden PDF card ──
+  document.getElementById('pdf-admissionId').textContent = id;
+  document.getElementById('pdf-studentName').textContent = d.studentName;
+  document.getElementById('pdf-class').textContent = 'Class Applied: ' + d.classApplying;
+  document.getElementById('pdf-dob').textContent = d.dob ? new Date(d.dob).toLocaleDateString('en-PK', { day:'2-digit', month:'long', year:'numeric' }) : '—';
+  document.getElementById('pdf-gender').textContent = d.gender;
+  document.getElementById('pdf-age').textContent = d.age;
+  document.getElementById('pdf-bform').textContent = d.bform;
+  document.getElementById('pdf-father').textContent = d.fatherName;
+  document.getElementById('pdf-mother').textContent = d.motherName;
+  document.getElementById('pdf-cnic').textContent = d.cnic;
+  document.getElementById('pdf-prevSchool').textContent = d.prevSchool;
+  document.getElementById('pdf-lastClass').textContent = d.lastClass;
+  document.getElementById('pdf-date').textContent = date;
+  document.getElementById('pdf-phone').textContent = d.phone;
+  document.getElementById('pdf-email').textContent = d.email;
+  document.getElementById('pdf-address').textContent = d.address;
+
+  // QR for PDF card — slight delay ensures DOM is ready
+  setTimeout(() => {
+    document.getElementById('pdfQrCode').innerHTML = '';
+    try {
+      new QRCode(document.getElementById('pdfQrCode'), {
+        text: `Paragon School | ${d.studentName} | ${id} | ${d.classApplying}`,
+        width: 72, height: 72,
+        colorDark: '#000000', colorLight: '#ffffff',
+        correctLevel: QRCode.CorrectLevel.M
+      });
+    } catch(e) {}
+  }, 200);
+}
+
+// ══════════════════════════════════════════
+// PDF GENERATOR — pure canvas → jsPDF (no iframe)
+// ══════════════════════════════════════════
+async function generatePDF(data) {
+  const id   = data.admissionId || 'ADM-0000';
+  const date = data.submittedAt || '—';
+  const dobStr = data.dob
+    ? (function(){ try { return new Date(data.dob).toLocaleDateString('en-PK',{day:'2-digit',month:'long',year:'numeric'}); } catch(e){ return data.dob; } })()
+    : '—';
+
+  // Build a styled overlay div directly in the DOM
+  const el = document.createElement('div');
+  el.id = '__pdfTarget__';
+  el.style.cssText = [
+    'position:fixed',
+    'top:0',
+    'left:0',
+    'width:794px',
+    'min-height:200px',
+    'background:#ffffff',
+    'color:#000000',
+    'font-family:Arial,Helvetica,sans-serif',
+    'z-index:999999',
+    'padding:20px',
+    'box-sizing:border-box',
+    'visibility:visible',
+    'opacity:1',
+    'overflow:visible'
+  ].join(';');
+
+  const rows = [
+    ['Date of Birth', dobStr],
+    ['Gender',        data.gender     || '—'],
+    ['Age',           data.age        || '—'],
+    ['B-Form No.',    data.bform      || '—'],
+    ["Father Name",   data.fatherName || '—'],
+    ["Mother Name",   data.motherName || '—'],
+    ["Father CNIC",   data.cnic       || '—'],
+    ['Prev School',   data.prevSchool || '—'],
+    ['Last Class',    data.lastClass  || '—'],
+    ['Submitted',     date],
+  ];
+
+  const cells = rows.map(([l,v], i) => {
+    const br = i < rows.length - 2 ? 'border-bottom:1px solid #ccc;' : '';
+    const bl = i % 2 === 0 ? 'border-right:1px solid #ccc;' : '';
+    return `<div style="padding:6px 10px;${bl}${br}">
+      <div style="font-size:7px;text-transform:uppercase;letter-spacing:1px;font-weight:700;color:#666;margin-bottom:1px;">${l}</div>
+      <div style="font-size:11px;font-weight:600;color:#000;">${v}</div>
+    </div>`;
+  }).join('');
+
+  el.innerHTML = `
+    <div style="border:2px solid #000;background:#fff;">
+      <!-- Header -->
+      <div style="border-bottom:3px double #000;padding:16px 20px;display:flex;justify-content:space-between;align-items:flex-start;background:#fff;">
+        <div>
+          <div style="font-size:22px;font-weight:900;letter-spacing:2px;color:#000;border-bottom:1px solid #000;padding-bottom:3px;margin-bottom:3px;">PARAGON SCHOOL</div>
+          <div style="font-size:8px;letter-spacing:2px;text-transform:uppercase;color:#000;">Excellence &middot; Integrity &middot; Innovation</div>
+          <div style="font-size:8px;margin-top:4px;line-height:1.5;color:#000;">Faisalabad, Punjab, Pakistan</div>
+        </div>
+        <div style="text-align:right;border:1.5px solid #000;padding:6px 12px;">
+          <div style="font-size:7px;letter-spacing:2px;text-transform:uppercase;color:#000;">Admission ID</div>
+          <div style="font-size:16px;font-weight:900;color:#000;">${id}</div>
+          <div style="font-size:8px;color:#000;">AY 2025-26</div>
+        </div>
+      </div>
+      <!-- Black band -->
+      <div style="background:#000;padding:6px 20px;text-align:center;">
+        <span style="color:#fff;font-size:10px;letter-spacing:4px;text-transform:uppercase;font-weight:700;">Student Admission Application - Receipt</span>
+      </div>
+      <!-- Student name -->
+      <div style="padding:14px 20px 8px;border-bottom:1px solid #ccc;background:#fff;">
+        <div style="font-size:20px;font-weight:900;color:#000;margin-bottom:3px;">${data.studentName || '—'}</div>
+        <div style="font-size:9px;letter-spacing:1px;text-transform:uppercase;font-weight:700;border:1px solid #000;display:inline-block;padding:2px 8px;color:#000;">Class: ${data.classApplying || '—'}</div>
+      </div>
+      <!-- Info grid -->
+      <div style="padding:10px 20px;background:#fff;">
+        <div style="display:grid;grid-template-columns:1fr 1fr;border:1px solid #000;">
+          ${cells}
+        </div>
+      </div>
+      <!-- Contact -->
+      <div style="padding:8px 20px 10px;border-top:1px solid #ccc;background:#fff;">
+        <div style="font-size:7px;letter-spacing:1px;text-transform:uppercase;font-weight:700;color:#000;margin-bottom:4px;">CONTACT DETAILS</div>
+        <div style="font-size:9px;line-height:1.9;color:#000;">
+          Phone: ${data.phone || '—'} &nbsp;&nbsp; Email: ${data.email || '—'}<br>
+          Address: ${data.address || '—'}
+        </div>
+      </div>
+      <!-- Status -->
+      <div style="padding:5px 20px;border-top:1px solid #ccc;font-size:8px;text-align:center;letter-spacing:1px;color:#000;background:#fff;">
+        Application Received | Status: PENDING REVIEW | Paragon School Admissions
+      </div>
+      <!-- Footer -->
+      <div style="border-top:2px solid #000;padding:8px 20px;display:flex;justify-content:space-between;align-items:center;background:#fff;">
+        <div style="font-size:7.5px;line-height:1.6;color:#000;">Computer-generated receipt. No signature required.</div>
+        <div style="border:2px solid #000;padding:3px 10px;font-size:8px;font-weight:900;letter-spacing:3px;color:#000;">RECEIVED</div>
+      </div>
+    </div>`;
+
+  document.body.appendChild(el);
+
+  // Force layout
+  el.getBoundingClientRect();
+  await new Promise(res => setTimeout(res, 500));
+
+  try {
+    const canvas = await html2canvas(el, {
+      scale: 2,
+      useCORS: true,
+      allowTaint: true,
+      backgroundColor: '#ffffff',
+      logging: false,
+      scrollX: 0,
+      scrollY: 0,
+      x: 0,
+      y: 0,
+      width: el.offsetWidth,
+      height: el.offsetHeight,
+      windowWidth: window.innerWidth,
+      windowHeight: window.innerHeight
+    });
+
+    console.log('[PDF] Canvas:', canvas.width, 'x', canvas.height);
+
+    const imgData = canvas.toDataURL('image/jpeg', 1.0);
+    if (canvas.width < 10 || canvas.height < 10) {
+      showToast('Canvas empty — check console.', 'error');
+      document.body.removeChild(el);
+      return;
+    }
+
+    const { jsPDF } = window.jspdf;
+    const pdf = new jsPDF({ unit: 'mm', format: 'a4', orientation: 'portrait' });
+    const pageW = pdf.internal.pageSize.getWidth();
+    const pageH = pdf.internal.pageSize.getHeight();
+    const imgRatio = canvas.height / canvas.width;
+    const imgH = pageW * imgRatio;
+
+    if (imgH <= pageH) {
+      pdf.addImage(imgData, 'JPEG', 0, 0, pageW, imgH);
+    } else {
+      const pageHeightPx = Math.floor(canvas.width * (pageH / pageW));
+      let yPx = 0;
+      while (yPx < canvas.height) {
+        const sliceH = Math.min(pageHeightPx, canvas.height - yPx);
+        const sc = document.createElement('canvas');
+        sc.width = canvas.width; sc.height = sliceH;
+        sc.getContext('2d').drawImage(canvas, 0, yPx, canvas.width, sliceH, 0, 0, canvas.width, sliceH);
+        if (yPx > 0) pdf.addPage();
+        pdf.addImage(sc.toDataURL('image/jpeg', 1.0), 'JPEG', 0, 0, pageW, pageH * (sliceH / pageHeightPx));
+        yPx += sliceH;
+      }
+    }
+
+    pdf.save('Paragon_Admission_' + id + '.pdf');
+    showToast('PDF downloaded!', 'success');
+  } catch(err) {
+    console.error('[PDF] Error:', err);
+    showToast('PDF error: ' + err.message, 'error');
+  } finally {
+    if (document.body.contains(el)) document.body.removeChild(el);
+  }
+}
+
+// ── Called after form submit ──// ── Called after form submit ──
+function downloadPDF() {
+  if (!lastSubmissionData) {
+    showToast('No submission data. Please submit the form first.', 'error');
+    return;
+  }
+  showToast('Generating PDF...', 'info');
+  generatePDF(lastSubmissionData);
+}
+
+// ── Called from dashboard card — fetches fresh from Firebase ──
+async function fetchAndDownloadPDF(admissionId, btn) {
+  if (!window._firebaseReady || !window._db) {
+    showToast('Firebase not ready. Try again.', 'error');
+    return;
+  }
+
+  // Disable button while working
+  if (btn) { btn.disabled = true; btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Loading...'; }
+
+  showToast('⏳ Fetching DATA...', 'info');
+
+  try {
+    const snap = await window._getDocs(window._collection(window._db, 'admissions'));
+    let found = null;
+    snap.forEach(doc => { const d = doc.data(); if (d.admissionId === admissionId) found = d; });
+
+    if (!found) {
+      showToast('❌ Record not found in Firebase.', 'error');
+      if (btn) { btn.disabled = false; btn.innerHTML = '<i class="fas fa-file-pdf"></i> PDF'; }
+      return;
+    }
+
+    // ✅ Confirm data is loaded — show a preview modal first
+    const confirmed = await showDataConfirmModal(found);
+    if (!confirmed) {
+      if (btn) { btn.disabled = false; btn.innerHTML = '<i class="fas fa-file-pdf"></i> PDF'; }
+      return;
+    }
+
+    showToast('📄 Generating PDF...', 'info');
+    await generatePDF(found);
+
+  } catch(e) {
+    console.error('Firebase fetch error:', e);
+    showToast('❌ Firebase error: ' + e.message, 'error');
+  } finally {
+    if (btn) { btn.disabled = false; btn.innerHTML = '<i class="fas fa-file-pdf"></i> PDF'; }
+  }
+}
+
+// ── Shows data preview modal before PDF — confirms Firebase data loaded ──
+function showDataConfirmModal(data) {
+  return new Promise(resolve => {
+    // Remove existing modal if any
+    const existing = document.getElementById('pdfConfirmModal');
+    if (existing) existing.remove();
+
+    const modal = document.createElement('div');
+    modal.id = 'pdfConfirmModal';
+    modal.style.cssText = 'position:fixed;inset:0;background:rgba(0,0,0,0.6);z-index:99999;display:flex;align-items:center;justify-content:center;padding:20px;';
+
+    modal.innerHTML = `
+      <div style="background:#fff;border-radius:16px;padding:32px;max-width:480px;width:100%;box-shadow:0 24px 64px rgba(0,0,0,0.3);">
+        <div style="display:flex;align-items:center;gap:12px;margin-bottom:20px;">
+          <div style="width:44px;height:44px;background:linear-gradient(135deg,#e8f9f0,#c6f0d9);border-radius:50%;display:flex;align-items:center;justify-content:center;">
+            <i class="fas fa-check" style="color:#1a7a45;font-size:1.1rem;"></i>
+          </div>
+          <div>
+            <div style="font-weight:700;font-size:1rem;color:#0d1f3c;">Firebase Data Loaded ✅</div>
+            <div style="font-size:0.78rem;color:#7a8aaa;">Review before downloading PDF</div>
+          </div>
+        </div>
+
+        <div style="background:#f4f6fb;border-radius:10px;padding:16px;margin-bottom:20px;font-size:0.85rem;line-height:1.9;">
+          <div><b>Student:</b> ${data.studentName || '—'}</div>
+          <div><b>Admission ID:</b> ${data.admissionId || '—'}</div>
+          <div><b>Class:</b> ${data.classApplying || '—'}</div>
+          <div><b>Father:</b> ${data.fatherName || '—'}</div>
+          <div><b>Phone:</b> ${data.phone || '—'}</div>
+          <div><b>Submitted:</b> ${data.submittedAt || '—'}</div>
+        </div>
+
+        <div style="display:flex;gap:10px;justify-content:flex-end;">
+          <button id="modalCancel" style="padding:10px 22px;border-radius:8px;border:1.5px solid #e2e8f0;background:#fff;font-weight:600;cursor:pointer;font-size:0.88rem;">Cancel</button>
+          <button id="modalDownload" style="padding:10px 22px;border-radius:8px;border:none;background:linear-gradient(135deg,#C41E3A,#a01428);color:#fff;font-weight:600;cursor:pointer;font-size:0.88rem;display:flex;align-items:center;gap:8px;">
+            <i class="fas fa-file-pdf"></i> Download PDF
+          </button>
+        </div>
+      </div>
+    `;
+
+    document.body.appendChild(modal);
+
+    document.getElementById('modalDownload').onclick = () => { modal.remove(); resolve(true); };
+    document.getElementById('modalCancel').onclick  = () => { modal.remove(); resolve(false); };
+    modal.addEventListener('click', e => { if (e.target === modal) { modal.remove(); resolve(false); } });
+  });
+}
+
+function printCard() {
+  window.print();
+}
+
+// ══════════════════════════════════════════
+// WHATSAPP SHARE
+// ══════════════════════════════════════════
+function shareWhatsApp() {
+  if (!lastSubmissionData) return;
+  const d = lastSubmissionData;
+  const msg = `🎓 *Paragon School — Admission Application*\n\n` +
+    `📋 *Admission ID:* ${d.admissionId}\n` +
+    `👦 *Student Name:* ${d.studentName}\n` +
+    `🏫 *Class Applied:* ${d.classApplying}\n` +
+    `👨 *Father's Name:* ${d.fatherName}\n` +
+    `📅 *Submitted On:* ${d.submittedAt}\n\n` +
+    `_My child's admission form has been submitted to Paragon School. World-Class Premium Education._\n\n` +
+    `📍 Paragon School, Faisalabad, Punjab, Pakistan`;
+  window.open(`https://wa.me/?text=${encodeURIComponent(msg)}`, '_blank');
+}
+
+// ══════════════════════════════════════════
+// NEW APPLICATION
+// ══════════════════════════════════════════
+function newApplication() {
+  lastSubmissionData = null;
+  agreeChecked = false;
+  document.getElementById('agree-box').classList.remove('checked');
+  document.querySelectorAll('.form-input, .form-select, .form-textarea').forEach(el => { el.value = ''; el.classList.remove('valid','invalid'); });
+  document.querySelectorAll('.field-error').forEach(el => el.classList.remove('show'));
+  document.getElementById('successScreen').classList.remove('show');
+  document.getElementById('admissionCard').classList.remove('show');
+  document.getElementById('cardActions').style.display = 'none';
+  document.getElementById('formCard').style.display = 'block';
+  showSection(1);
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+// ══════════════════════════════════════════
+// FETCH DASHBOARD
+// ══════════════════════════════════════════
+async function fetchSubmissions() {
+  const grid = document.getElementById('submissionsGrid');
+  if (!window._firebaseReady || !window._db) return;
+
+  grid.innerHTML = `<div class="empty-state"><i class="fas fa-spinner fa-spin"></i><p>Loading...</p></div>`;
+  try {
+    const q = window._query(window._collection(window._db, 'admissions'), window._orderBy('timestamp', 'desc'));
+    const snap = await window._getDocs(q);
+    renderDashboard(snap);
+  } catch(e) {
+    // Fallback: fetch without ordering (works without Firestore index)
+    try {
+      const snap = await window._getDocs(window._collection(window._db, 'admissions'));
+      renderDashboard(snap);
+    } catch(e2) {
+      grid.innerHTML = `<div class="empty-state"><i class="fas fa-exclamation-triangle"></i><p>Could not load. Check Firestore Rules.</p></div>`;
+    }
+  }
+}
+
+function renderDashboard(snap) {
+  const grid = document.getElementById('submissionsGrid');
+  const docs = [];
+  snap.forEach(d => docs.push({ id: d.id, ...d.data() }));
+  document.getElementById('totalCount').textContent = docs.length;
+  if (docs.length === 0) {
+    grid.innerHTML = `<div class="empty-state"><i class="fas fa-inbox"></i><p>No submissions yet.</p></div>`;
+    return;
+  }
+  grid.innerHTML = docs.map((d, i) => `
+    <div class="submission-card" id="card-${d.admissionId}" style="animation-delay:${i*0.07}s">
+      <div class="sub-left">
+        <div class="sub-avatar">${d.studentName ? d.studentName.charAt(0).toUpperCase() : '?'}</div>
+        <div>
+          <div class="sub-name">${d.studentName || '—'}</div>
+          <div class="sub-meta">
+            <span><i class="fas fa-user"></i> ${d.gender || '—'}</span>
+            <span><i class="fas fa-phone"></i> ${d.phone || '—'}</span>
+            <span><i class="fas fa-calendar"></i> ${d.submittedAt || '—'}</span>
+          </div>
+        </div>
+      </div>
+      <div class="sub-right">
+        <div class="sub-class-tag">${d.classApplying || '—'}</div>
+        <div class="sub-id">${d.admissionId || '—'}</div>
+        ${d.admissionId ? `<button onclick="fetchAndDownloadPDF('${d.admissionId}', this)" style="background:linear-gradient(135deg,#C41E3A,#a01428);color:white;border:none;padding:6px 14px;border-radius:8px;font-size:0.75rem;font-weight:600;cursor:pointer;display:flex;align-items:center;gap:5px;"><i class="fas fa-file-pdf"></i> PDF</button>` : ''}
+        ${d.id ? `<button onclick="confirmDelete('${d.id}','${d.admissionId}','${(d.studentName||'').replace(/'/g,"\'")}', this)" style="background:#fff;color:#c41e3a;border:1.5px solid #f5c6cc;padding:6px 14px;border-radius:8px;font-size:0.75rem;font-weight:600;cursor:pointer;display:flex;align-items:center;gap:5px;transition:all 0.2s;" onmouseover="this.style.background='#fef0f0'" onmouseout="this.style.background='#fff'"><i class="fas fa-trash-alt"></i> Delete</button>` : ''}
+      </div>
+    </div>
+  `).join('');
+}
+
+// ══════════════════════════════════════════
+// DELETE FORM
+// ══════════════════════════════════════════
+function confirmDelete(docId, admissionId, studentName, btn) {
+  // Show confirm modal
+  const existing = document.getElementById('deleteConfirmModal');
+  if (existing) existing.remove();
+
+  const modal = document.createElement('div');
+  modal.id = 'deleteConfirmModal';
+  modal.style.cssText = 'position:fixed;inset:0;background:rgba(0,0,0,0.55);z-index:99999;display:flex;align-items:center;justify-content:center;padding:20px;';
+  modal.innerHTML = `
+    <div style="background:#fff;border-radius:16px;padding:32px;max-width:420px;width:100%;box-shadow:0 24px 64px rgba(0,0,0,0.3);">
+      <div style="display:flex;align-items:center;gap:14px;margin-bottom:18px;">
+        <div style="width:48px;height:48px;background:#fef0f0;border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0;">
+          <i class="fas fa-trash-alt" style="color:#c41e3a;font-size:1.2rem;"></i>
+        </div>
+        <div>
+          <div style="font-weight:700;font-size:1rem;color:#0d1f3c;">Delete Admission Form?</div>
+          <div style="font-size:0.78rem;color:#7a8aaa;margin-top:2px;">This action cannot be undone</div>
+        </div>
+      </div>
+      <div style="background:#f4f6fb;border-radius:10px;padding:14px 16px;margin-bottom:22px;font-size:0.85rem;line-height:1.8;">
+        <div><b>Student:</b> ${studentName || '—'}</div>
+        <div><b>Admission ID:</b> ${admissionId || '—'}</div>
+      </div>
+      <div style="display:flex;gap:10px;justify-content:flex-end;">
+        <button id="delCancel" style="padding:10px 22px;border-radius:8px;border:1.5px solid #e2e8f0;background:#fff;font-weight:600;cursor:pointer;font-size:0.88rem;color:#3a4a6b;">Cancel</button>
+        <button id="delConfirm" style="padding:10px 22px;border-radius:8px;border:none;background:linear-gradient(135deg,#c41e3a,#a01428);color:#fff;font-weight:600;cursor:pointer;font-size:0.88rem;display:flex;align-items:center;gap:8px;">
+          <i class="fas fa-trash-alt"></i> Yes, Delete
+        </button>
+      </div>
+    </div>`;
+
+  document.body.appendChild(modal);
+
+  document.getElementById('delCancel').onclick  = () => modal.remove();
+  modal.addEventListener('click', e => { if (e.target === modal) modal.remove(); });
+
+  document.getElementById('delConfirm').onclick = async () => {
+    const confirmBtn = document.getElementById('delConfirm');
+    confirmBtn.disabled = true;
+    confirmBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Deleting...';
+    try {
+      await window._deleteDoc(window._doc(window._db, 'admissions', docId));
+      modal.remove();
+      showToast('Record deleted successfully.', 'success');
+      // Remove card from DOM instantly
+      const card = document.getElementById('card-' + admissionId);
+      if (card) {
+        card.style.transition = 'all 0.3s ease';
+        card.style.opacity = '0';
+        card.style.transform = 'translateX(30px)';
+        setTimeout(() => { card.remove(); fetchSubmissions(); }, 350);
+      } else {
+        fetchSubmissions();
+      }
+    } catch(e) {
+      console.error('Delete error:', e);
+      showToast('Delete failed: ' + e.message, 'error');
+      modal.remove();
+    }
+  };
+}
+
+// ══════════════════════════════════════════
+// TOAST
+// ══════════════════════════════════════════
+function showToast(msg, type = 'info') {
+  const icons = { success: 'fa-check-circle', error: 'fa-times-circle', info: 'fa-info-circle' };
+  const t = document.createElement('div');
+  t.className = `toast ${type}`;
+  t.innerHTML = `<i class="fas ${icons[type]}"></i> ${msg}`;
+  document.getElementById('toast-container').appendChild(t);
+  setTimeout(() => t.remove(), 3800);
+}
+
+// ══════════════════════════════════════════
+// RIGHT CLICK DISABLE
+// ══════════════════════════════════════════
+document.addEventListener('contextmenu', e => e.preventDefault());
+</script>
 </body>
 </html>
