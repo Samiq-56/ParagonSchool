@@ -1024,19 +1024,7 @@ body {
 
   </div>
 
-  <!-- DASHBOARD -->
-  <div class="dashboard-section" id="dashboardSection">
-    <div class="dashboard-header">
-      <div class="dashboard-title">Recent Submissions</div>
-      <div class="dashboard-count">Total: <strong id="totalCount">0</strong> applications</div>
-    </div>
-    <div class="submissions-grid" id="submissionsGrid">
-      <div class="empty-state">
-        <i class="fas fa-inbox"></i>
-        <p>No submissions yet. Submit an application to see it here.</p>
-      </div>
-    </div>
-  </div>
+
 
 </div><!-- end main-wrap -->
 
@@ -1145,7 +1133,7 @@ body {
 <script type="module">
   // 🔹 Firebase Imports
   import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
-  import { getFirestore, collection, addDoc, getDocs, getDocs as _gd, query, orderBy, serverTimestamp, deleteDoc, doc } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
+  import { getFirestore, collection, addDoc, getDocs, query, orderBy, serverTimestamp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
 
   // 🔹 Firebase Config
   const firebaseConfig = {
@@ -1168,8 +1156,6 @@ body {
   window._query           = query;
   window._orderBy         = orderBy;
   window._serverTimestamp = serverTimestamp;
-  window._deleteDoc       = deleteDoc;
-  window._doc             = doc;
   window._firebaseReady   = true;
   document.dispatchEvent(new Event('firebaseReady'));
 
@@ -1217,10 +1203,8 @@ window.addEventListener('load', () => {
     fbTries++;
     if (window._firebaseReady) {
       clearInterval(fbPoll);
-      try { fetchSubmissions(); } catch(e) { console.error('fetchSubmissions error:', e); }
     } else if (fbTries > 80) {
       clearInterval(fbPoll);
-      console.warn('Firebase did not initialize in time.');
     }
   }, 100);
 });
@@ -1803,125 +1787,7 @@ function newApplication() {
   window.scrollTo({ top: 0, behavior: 'smooth' });
 }
 
-// ══════════════════════════════════════════
-// FETCH DASHBOARD
-// ══════════════════════════════════════════
-async function fetchSubmissions() {
-  const grid = document.getElementById('submissionsGrid');
-  if (!window._firebaseReady || !window._db) return;
 
-  grid.innerHTML = `<div class="empty-state"><i class="fas fa-spinner fa-spin"></i><p>Loading...</p></div>`;
-  try {
-    const q = window._query(window._collection(window._db, 'admissions'), window._orderBy('timestamp', 'desc'));
-    const snap = await window._getDocs(q);
-    renderDashboard(snap);
-  } catch(e) {
-    // Fallback: fetch without ordering (works without Firestore index)
-    try {
-      const snap = await window._getDocs(window._collection(window._db, 'admissions'));
-      renderDashboard(snap);
-    } catch(e2) {
-      grid.innerHTML = `<div class="empty-state"><i class="fas fa-exclamation-triangle"></i><p>Could not load. Check Firestore Rules.</p></div>`;
-    }
-  }
-}
-
-function renderDashboard(snap) {
-  const grid = document.getElementById('submissionsGrid');
-  const docs = [];
-  snap.forEach(d => docs.push({ id: d.id, ...d.data() }));
-  document.getElementById('totalCount').textContent = docs.length;
-  if (docs.length === 0) {
-    grid.innerHTML = `<div class="empty-state"><i class="fas fa-inbox"></i><p>No submissions yet.</p></div>`;
-    return;
-  }
-  grid.innerHTML = docs.map((d, i) => `
-    <div class="submission-card" id="card-${d.admissionId}" style="animation-delay:${i*0.07}s">
-      <div class="sub-left">
-        <div class="sub-avatar">${d.studentName ? d.studentName.charAt(0).toUpperCase() : '?'}</div>
-        <div>
-          <div class="sub-name">${d.studentName || '—'}</div>
-          <div class="sub-meta">
-            <span><i class="fas fa-user"></i> ${d.gender || '—'}</span>
-            <span><i class="fas fa-phone"></i> ${d.phone || '—'}</span>
-            <span><i class="fas fa-calendar"></i> ${d.submittedAt || '—'}</span>
-          </div>
-        </div>
-      </div>
-      <div class="sub-right">
-        <div class="sub-class-tag">${d.classApplying || '—'}</div>
-        <div class="sub-id">${d.admissionId || '—'}</div>
-        ${d.admissionId ? `<button onclick="fetchAndDownloadPDF('${d.admissionId}', this)" style="background:linear-gradient(135deg,#C41E3A,#a01428);color:white;border:none;padding:6px 14px;border-radius:8px;font-size:0.75rem;font-weight:600;cursor:pointer;display:flex;align-items:center;gap:5px;"><i class="fas fa-file-pdf"></i> PDF</button>` : ''}
-        ${d.id ? `<button onclick="confirmDelete('${d.id}','${d.admissionId}','${(d.studentName||'').replace(/'/g,"\'")}', this)" style="background:#fff;color:#c41e3a;border:1.5px solid #f5c6cc;padding:6px 14px;border-radius:8px;font-size:0.75rem;font-weight:600;cursor:pointer;display:flex;align-items:center;gap:5px;transition:all 0.2s;" onmouseover="this.style.background='#fef0f0'" onmouseout="this.style.background='#fff'"><i class="fas fa-trash-alt"></i> Delete</button>` : ''}
-      </div>
-    </div>
-  `).join('');
-}
-
-// ══════════════════════════════════════════
-// DELETE FORM
-// ══════════════════════════════════════════
-function confirmDelete(docId, admissionId, studentName, btn) {
-  // Show confirm modal
-  const existing = document.getElementById('deleteConfirmModal');
-  if (existing) existing.remove();
-
-  const modal = document.createElement('div');
-  modal.id = 'deleteConfirmModal';
-  modal.style.cssText = 'position:fixed;inset:0;background:rgba(0,0,0,0.55);z-index:99999;display:flex;align-items:center;justify-content:center;padding:20px;';
-  modal.innerHTML = `
-    <div style="background:#fff;border-radius:16px;padding:32px;max-width:420px;width:100%;box-shadow:0 24px 64px rgba(0,0,0,0.3);">
-      <div style="display:flex;align-items:center;gap:14px;margin-bottom:18px;">
-        <div style="width:48px;height:48px;background:#fef0f0;border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0;">
-          <i class="fas fa-trash-alt" style="color:#c41e3a;font-size:1.2rem;"></i>
-        </div>
-        <div>
-          <div style="font-weight:700;font-size:1rem;color:#0d1f3c;">Delete Admission Form?</div>
-          <div style="font-size:0.78rem;color:#7a8aaa;margin-top:2px;">This action cannot be undone</div>
-        </div>
-      </div>
-      <div style="background:#f4f6fb;border-radius:10px;padding:14px 16px;margin-bottom:22px;font-size:0.85rem;line-height:1.8;">
-        <div><b>Student:</b> ${studentName || '—'}</div>
-        <div><b>Admission ID:</b> ${admissionId || '—'}</div>
-      </div>
-      <div style="display:flex;gap:10px;justify-content:flex-end;">
-        <button id="delCancel" style="padding:10px 22px;border-radius:8px;border:1.5px solid #e2e8f0;background:#fff;font-weight:600;cursor:pointer;font-size:0.88rem;color:#3a4a6b;">Cancel</button>
-        <button id="delConfirm" style="padding:10px 22px;border-radius:8px;border:none;background:linear-gradient(135deg,#c41e3a,#a01428);color:#fff;font-weight:600;cursor:pointer;font-size:0.88rem;display:flex;align-items:center;gap:8px;">
-          <i class="fas fa-trash-alt"></i> Yes, Delete
-        </button>
-      </div>
-    </div>`;
-
-  document.body.appendChild(modal);
-
-  document.getElementById('delCancel').onclick  = () => modal.remove();
-  modal.addEventListener('click', e => { if (e.target === modal) modal.remove(); });
-
-  document.getElementById('delConfirm').onclick = async () => {
-    const confirmBtn = document.getElementById('delConfirm');
-    confirmBtn.disabled = true;
-    confirmBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Deleting...';
-    try {
-      await window._deleteDoc(window._doc(window._db, 'admissions', docId));
-      modal.remove();
-      showToast('Record deleted successfully.', 'success');
-      // Remove card from DOM instantly
-      const card = document.getElementById('card-' + admissionId);
-      if (card) {
-        card.style.transition = 'all 0.3s ease';
-        card.style.opacity = '0';
-        card.style.transform = 'translateX(30px)';
-        setTimeout(() => { card.remove(); fetchSubmissions(); }, 350);
-      } else {
-        fetchSubmissions();
-      }
-    } catch(e) {
-      console.error('Delete error:', e);
-      showToast('Delete failed: ' + e.message, 'error');
-      modal.remove();
-    }
-  };
-}
 
 // ══════════════════════════════════════════
 // TOAST
