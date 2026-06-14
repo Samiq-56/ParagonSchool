@@ -1,12 +1,15 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <link rel="icon" href="https://cdn-icons-png.flaticon.com/512/3135/3135755.png" type="image/png">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover, user-scalable=yes">
   <title>Paragon AI · Educational Assistant | Type & Speak Modes</title>
   <!-- Google Fonts: Elegant & Premium -->
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Montserrat:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <link
+    href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Montserrat:wght@300;400;500;600;700;800&display=swap"
+    rel="stylesheet">
   <!-- Font Awesome 6 -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
   <style>
@@ -61,6 +64,7 @@
         z-index: 9999;
         transition: transform 0.1s ease;
       }
+
       .cursor-outline {
         width: 40px;
         height: 40px;
@@ -86,11 +90,13 @@
       transition: var(--transition-smooth);
       border-bottom: 1px solid rgba(212, 175, 55, 0.2);
     }
+
     .navbar.scrolled {
       padding: 0.6rem 0;
       background: rgba(10, 28, 58, 0.96);
-      box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
     }
+
     .nav-container {
       max-width: 1400px;
       margin: 0 auto;
@@ -99,6 +105,7 @@
       justify-content: space-between;
       align-items: center;
     }
+
     .logo h1 {
       font-family: 'Cormorant Garamond', serif;
       font-size: 1.7rem;
@@ -109,11 +116,13 @@
       color: transparent;
       letter-spacing: 1px;
     }
+
     .nav-links {
       display: flex;
       gap: 1.5rem;
       align-items: center;
     }
+
     .nav-links a {
       text-decoration: none;
       font-weight: 500;
@@ -123,6 +132,7 @@
       letter-spacing: 0.3px;
       white-space: nowrap;
     }
+
     .nav-links a::after {
       content: '';
       position: absolute;
@@ -133,24 +143,29 @@
       background: var(--crimson-red);
       transition: width 0.3s ease;
     }
+
     .nav-links a {
       position: relative;
     }
+
     .nav-links a:hover::after {
       width: 100%;
     }
+
     .btn-apply-nav {
       background: var(--crimson-red);
       padding: 0.5rem 1.4rem;
       border-radius: 40px;
       font-weight: 600;
-      box-shadow: 0 4px 12px rgba(196,30,58,0.4);
+      box-shadow: 0 4px 12px rgba(196, 30, 58, 0.4);
     }
+
     .btn-apply-nav:hover {
       background: var(--gold-accent);
       color: var(--royal-navy) !important;
       transform: translateY(-2px);
     }
+
     .menu-icon {
       display: none;
       font-size: 1.8rem;
@@ -164,6 +179,7 @@
       background: linear-gradient(145deg, #faf9fc 0%, #f0f2f5 100%);
       position: relative;
     }
+
     .chat-container {
       max-width: 1300px;
       margin: 0 auto;
@@ -173,6 +189,7 @@
       box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25), 0 0 0 1px rgba(212, 175, 55, 0.2);
       overflow: hidden;
     }
+
     .chat-header {
       background: linear-gradient(135deg, var(--royal-navy), var(--royal-navy-light));
       padding: 1rem 1.5rem;
@@ -183,28 +200,33 @@
       gap: 0.8rem;
       border-bottom: 2px solid var(--gold-accent);
     }
+
     .chat-brand {
       display: flex;
       align-items: center;
       gap: 0.8rem;
     }
+
     .chat-brand i {
       font-size: 2rem;
       color: var(--gold-accent);
     }
+
     .chat-brand h3 {
       font-family: 'Cormorant Garamond', serif;
       font-size: 1.4rem;
       color: white;
       font-weight: 700;
     }
+
     .mode-switch {
       display: flex;
       gap: 0.6rem;
-      background: rgba(255,255,255,0.12);
+      background: rgba(255, 255, 255, 0.12);
       padding: 0.2rem 0.6rem;
       border-radius: 60px;
     }
+
     .mode-btn {
       background: transparent;
       border: none;
@@ -218,11 +240,13 @@
       font-family: 'Montserrat', sans-serif;
       white-space: nowrap;
     }
+
     .mode-btn.active {
       background: linear-gradient(135deg, var(--crimson-red), #ff6b6b);
       color: white;
-      box-shadow: 0 4px 10px rgba(196,30,58,0.4);
+      box-shadow: 0 4px 10px rgba(196, 30, 58, 0.4);
     }
+
     .chat-window {
       height: 50vh;
       min-height: 320px;
@@ -233,6 +257,7 @@
       gap: 0.8rem;
       background: #fefcf7;
     }
+
     .message {
       max-width: 85%;
       padding: 0.8rem 1.2rem;
@@ -242,24 +267,35 @@
       word-wrap: break-word;
       animation: slideMsg 0.25s ease;
     }
+
     @keyframes slideMsg {
-      from { opacity: 0; transform: translateY(8px);}
-      to { opacity: 1; transform: translateY(0);}
+      from {
+        opacity: 0;
+        transform: translateY(8px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
     }
+
     .user {
       background: linear-gradient(145deg, var(--crimson-red), #9b1d2c);
       color: white;
       align-self: flex-end;
       border-bottom-right-radius: 8px;
     }
+
     .bot {
       background: white;
       border: 1px solid rgba(212, 175, 55, 0.3);
       color: var(--royal-navy);
       align-self: flex-start;
       border-bottom-left-radius: 8px;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.03);
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.03);
     }
+
     .typing-indicator {
       display: flex;
       gap: 5px;
@@ -268,6 +304,7 @@
       border-radius: 40px;
       width: fit-content;
     }
+
     .typing-dot {
       width: 7px;
       height: 7px;
@@ -275,18 +312,31 @@
       border-radius: 50%;
       animation: wave 1s infinite;
     }
+
     @keyframes wave {
-      0%,60%,100%{ transform: translateY(0); opacity: 0.5; }
-      30%{ transform: translateY(-6px); opacity: 1; }
+
+      0%,
+      60%,
+      100% {
+        transform: translateY(0);
+        opacity: 0.5;
+      }
+
+      30% {
+        transform: translateY(-6px);
+        opacity: 1;
+      }
     }
+
     .suggestions {
       padding: 0.7rem 1rem;
       display: flex;
       gap: 0.6rem;
       flex-wrap: wrap;
-      background: rgba(10,28,58,0.03);
-      border-top: 1px solid rgba(0,0,0,0.05);
+      background: rgba(10, 28, 58, 0.03);
+      border-top: 1px solid rgba(0, 0, 0, 0.05);
     }
+
     .suggestion-chip {
       background: white;
       border: 1px solid var(--crimson-red);
@@ -299,30 +349,35 @@
       transition: 0.2s;
       white-space: nowrap;
     }
+
     @media (max-width: 550px) {
       .suggestion-chip {
         white-space: normal;
         font-size: 0.7rem;
         text-align: center;
       }
+
       .suggestions {
         justify-content: center;
       }
     }
+
     .suggestion-chip:hover {
       background: var(--crimson-red);
       color: white;
       transform: translateY(-2px);
     }
+
     .input-area {
       padding: 1rem 1.2rem;
       background: white;
       display: flex;
       gap: 0.6rem;
       align-items: center;
-      border-top: 1px solid rgba(0,0,0,0.08);
+      border-top: 1px solid rgba(0, 0, 0, 0.08);
       flex-wrap: nowrap;
     }
+
     .input-wrapper {
       flex: 1;
       background: #f1f5f9;
@@ -333,10 +388,12 @@
       border: 1px solid #e2e8f0;
       transition: 0.2s;
     }
+
     .input-wrapper:focus-within {
       border-color: var(--crimson-red);
-      box-shadow: 0 0 0 3px rgba(196,30,58,0.2);
+      box-shadow: 0 0 0 3px rgba(196, 30, 58, 0.2);
     }
+
     #chatInput {
       flex: 1;
       border: none;
@@ -346,6 +403,7 @@
       font-size: 0.9rem;
       min-width: 0;
     }
+
     .mic-btn {
       background: #eef2ff;
       border: none;
@@ -358,16 +416,27 @@
       transition: 0.2s;
       flex-shrink: 0;
     }
+
     .mic-btn.listening {
       background: var(--crimson-red);
       color: white;
       animation: pulseMic 0.9s infinite;
     }
+
     @keyframes pulseMic {
-      0% { box-shadow: 0 0 0 0 rgba(196,30,58,0.5);}
-      70% { box-shadow: 0 0 0 10px rgba(196,30,58,0);}
-      100% { box-shadow: 0 0 0 0 rgba(196,30,58,0);}
+      0% {
+        box-shadow: 0 0 0 0 rgba(196, 30, 58, 0.5);
+      }
+
+      70% {
+        box-shadow: 0 0 0 10px rgba(196, 30, 58, 0);
+      }
+
+      100% {
+        box-shadow: 0 0 0 0 rgba(196, 30, 58, 0);
+      }
     }
+
     .send-btn {
       background: linear-gradient(145deg, var(--crimson-red), #a51d35);
       border: none;
@@ -378,15 +447,27 @@
       color: white;
       cursor: pointer;
       transition: 0.2s;
-      box-shadow: 0 6px 12px rgba(196,30,58,0.3);
+      box-shadow: 0 6px 12px rgba(196, 30, 58, 0.3);
       flex-shrink: 0;
     }
+
     .send-btn:active {
       transform: scale(0.96);
     }
-    .chat-window::-webkit-scrollbar { width: 4px; }
-    .chat-window::-webkit-scrollbar-track { background: #eef2f5; border-radius: 10px; }
-    .chat-window::-webkit-scrollbar-thumb { background: var(--crimson-red); border-radius: 10px; }
+
+    .chat-window::-webkit-scrollbar {
+      width: 4px;
+    }
+
+    .chat-window::-webkit-scrollbar-track {
+      background: #eef2f5;
+      border-radius: 10px;
+    }
+
+    .chat-window::-webkit-scrollbar-thumb {
+      background: var(--crimson-red);
+      border-radius: 10px;
+    }
 
     /* footer & other responsiveness */
     .footer {
@@ -395,6 +476,7 @@
       padding: 2rem 0;
       text-align: center;
     }
+
     .whatsapp-float {
       position: fixed;
       bottom: 20px;
@@ -410,13 +492,15 @@
       z-index: 99;
       text-decoration: none;
       color: white;
-      box-shadow: 0 6px 14px rgba(0,0,0,0.2);
+      box-shadow: 0 6px 14px rgba(0, 0, 0, 0.2);
       transition: all 0.2s;
     }
+
     .whatsapp-float:hover {
       background-color: #1ebe5d;
       transform: scale(1.08);
     }
+
     @media (max-width: 768px) {
       .nav-links {
         position: fixed;
@@ -431,66 +515,82 @@
         z-index: 999;
         gap: 1.8rem;
         align-items: flex-start;
-        box-shadow: 4px 0 20px rgba(0,0,0,0.3);
+        box-shadow: 4px 0 20px rgba(0, 0, 0, 0.3);
       }
+
       .nav-links a {
         white-space: normal;
         font-size: 1rem;
       }
+
       .nav-links.active {
         left: 0;
       }
+
       .menu-icon {
         display: block;
       }
+
       .message {
         max-width: 92%;
         font-size: 0.85rem;
       }
-      .cursor-dot, .cursor-outline {
+
+      .cursor-dot,
+      .cursor-outline {
         display: none;
       }
+
       .chat-brand h3 {
         font-size: 1.1rem;
       }
+
       .mode-btn {
         font-size: 0.7rem;
         padding: 0.3rem 0.8rem;
       }
+
       .send-btn {
         width: 46px;
         height: 46px;
         font-size: 1.2rem;
       }
+
       .mic-btn {
         width: 40px;
         height: 40px;
       }
     }
+
     @media (max-width: 480px) {
       .chat-header {
         flex-direction: column;
         align-items: stretch;
         text-align: center;
       }
+
       .mode-switch {
         justify-content: center;
       }
+
       .input-area {
         gap: 0.5rem;
         padding: 0.8rem;
       }
+
       .suggestion-chip {
         font-size: 0.65rem;
         padding: 0.3rem 0.9rem;
       }
     }
+
     /* Footer grid responsiveness */
     footer .grid-footer {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
       gap: 2rem;
     }
+
     @media (max-width: 600px) {
       .ai-chat-section {
         padding: 6rem 0.8rem 3rem;
@@ -498,343 +598,366 @@
     }
   </style>
 </head>
+
 <body>
 
-<div class="cursor-dot"></div>
-<div class="cursor-outline"></div>
+  <div class="cursor-dot"></div>
+  <div class="cursor-outline"></div>
 
-<nav class="navbar" id="navbar">
-  <div class="nav-container">
-    <div class="logo"><h1>Paragon School</h1></div>
-    <div class="menu-icon" id="menuToggle"><i class="fas fa-bars"></i></div>
-    <div class="nav-links" id="navLinks">
-      <a href="index.html">Home</a>
-      <a href="announcement.html">Announcements</a>
-      <a href="index.html#academics">Academics</a>
-      <a href="index.html#admissions">Admissions</a>
-      <a href="antham.html">Anthem</a>
-      <a href="index.html#gallery">Gallery</a>
-      <a href="index.html#contact">Contact</a>
-      <a href="admission.html" class="btn-apply-nav">Apply Now</a>
+  <nav class="navbar" id="navbar">
+    <div class="nav-container">
+      <div class="logo">
+        <h1>Paragon School</h1>
+      </div>
+      <div class="menu-icon" id="menuToggle"><i class="fas fa-bars"></i></div>
+      <div class="nav-links" id="navLinks">
+        <a href="index.html">Home</a>
+        <a href="announcement.html">Announcements</a>
+        <a href="index.html#academics">Academics</a>
+        <a href="index.html#admissions">Admissions</a>
+        <a href="antham.html">Anthem</a>
+        <a href="index.html#gallery">Gallery</a>
+        <a href="index.html#contact">Contact</a>
+        <a href="admission.html" class="btn-apply-nav">Apply Now</a>
+      </div>
     </div>
-  </div>
-</nav>
+  </nav>
 
-<!-- AI CHATBOT SECTION - fully responsive with type & speak modes -->
-<section id="ai-assistant" class="ai-chat-section">
-  <div class="chat-container">
-    <div class="chat-header">
-      <div class="chat-brand">
-        <i class="fas fa-robot"></i>
-        <h3>Paragon AI · Educational Guide</h3>
+  <!-- AI CHATBOT SECTION - fully responsive with type & speak modes -->
+  <section id="ai-assistant" class="ai-chat-section">
+    <div class="chat-container">
+      <div class="chat-header">
+        <div class="chat-brand">
+          <i class="fas fa-robot"></i>
+          <h3>Paragon AI · Educational Guide</h3>
+        </div>
+        <div class="mode-switch">
+          <button class="mode-btn active" id="typeModeBtn">⌨️ Type to AI</button>
+          <button class="mode-btn" id="speakModeBtn">🎙️ Speak to AI</button>
+        </div>
       </div>
-      <div class="mode-switch">
-        <button class="mode-btn active" id="typeModeBtn">⌨️ Type to AI</button>
-        <button class="mode-btn" id="speakModeBtn">🎙️ Speak to AI</button>
+      <div class="chat-window" id="chatWindow">
+        <div class="message bot">✨ Hello! Welcome to <strong>Paragon AI Assistant</strong> 🌟<br>I'm your educational
+          companion for Paragon School. You can <strong>type</strong> or <strong>speak</strong> your questions. Ask me
+          about academics, admissions, curriculum, or anything school-related!</div>
+      </div>
+      <div class="suggestions">
+        <div class="suggestion-chip" data-suggestion="Tell me about Paragon School curriculum">📖 Curriculum Details
+        </div>
+        <div class="suggestion-chip" data-suggestion="What are the admission requirements?">📋 Admission Process</div>
+        <div class="suggestion-chip" data-suggestion="List the facilities at Paragon">🏫 School Facilities</div>
+        <div class="suggestion-chip" data-suggestion="How to contact Paragon School?">📞 Contact Info</div>
+      </div>
+      <div class="input-area">
+        <div class="input-wrapper">
+          <input type="text" id="chatInput" placeholder="Ask about Paragon School..." autocomplete="off">
+          <button class="mic-btn" id="micBtn" title="Voice input">🎤</button>
+        </div>
+        <button class="send-btn" id="sendBtn">➤</button>
       </div>
     </div>
-    <div class="chat-window" id="chatWindow">
-      <div class="message bot">✨ Hello! Welcome to <strong>Paragon AI Assistant</strong> 🌟<br>I'm your educational companion for Paragon School. You can <strong>type</strong> or <strong>speak</strong> your questions. Ask me about academics, admissions, curriculum, or anything school-related!</div>
-    </div>
-    <div class="suggestions">
-      <div class="suggestion-chip" data-suggestion="Tell me about Paragon School curriculum">📖 Curriculum Details</div>
-      <div class="suggestion-chip" data-suggestion="What are the admission requirements?">📋 Admission Process</div>
-      <div class="suggestion-chip" data-suggestion="List the facilities at Paragon">🏫 School Facilities</div>
-      <div class="suggestion-chip" data-suggestion="How to contact Paragon School?">📞 Contact Info</div>
-    </div>
-    <div class="input-area">
-      <div class="input-wrapper">
-        <input type="text" id="chatInput" placeholder="Ask about Paragon School..." autocomplete="off">
-        <button class="mic-btn" id="micBtn" title="Voice input">🎤</button>
-      </div>
-      <button class="send-btn" id="sendBtn">➤</button>
-    </div>
-  </div>
-</section>
+  </section>
 
-<!-- Footer (simplified but responsive) -->
-<footer style="background: #1a1a2e; padding: 50px 0 20px; border-top: 4px solid #ff6b6b;">
-  <div style="max-width: 1300px; margin: 0 auto; padding: 0 20px;">
-    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 35px; margin-bottom: 40px;">
-      <div>
-        <h2 style="font-size: 26px; font-weight: 700; color: white;"><span style="color: #ff6b6b;">PARAGON</span> <span style="color: white;">Schools</span></h2>
-        <p style="color: rgba(255,255,255,0.7); font-size: 13px; margin-top: 12px;">Excellence in Education & Innovation. Preparing students for a dynamic future.</p>
+  <!-- Footer (simplified but responsive) -->
+  <footer style="background: #1a1a2e; padding: 50px 0 20px; border-top: 4px solid #ff6b6b;">
+    <div style="max-width: 1300px; margin: 0 auto; padding: 0 20px;">
+      <div
+        style="display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 35px; margin-bottom: 40px;">
+        <div>
+          <h2 style="font-size: 26px; font-weight: 700; color: white;"><span style="color: #ff6b6b;">PARAGON</span>
+            <span style="color: white;">Schools</span></h2>
+          <p style="color: rgba(255,255,255,0.7); font-size: 13px; margin-top: 12px;">Excellence in Education &
+            Innovation. Preparing students for a dynamic future.</p>
+        </div>
+        <div>
+          <h4 style="color: white; margin-bottom: 20px; font-size: 18px;">Quick Links</h4>
+          <ul style="list-style: none;">
+            <li style="margin-bottom: 8px;"><a href="#"
+                style="color: rgba(255,255,255,0.7); text-decoration: none; font-size: 13px;">Home</a></li>
+            <li style="margin-bottom: 8px;"><a href="#"
+                style="color: rgba(255,255,255,0.7); text-decoration: none; font-size: 13px;">Admissions</a></li>
+            <li style="margin-bottom: 8px;"><a href="#"
+                style="color: rgba(255,255,255,0.7); text-decoration: none; font-size: 13px;">Academics</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4 style="color: white; margin-bottom: 20px; font-size: 18px;">Contact</h4>
+          <p style="color: rgba(255,255,255,0.7); font-size: 13px;"><i class="fas fa-map-marker-alt"
+              style="margin-right: 8px; color:#ff6b6b;"></i> 63 E1, Gulberg III, Lahore</p>
+          <p style="color: rgba(255,255,255,0.7); font-size: 13px;"><i class="fas fa-phone"
+              style="margin-right: 8px; color:#ff6b6b;"></i> +92 42 35756357</p>
+        </div>
       </div>
-      <div>
-        <h4 style="color: white; margin-bottom: 20px; font-size: 18px;">Quick Links</h4>
-        <ul style="list-style: none;">
-          <li style="margin-bottom: 8px;"><a href="#" style="color: rgba(255,255,255,0.7); text-decoration: none; font-size: 13px;">Home</a></li>
-          <li style="margin-bottom: 8px;"><a href="#" style="color: rgba(255,255,255,0.7); text-decoration: none; font-size: 13px;">Admissions</a></li>
-          <li style="margin-bottom: 8px;"><a href="#" style="color: rgba(255,255,255,0.7); text-decoration: none; font-size: 13px;">Academics</a></li>
-        </ul>
-      </div>
-      <div>
-        <h4 style="color: white; margin-bottom: 20px; font-size: 18px;">Contact</h4>
-        <p style="color: rgba(255,255,255,0.7); font-size: 13px;"><i class="fas fa-map-marker-alt" style="margin-right: 8px; color:#ff6b6b;"></i> 63 E1, Gulberg III, Lahore</p>
-        <p style="color: rgba(255,255,255,0.7); font-size: 13px;"><i class="fas fa-phone" style="margin-right: 8px; color:#ff6b6b;"></i> +92 42 35756357</p>
-      </div>
+      <div
+        style="border-top: 1px solid rgba(255,255,255,0.1); padding-top: 20px; text-align: center; color: rgba(255,255,255,0.5); font-size: 12px;">
+        © 2026 Paragon Schools. All Rights Reserved.</div>
     </div>
-    <div style="border-top: 1px solid rgba(255,255,255,0.1); padding-top: 20px; text-align: center; color: rgba(255,255,255,0.5); font-size: 12px;">© 2026 Paragon Schools. All Rights Reserved.</div>
-  </div>
-</footer>
+  </footer>
 
-<a href="https://wa.me/923189669802?text=Hello%20Paragon%20AI" class="whatsapp-float" target="_blank"><i class="fab fa-whatsapp"></i></a>
+  <a href="https://wa.me/923189669802?text=Hello%20Paragon%20AI" class="whatsapp-float" target="_blank"><i
+      class="fab fa-whatsapp"></i></a>
 
-<script>
-  (function() {
-    // ---------- PARAGON AI CHATBOT WITH FULL RESPONSIVENESS & SPEECH ----------
-    const API_KEY = "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";
-    
-    const SYSTEM_PROMPT = `You are "Paragon AI Assistant", a warm, professional female-voiced educational chatbot for Paragon School (Playgroup to Grade 10). 
+  <script>
+    (function () {
+      // ---------- PARAGON AI CHATBOT WITH FULL RESPONSIVENESS & SPEECH ----------
+      const API_KEY = "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";
+
+      const SYSTEM_PROMPT = `You are "Paragon AI Assistant", a warm, professional female-voiced educational chatbot for Paragon School (Playgroup to Grade 10). 
 You represent Paragon School located at 63 E1, Gulberg III, Lahore. Contact: +92 42 35756357, info@paragonschool.edu.pk.
 Key facts: Smart classrooms, STEM focus, sports complex, Cambridge-aligned curriculum, admissions open for 2025-26.
 Keep answers concise (max 3 sentences), encouraging, and helpful. Use a friendly tone. For any doubts about admissions or events, guide them to contact school. Never invent false details. If question is off-topic, politely redirect to educational topics.`;
 
-    const chatWindow = document.getElementById('chatWindow');
-    const inputField = document.getElementById('chatInput');
-    const sendBtn = document.getElementById('sendBtn');
-    const micBtn = document.getElementById('micBtn');
-    const typeModeBtn = document.getElementById('typeModeBtn');
-    const speakModeBtn = document.getElementById('speakModeBtn');
+      const chatWindow = document.getElementById('chatWindow');
+      const inputField = document.getElementById('chatInput');
+      const sendBtn = document.getElementById('sendBtn');
+      const micBtn = document.getElementById('micBtn');
+      const typeModeBtn = document.getElementById('typeModeBtn');
+      const speakModeBtn = document.getElementById('speakModeBtn');
 
-    let currentMode = "type";
-    let currentTypingDiv = null;
-    let recognition = null;
-    let isListening = false;
+      let currentMode = "type";
+      let currentTypingDiv = null;
+      let recognition = null;
+      let isListening = false;
 
-    // Speech Recognition init
-    try {
-      const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
-      if (SpeechRecognition) {
-        recognition = new SpeechRecognition();
-        recognition.continuous = false;
-        recognition.interimResults = false;
-        recognition.lang = 'en-US';
-        recognition.onstart = () => {
-          isListening = true;
-          micBtn.classList.add('listening');
-          addSystemHint("🎙️ Listening... speak your question", 'bot', true);
-        };
-        recognition.onresult = (event) => {
-          const transcript = event.results[0][0].transcript;
-          inputField.value = transcript;
-          if (currentMode === "speak") {
-            sendMessage(transcript);
+      // Speech Recognition init
+      try {
+        const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+        if (SpeechRecognition) {
+          recognition = new SpeechRecognition();
+          recognition.continuous = false;
+          recognition.interimResults = false;
+          recognition.lang = 'en-US';
+          recognition.onstart = () => {
+            isListening = true;
+            micBtn.classList.add('listening');
+            addSystemHint("🎙️ Listening... speak your question", 'bot', true);
+          };
+          recognition.onresult = (event) => {
+            const transcript = event.results[0][0].transcript;
+            inputField.value = transcript;
+            if (currentMode === "speak") {
+              sendMessage(transcript);
+            } else {
+              addSystemHint(`🎤 Recognized: "${transcript}" — tap send to ask.`, 'bot', true);
+            }
+          };
+          recognition.onend = () => {
+            isListening = false;
+            micBtn.classList.remove('listening');
+          };
+          recognition.onerror = () => {
+            isListening = false;
+            micBtn.classList.remove('listening');
+            addSystemHint("⚠️ Voice error. Try typing or check mic permissions.", 'bot', true);
+          };
+        } else {
+          console.warn("Speech not supported");
+        }
+      } catch (e) { console.warn(e); }
+
+      function addSystemHint(text, sender, isTemp = false) {
+        const msg = document.createElement('div');
+        msg.className = `message ${sender}`;
+        msg.style.fontSize = "0.75rem";
+        msg.style.opacity = "0.85";
+        msg.textContent = text;
+        chatWindow.appendChild(msg);
+        msg.scrollIntoView({ behavior: 'smooth' });
+        if (isTemp) setTimeout(() => { if (msg.parentNode) msg.remove(); }, 3800);
+      }
+
+      function addMessage(text, sender) {
+        const msgDiv = document.createElement('div');
+        msgDiv.className = `message ${sender}`;
+        msgDiv.textContent = text;
+        chatWindow.appendChild(msgDiv);
+        msgDiv.scrollIntoView({ behavior: 'smooth' });
+        return msgDiv;
+      }
+
+      function showTyping() {
+        if (currentTypingDiv) return;
+        const typingDiv = document.createElement('div');
+        typingDiv.className = 'message bot';
+        typingDiv.style.padding = '0.5rem 1rem';
+        typingDiv.innerHTML = '<div class="typing-indicator"><span class="typing-dot"></span><span class="typing-dot"></span><span class="typing-dot"></span></div>';
+        chatWindow.appendChild(typingDiv);
+        typingDiv.scrollIntoView({ behavior: 'smooth' });
+        currentTypingDiv = typingDiv;
+      }
+
+      function hideTyping() {
+        if (currentTypingDiv) {
+          currentTypingDiv.remove();
+          currentTypingDiv = null;
+        }
+      }
+
+      function speakResponse(text) {
+        if (currentMode !== "speak") return;
+        if (!window.speechSynthesis) return;
+        speechSynthesis.cancel();
+        const utterance = new SpeechSynthesisUtterance(text);
+        utterance.rate = 0.92;
+        utterance.pitch = 1.2;
+        utterance.volume = 1;
+        utterance.lang = 'en-US';
+        let voices = speechSynthesis.getVoices();
+        if (voices.length) {
+          let femaleVoice = voices.find(v => v.name.includes("Google UK English Female") || v.name.includes("Samantha") || v.name.includes("Zira") || (v.name.toLowerCase().includes("female")));
+          if (femaleVoice) utterance.voice = femaleVoice;
+        } else {
+          speechSynthesis.onvoiceschanged = () => {
+            let updatedVoices = speechSynthesis.getVoices();
+            let female = updatedVoices.find(v => v.name.includes("Google UK English Female") || v.name.includes("Samantha"));
+            if (female) utterance.voice = female;
+            speechSynthesis.speak(utterance);
+          };
+          return;
+        }
+        speechSynthesis.speak(utterance);
+      }
+
+      async function sendMessage(userText = null) {
+        let textToSend = userText;
+        if (!textToSend) {
+          textToSend = inputField.value.trim();
+        }
+        if (!textToSend) return;
+        addMessage(textToSend, 'user');
+        if (!userText) inputField.value = '';
+        showTyping();
+        try {
+          const response = await fetch('https://openrouter.ai/api/v1/chat/completions', {
+            method: 'POST',
+            headers: {
+              'Authorization': 'Bearer ' + API_KEY,
+              'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+              model: 'nvidia/nemotron-nano-9b-v2:free',
+              messages: [
+                { role: 'system', content: SYSTEM_PROMPT },
+                { role: 'user', content: textToSend }
+              ],
+              max_tokens: 800,
+              temperature: 0.7
+            })
+          });
+          const data = await response.json();
+          hideTyping();
+          let reply = data?.choices?.[0]?.message?.content;
+          if (!reply) {
+            console.error("API Error:", data);
+            reply = "The AI is currently unavailable or rate-limited. For details, please reach out directly to Paragon School at +92 42 35756357.";
           } else {
-            addSystemHint(`🎤 Recognized: "${transcript}" — tap send to ask.`, 'bot', true);
+            reply = reply.replace(/<think>[\s\S]*?<\/think>/g, '').trim();
           }
-        };
-        recognition.onend = () => {
-          isListening = false;
-          micBtn.classList.remove('listening');
-        };
-        recognition.onerror = () => {
-          isListening = false;
-          micBtn.classList.remove('listening');
-          addSystemHint("⚠️ Voice error. Try typing or check mic permissions.", 'bot', true);
-        };
-      } else {
-        console.warn("Speech not supported");
+          addMessage(reply, 'bot');
+          if (currentMode === "speak") speakResponse(reply);
+        } catch (err) {
+          hideTyping();
+          addMessage("⚠️ Network issue. Please check your connection and try again.", 'bot');
+          if (currentMode === "speak") speakResponse("Network error. Please try again later.");
+        }
       }
-    } catch(e) { console.warn(e); }
 
-    function addSystemHint(text, sender, isTemp = false) {
-      const msg = document.createElement('div');
-      msg.className = `message ${sender}`;
-      msg.style.fontSize = "0.75rem";
-      msg.style.opacity = "0.85";
-      msg.textContent = text;
-      chatWindow.appendChild(msg);
-      msg.scrollIntoView({ behavior: 'smooth' });
-      if (isTemp) setTimeout(() => { if(msg.parentNode) msg.remove(); }, 3800);
-    }
-
-    function addMessage(text, sender) {
-      const msgDiv = document.createElement('div');
-      msgDiv.className = `message ${sender}`;
-      msgDiv.textContent = text;
-      chatWindow.appendChild(msgDiv);
-      msgDiv.scrollIntoView({ behavior: 'smooth' });
-      return msgDiv;
-    }
-
-    function showTyping() {
-      if (currentTypingDiv) return;
-      const typingDiv = document.createElement('div');
-      typingDiv.className = 'message bot';
-      typingDiv.style.padding = '0.5rem 1rem';
-      typingDiv.innerHTML = '<div class="typing-indicator"><span class="typing-dot"></span><span class="typing-dot"></span><span class="typing-dot"></span></div>';
-      chatWindow.appendChild(typingDiv);
-      typingDiv.scrollIntoView({ behavior: 'smooth' });
-      currentTypingDiv = typingDiv;
-    }
-
-    function hideTyping() {
-      if (currentTypingDiv) {
-        currentTypingDiv.remove();
-        currentTypingDiv = null;
+      function startVoiceInput() {
+        if (!recognition) {
+          addMessage("🎤 Voice input not supported in this browser. Use typing mode.", 'bot');
+          return;
+        }
+        if (currentMode === "type") {
+          addSystemHint("💡 You're in TYPE mode. Speak & then press Send, or switch to SPEAK mode for auto-answers.", 'bot', true);
+        }
+        if (isListening) {
+          recognition.stop();
+          return;
+        }
+        try {
+          recognition.start();
+        } catch (e) { addSystemHint("Mic busy, tap again.", 'bot', true); }
       }
-    }
 
-    function speakResponse(text) {
-      if (currentMode !== "speak") return;
-      if (!window.speechSynthesis) return;
-      speechSynthesis.cancel();
-      const utterance = new SpeechSynthesisUtterance(text);
-      utterance.rate = 0.92;
-      utterance.pitch = 1.2;
-      utterance.volume = 1;
-      utterance.lang = 'en-US';
-      let voices = speechSynthesis.getVoices();
-      if (voices.length) {
-        let femaleVoice = voices.find(v => v.name.includes("Google UK English Female") || v.name.includes("Samantha") || v.name.includes("Zira") || (v.name.toLowerCase().includes("female")));
-        if (femaleVoice) utterance.voice = femaleVoice;
-      } else {
-        speechSynthesis.onvoiceschanged = () => {
-          let updatedVoices = speechSynthesis.getVoices();
-          let female = updatedVoices.find(v => v.name.includes("Google UK English Female") || v.name.includes("Samantha"));
-          if (female) utterance.voice = female;
-          speechSynthesis.speak(utterance);
-        };
-        return;
+      function setMode(mode) {
+        currentMode = mode;
+        if (mode === "speak") {
+          typeModeBtn.classList.remove('active');
+          speakModeBtn.classList.add('active');
+          addSystemHint("🔊 SPEAK MODE: Voice questions auto-answered with speech & text.", 'bot', true);
+          if (window.speechSynthesis) {
+            const utterance = new SpeechSynthesisUtterance("Speak mode activated. Ask me about Paragon School.");
+            utterance.rate = 0.9;
+            utterance.pitch = 1.2;
+            speechSynthesis.speak(utterance);
+          }
+        } else {
+          speakModeBtn.classList.remove('active');
+          typeModeBtn.classList.add('active');
+          addSystemHint("⌨️ TYPE MODE: Type your message and press send. Voice input works for dictation only.", 'bot', true);
+          if (window.speechSynthesis) speechSynthesis.cancel();
+        }
       }
-      speechSynthesis.speak(utterance);
-    }
 
-    async function sendMessage(userText = null) {
-      let textToSend = userText;
-      if (!textToSend) {
-        textToSend = inputField.value.trim();
-      }
-      if (!textToSend) return;
-      addMessage(textToSend, 'user');
-      if (!userText) inputField.value = '';
-      showTyping();
-      try {
-        const response = await fetch('https://openrouter.ai/api/v1/chat/completions', {
-          method: 'POST',
-          headers: {
-            'Authorization': 'Bearer ' + API_KEY,
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify({
-            model: 'openai/gpt-3.5-turbo',
-            messages: [
-              { role: 'system', content: SYSTEM_PROMPT },
-              { role: 'user', content: textToSend }
-            ],
-            max_tokens: 300,
-            temperature: 0.7
-          })
+      sendBtn.addEventListener('click', () => sendMessage());
+      micBtn.addEventListener('click', startVoiceInput);
+      inputField.addEventListener('keydown', (e) => { if (e.key === 'Enter') { e.preventDefault(); sendMessage(); } });
+      typeModeBtn.addEventListener('click', () => setMode('type'));
+      speakModeBtn.addEventListener('click', () => setMode('speak'));
+
+      document.querySelectorAll('.suggestion-chip').forEach(chip => {
+        chip.addEventListener('click', () => {
+          const suggestion = chip.getAttribute('data-suggestion');
+          if (suggestion) {
+            inputField.value = suggestion;
+            sendMessage(suggestion);
+          }
         });
-        const data = await response.json();
-        hideTyping();
-        let reply = data?.choices?.[0]?.message?.content || "Thank you for your interest! For specific details, please reach out to Paragon School directly at +92 42 35756357.";
-        if (reply.length > 500) reply = reply.substring(0, 490) + "...";
-        addMessage(reply, 'bot');
-        if (currentMode === "speak") speakResponse(reply);
-      } catch (err) {
-        hideTyping();
-        addMessage("⚠️ Network issue. Please check your connection and try again.", 'bot');
-        if (currentMode === "speak") speakResponse("Network error. Please try again later.");
-      }
-    }
-
-    function startVoiceInput() {
-      if (!recognition) {
-        addMessage("🎤 Voice input not supported in this browser. Use typing mode.", 'bot');
-        return;
-      }
-      if (currentMode === "type") {
-        addSystemHint("💡 You're in TYPE mode. Speak & then press Send, or switch to SPEAK mode for auto-answers.", 'bot', true);
-      }
-      if (isListening) {
-        recognition.stop();
-        return;
-      }
-      try {
-        recognition.start();
-      } catch(e) { addSystemHint("Mic busy, tap again.", 'bot', true); }
-    }
-
-    function setMode(mode) {
-      currentMode = mode;
-      if (mode === "speak") {
-        typeModeBtn.classList.remove('active');
-        speakModeBtn.classList.add('active');
-        addSystemHint("🔊 SPEAK MODE: Voice questions auto-answered with speech & text.", 'bot', true);
-        if (window.speechSynthesis) {
-          const utterance = new SpeechSynthesisUtterance("Speak mode activated. Ask me about Paragon School.");
-          utterance.rate = 0.9;
-          utterance.pitch = 1.2;
-          speechSynthesis.speak(utterance);
-        }
-      } else {
-        speakModeBtn.classList.remove('active');
-        typeModeBtn.classList.add('active');
-        addSystemHint("⌨️ TYPE MODE: Type your message and press send. Voice input works for dictation only.", 'bot', true);
-        if (window.speechSynthesis) speechSynthesis.cancel();
-      }
-    }
-
-    sendBtn.addEventListener('click', () => sendMessage());
-    micBtn.addEventListener('click', startVoiceInput);
-    inputField.addEventListener('keydown', (e) => { if (e.key === 'Enter') { e.preventDefault(); sendMessage(); } });
-    typeModeBtn.addEventListener('click', () => setMode('type'));
-    speakModeBtn.addEventListener('click', () => setMode('speak'));
-
-    document.querySelectorAll('.suggestion-chip').forEach(chip => {
-      chip.addEventListener('click', () => {
-        const suggestion = chip.getAttribute('data-suggestion');
-        if (suggestion) {
-          inputField.value = suggestion;
-          sendMessage(suggestion);
-        }
       });
-    });
 
-    window.addEventListener('load', () => {
-      if (window.speechSynthesis) speechSynthesis.getVoices();
-      addSystemHint("✨ Paragon AI ready! Type or speak your educational queries.", 'bot', true);
-    });
-
-    // Navbar responsive & scroll
-    const navbar = document.getElementById('navbar');
-    window.addEventListener('scroll', () => { 
-      if(window.scrollY > 50) navbar.classList.add('scrolled'); 
-      else navbar.classList.remove('scrolled'); 
-    });
-    const menuToggle = document.getElementById('menuToggle');
-    const navLinks = document.getElementById('navLinks');
-    if(menuToggle) {
-      menuToggle.onclick = () => navLinks.classList.toggle('active');
-    }
-    document.querySelectorAll('.nav-links a').forEach(l => l.addEventListener('click', () => navLinks.classList.remove('active')));
-
-    // Custom cursor only for mouse devices (fine pointer)
-    const cursorDot = document.querySelector('.cursor-dot');
-    const cursorOutline = document.querySelector('.cursor-outline');
-    if(cursorDot && cursorOutline && window.matchMedia('(pointer: fine)').matches) {
-      window.addEventListener('mousemove', (e) => {
-        cursorDot.style.transform = `translate(${e.clientX - 4}px, ${e.clientY - 4}px)`;
-        cursorOutline.style.transform = `translate(${e.clientX - 20}px, ${e.clientY - 20}px)`;
+      window.addEventListener('load', () => {
+        if (window.speechSynthesis) speechSynthesis.getVoices();
+        addSystemHint("✨ Paragon AI ready! Type or speak your educational queries.", 'bot', true);
       });
-    }
-  })();
+
+      // Navbar responsive & scroll
+      const navbar = document.getElementById('navbar');
+      window.addEventListener('scroll', () => {
+        if (window.scrollY > 50) navbar.classList.add('scrolled');
+        else navbar.classList.remove('scrolled');
+      });
+      const menuToggle = document.getElementById('menuToggle');
+      const navLinks = document.getElementById('navLinks');
+      if (menuToggle) {
+        menuToggle.onclick = () => navLinks.classList.toggle('active');
+      }
+      document.querySelectorAll('.nav-links a').forEach(l => l.addEventListener('click', () => navLinks.classList.remove('active')));
+
+      // Custom cursor only for mouse devices (fine pointer)
+      const cursorDot = document.querySelector('.cursor-dot');
+      const cursorOutline = document.querySelector('.cursor-outline');
+      if (cursorDot && cursorOutline && window.matchMedia('(pointer: fine)').matches) {
+        window.addEventListener('mousemove', (e) => {
+          cursorDot.style.transform = `translate(${e.clientX - 4}px, ${e.clientY - 4}px)`;
+          cursorOutline.style.transform = `translate(${e.clientX - 20}px, ${e.clientY - 20}px)`;
+        });
+      }
+    })();
 
 
     // stop to see code page sourse
-  // Right Click Disable
-document.addEventListener('contextmenu', e => e.preventDefault());
+    // Right Click Disable
+    document.addEventListener('contextmenu', e => e.preventDefault());
 
-//chatbot security
+    //chatbot security
 
-// if (document.referrer && document.referrer.includes("your-site.web.app")) {
-//     // chatbot load karo
-// } else {
-//     document.body.innerHTML = "<h1> We Have Blocked you. Access Denied</h1>";
-// }
+    // if (document.referrer && document.referrer.includes("your-site.web.app")) {
+    //     // chatbot load karo
+    // } else {
+    //     document.body.innerHTML = "<h1> We Have Blocked you. Access Denied</h1>";
+    // }
 
-</script>
+  </script>
 </body>
+
 </html>
