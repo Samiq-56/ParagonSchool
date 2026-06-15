@@ -259,6 +259,26 @@
       max-width: 80%;
       text-align: left;
     }
+    
+    .footer-socials { display: flex; gap: 10px; }
+    .footer-social-btn {
+      width: 36px; height: 36px;
+      border-radius: 8px;
+      background: rgba(255,255,255,0.07);
+      border: 1px solid rgba(255,255,255,0.1);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: rgba(255,255,255,0.6);
+      font-size: 0.85rem;
+      transition: var(--transition-fast);
+    }
+    .footer-social-btn:hover {
+      background: var(--crimson);
+      color: white;
+      border-color: var(--crimson);
+      transform: translateY(-3px);
+    }
 
     /* follow-us + footer exact same as original */
     .follow-us {
@@ -514,11 +534,12 @@
         </div>
         <p style="color: rgba(255,255,255,0.7); line-height: 1.7; margin-bottom: 25px; font-size: 14px;">The purpose of Paragon Schools is to prepare students with promise to enhance their intellectual, physical, social, emotional, spiritual, and artistic growth.</p>
         <div style="display: flex; gap: 12px;">
-          <a href="#" style="display: inline-block; width: 36px; height: 36px; background: rgba(255,255,255,0.1); border-radius: 5px; text-align: center; line-height: 36px; color: white; transition: all 0.3s ease; text-decoration: none;"><i class="fab fa-facebook-f" style="font-size: 14px;"></i></a>
-          <a href="#" style="display: inline-block; width: 36px; height: 36px; background: rgba(255,255,255,0.1); border-radius: 5px; text-align: center; line-height: 36px; color: white; transition: all 0.3s ease; text-decoration: none;"><i class="fab fa-twitter" style="font-size: 14px;"></i></a>
-          <a href="#" style="display: inline-block; width: 36px; height: 36px; background: rgba(255,255,255,0.1); border-radius: 5px; text-align: center; line-height: 36px; color: white; transition: all 0.3s ease; text-decoration: none;"><i class="fab fa-instagram" style="font-size: 14px;"></i></a>
-          <a href="#" style="display: inline-block; width: 36px; height: 36px; background: rgba(255,255,255,0.1); border-radius: 5px; text-align: center; line-height: 36px; color: white; transition: all 0.3s ease; text-decoration: none;"><i class="fab fa-youtube" style="font-size: 14px;"></i></a>
-          <a href="#" style="display: inline-block; width: 36px; height: 36px; background: rgba(255,255,255,0.1); border-radius: 5px; text-align: center; line-height: 36px; color: white; transition: all 0.3s ease; text-decoration: none;"><i class="fab fa-linkedin-in" style="font-size: 14px;"></i></a>
+        <div class="footer-socials">
+          <a href="https://www.facebook.com/profile.php?id=61590998332841" class="footer-social-btn"><i class="fab fa-facebook-f"></i></a>
+          <a href="https://www.instagram.com/paragonschool.pk/" class="footer-social-btn"><i class="fab fa-instagram"></i></a>
+          <a href="#" class="footer-social-btn"><i class="fab fa-youtube"></i></a>
+          <a href="#" class="footer-social-btn"><i class="fab fa-linkedin-in"></i></a>
+        </div>
         </div>
       </div>
       <!-- Quick Links -->
@@ -560,7 +581,7 @@
         <ul style="list-style: none; padding: 0;">
           <li style="margin-bottom: 18px; display: flex; align-items: flex-start; gap: 12px;">
             <i class="fas fa-map-marker-alt" style="color: #ff6b6b; font-size: 18px; margin-top: 3px;"></i>
-            <span style="color: rgba(255,255,255,0.7); font-size: 14px; line-height: 1.5;">63 E1, Gulberg III, Lahore, Pakistan</span>
+            <span style="color: rgba(255,255,255,0.7); font-size: 14px; line-height: 1.5;">681 B People's Colony, Faisalabad, Punjab, Pakistan </span>
           </li>
           <li style="margin-bottom: 18px; display: flex; align-items: center; gap: 12px;">
             <i class="fas fa-phone-alt" style="color: #ff6b6b; font-size: 18px;"></i>
@@ -572,7 +593,7 @@
           </li>
           <li style="margin-bottom: 18px; display: flex; align-items: center; gap: 12px;">
             <i class="fas fa-envelope" style="color: #ff6b6b; font-size: 18px;"></i>
-            <a href="mailto:info@paragonschools.edu.pk" style="color: rgba(255,255,255,0.7); text-decoration: none; font-size: 14px;">info@paragonschools.edu.pk</a>
+            <a href="mailto:info@paragonschools.edu.pk" style="color: rgba(255,255,255,0.7); text-decoration: none; font-size: 14px;">info@paragonschool.pk</a>
           </li>
         </ul>
       </div>
