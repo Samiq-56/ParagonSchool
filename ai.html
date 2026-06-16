@@ -665,7 +665,8 @@
         style="display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 35px; margin-bottom: 40px;">
         <div>
           <h2 style="font-size: 26px; font-weight: 700; color: white;"><span style="color: #ff6b6b;">PARAGON</span>
-            <span style="color: white;">Schools</span></h2>
+            <span style="color: white;">Schools</span>
+          </h2>
           <p style="color: rgba(255,255,255,0.7); font-size: 13px; margin-top: 12px;">Excellence in Education &
             Innovation. Preparing students for a dynamic future.</p>
         </div>
@@ -687,7 +688,7 @@
           <p style="color: rgba(255,255,255,0.7); font-size: 13px;"><i class="fas fa-phone"
               style="margin-right: 8px; color:#ff6b6b;"></i> +92 42 35756357</p>
 
-              <p style="color: rgba(255,255,255,0.7); font-size: 13px;"><i class="fas fa-envelope"
+          <p style="color: rgba(255,255,255,0.7); font-size: 13px;"><i class="fas fa-envelope"
               style="margin-right: 8px; color:#ff6b6b;"></i> info@paragonschool.pk</p>
         </div>
       </div>
@@ -703,7 +704,7 @@
   <script>
     (function () {
       // ---------- PARAGON AI CHATBOT WITH FULL RESPONSIVENESS & SPEECH ----------
-      const API_KEY = "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";
+      // const API_KEY = "";
 
       const SYSTEM_PROMPT = `You are "Paragon AI", the official intelligent assistant of Paragon Public High School — a premier educational institution located at 681 B People's Colony, Faisalabad, Punjab, Pakistan.
 
@@ -870,22 +871,24 @@ You: "What a wonderful curiosity! While I'm here to assist with Paragon School a
         if (!userText) inputField.value = '';
         showTyping();
         try {
-          const response = await fetch('https://openrouter.ai/api/v1/chat/completions', {
-            method: 'POST',
-            headers: {
-              'Authorization': 'Bearer ' + API_KEY,
-              'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({
-              model: 'nvidia/nemotron-nano-9b-v2:free',
-              messages: [
-                { role: 'system', content: SYSTEM_PROMPT },
-                { role: 'user', content: textToSend }
-              ],
-              max_tokens: 800,
-              temperature: 0.7
-            })
-          });
+    
+ const APPS_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbynZ500RfT1JtYrwl7C7u-rYZBjqN1I3GWjy4jSL2B4CaVWnVpLPWBUtkzwn94KXTzk/exec";
+
+  const response = await fetch(APPS_SCRIPT_URL, {
+  method: 'POST',
+  headers: {
+    'Content-Type': 'text/plain', // ← 'application/json' ki jagah yeh daalo
+  },
+  body: JSON.stringify({
+    model: 'nvidia/nemotron-nano-9b-v2:free',
+    messages: [
+      { role: 'system', content: SYSTEM_PROMPT },
+      { role: 'user', content: textToSend }
+    ],
+    max_tokens: 800,
+    temperature: 0.7
+  })
+});
           const data = await response.json();
           hideTyping();
           let reply = data?.choices?.[0]?.message?.content;
