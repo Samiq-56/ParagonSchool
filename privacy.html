@@ -1,0 +1,942 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Privacy Policy – Paragon Public High School</title>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700;800&family=Crimson+Pro:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg: #0b0c10;
+            --surface: rgba(255,255,255,0.03);
+            --border: rgba(255,255,255,0.07);
+            --gold: #c9a84c;
+            --gold-dim: rgba(201,168,76,0.15);
+            --gold-glow: rgba(201,168,76,0.3);
+            --white: #f0efe8;
+            --muted: #8a8a9a;
+            --danger: #e05a5a;
+            --safe: #4caf76;
+        }
+
+        *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'Outfit', sans-serif;
+            background: var(--bg);
+            color: var(--white);
+            line-height: 1.7;
+            overflow-x: hidden;
+        }
+
+        /* ── Ambient ── */
+        body::before {
+            content: '';
+            position: fixed;
+            inset: 0;
+            background:
+                radial-gradient(ellipse 70% 50% at 15% 10%, rgba(201,168,76,0.06) 0%, transparent 60%),
+                radial-gradient(ellipse 50% 60% at 90% 90%, rgba(60,80,200,0.05) 0%, transparent 60%);
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        /* ── Layout ── */
+        .page-wrap {
+            position: relative;
+            z-index: 1;
+            max-width: 860px;
+            margin: 0 auto;
+            padding: 4rem 2rem 6rem;
+        }
+
+        /* ── Sticky Nav Bar ── */
+        .top-bar {
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            background: rgba(11,12,16,0.85);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid var(--border);
+            padding: 0.9rem 2rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .top-bar .school-name {
+            font-size: 0.85rem;
+            font-weight: 600;
+            letter-spacing: 0.08em;
+            color: var(--gold);
+            text-transform: uppercase;
+        }
+
+        .top-bar a {
+            font-size: 0.8rem;
+            color: var(--muted);
+            text-decoration: none;
+            border: 1px solid var(--border);
+            padding: 0.35rem 1rem;
+            border-radius: 20px;
+            transition: all 0.25s;
+        }
+        .top-bar a:hover { color: var(--white); border-color: var(--gold); }
+
+        /* ── Header ── */
+        .hero {
+            text-align: center;
+            padding: 3.5rem 0 3rem;
+            border-bottom: 1px solid var(--border);
+            margin-bottom: 3.5rem;
+        }
+
+        .pill {
+            display: inline-block;
+            padding: 0.4rem 1.2rem;
+            background: var(--gold-dim);
+            border: 1px solid var(--gold-glow);
+            border-radius: 50px;
+            font-size: 0.72rem;
+            font-weight: 700;
+            letter-spacing: 0.18em;
+            text-transform: uppercase;
+            color: var(--gold);
+            margin-bottom: 1.5rem;
+        }
+
+        h1 {
+            font-family: 'Crimson Pro', serif;
+            font-size: clamp(2.4rem, 5vw, 3.8rem);
+            font-weight: 600;
+            line-height: 1.1;
+            margin-bottom: 1rem;
+            background: linear-gradient(135deg, #ffffff 0%, var(--gold) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .hero-sub {
+            color: var(--muted);
+            font-size: 0.95rem;
+            max-width: 520px;
+            margin: 0 auto 1.5rem;
+        }
+
+        .meta-row {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .meta-item {
+            font-size: 0.8rem;
+            color: var(--muted);
+        }
+
+        .meta-item span {
+            color: var(--gold);
+            font-weight: 600;
+        }
+
+        /* ── Table of Contents ── */
+        .toc {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 1.8rem 2rem;
+            margin-bottom: 3rem;
+        }
+
+        .toc-title {
+            font-size: 0.75rem;
+            font-weight: 700;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            color: var(--gold);
+            margin-bottom: 1rem;
+        }
+
+        .toc ol {
+            list-style: none;
+            columns: 2;
+            gap: 1rem;
+        }
+
+        .toc ol li {
+            margin-bottom: 0.5rem;
+            font-size: 0.88rem;
+            break-inside: avoid;
+        }
+
+        .toc ol li a {
+            color: var(--muted);
+            text-decoration: none;
+            transition: color 0.2s;
+        }
+
+        .toc ol li a:hover { color: var(--gold); }
+
+        @media (max-width: 580px) { .toc ol { columns: 1; } }
+
+        /* ── Sections ── */
+        .section {
+            margin-bottom: 3rem;
+            scroll-margin-top: 80px;
+        }
+
+        .section-header {
+            display: flex;
+            align-items: flex-start;
+            gap: 1.2rem;
+            margin-bottom: 1.2rem;
+        }
+
+        .section-num {
+            flex-shrink: 0;
+            width: 36px;
+            height: 36px;
+            background: var(--gold-dim);
+            border: 1px solid var(--gold-glow);
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.78rem;
+            font-weight: 700;
+            color: var(--gold);
+            margin-top: 3px;
+        }
+
+        h2 {
+            font-size: 1.45rem;
+            font-weight: 700;
+            color: var(--white);
+            line-height: 1.2;
+        }
+
+        .section-body p {
+            color: #9a9aaa;
+            font-size: 1rem;
+            margin-bottom: 0.9rem;
+        }
+
+        .section-body ul, .section-body ol {
+            padding-left: 1.4rem;
+            margin-bottom: 1rem;
+        }
+
+        .section-body ul li, .section-body ol li {
+            color: #9a9aaa;
+            font-size: 1rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .section-body ul li::marker { color: var(--gold); }
+        .section-body ol li::marker { color: var(--gold); font-weight: 700; }
+
+        a { color: var(--gold); text-decoration: none; }
+        a:hover { text-decoration: underline; }
+
+        /* ── Law Callout Box ── */
+        .law-box {
+            background: rgba(201,168,76,0.07);
+            border-left: 3px solid var(--gold);
+            border-radius: 0 12px 12px 0;
+            padding: 1rem 1.3rem;
+            margin: 1.2rem 0;
+        }
+
+        .law-box .law-label {
+            font-size: 0.72rem;
+            font-weight: 700;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            color: var(--gold);
+            margin-bottom: 0.4rem;
+        }
+
+        .law-box p {
+            font-size: 0.92rem !important;
+            color: #b0a888 !important;
+            margin: 0 !important;
+        }
+
+        /* ── Important Warning Box ── */
+        .warn-box {
+            background: rgba(224,90,90,0.07);
+            border: 1px solid rgba(224,90,90,0.25);
+            border-radius: 12px;
+            padding: 1rem 1.3rem;
+            margin: 1.2rem 0;
+            display: flex;
+            gap: 0.8rem;
+            align-items: flex-start;
+        }
+
+        .warn-icon { font-size: 1.2rem; flex-shrink: 0; margin-top: 1px; }
+
+        .warn-box p {
+            font-size: 0.92rem !important;
+            color: #c88a8a !important;
+            margin: 0 !important;
+        }
+
+        /* ── Safe Box ── */
+        .safe-box {
+            background: rgba(76,175,118,0.07);
+            border: 1px solid rgba(76,175,118,0.2);
+            border-radius: 12px;
+            padding: 1rem 1.3rem;
+            margin: 1.2rem 0;
+        }
+
+        .safe-box p {
+            font-size: 0.92rem !important;
+            color: #88c8a4 !important;
+            margin: 0 !important;
+        }
+
+        /* ── Data Table ── */
+        .data-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1.2rem 0;
+            font-size: 0.9rem;
+        }
+
+        .data-table th {
+            background: rgba(201,168,76,0.1);
+            color: var(--gold);
+            font-weight: 600;
+            padding: 0.7rem 1rem;
+            text-align: left;
+            font-size: 0.8rem;
+            letter-spacing: 0.05em;
+            text-transform: uppercase;
+        }
+
+        .data-table td {
+            padding: 0.65rem 1rem;
+            color: #9a9aaa;
+            border-bottom: 1px solid var(--border);
+            vertical-align: top;
+        }
+
+        .data-table tr:last-child td { border-bottom: none; }
+
+        /* ── Divider ── */
+        .divider {
+            height: 1px;
+            background: var(--border);
+            margin: 3rem 0;
+        }
+
+        /* ── Contact Card ── */
+        .contact-card {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 2rem;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.5rem;
+        }
+
+        @media (max-width: 580px) { .contact-card { grid-template-columns: 1fr; } }
+
+        .contact-item .label {
+            font-size: 0.72rem;
+            font-weight: 700;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            color: var(--gold);
+            margin-bottom: 0.3rem;
+        }
+
+        .contact-item .value {
+            color: var(--white);
+            font-size: 0.95rem;
+        }
+
+        /* ── Footer ── */
+        .footer {
+            margin-top: 4rem;
+            padding-top: 2rem;
+            border-top: 1px solid var(--border);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .footer p { color: var(--muted); font-size: 0.85rem; }
+
+        .btn-home {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            padding: 0.55rem 1.4rem;
+            border: 1px solid var(--border);
+            border-radius: 30px;
+            color: var(--muted);
+            font-size: 0.85rem;
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.25s;
+        }
+
+        .btn-home:hover {
+            border-color: var(--gold);
+            color: var(--gold);
+            text-decoration: none;
+        }
+    </style>
+</head>
+<body>
+
+<!-- Sticky Top Bar -->
+<div class="top-bar">
+    <span class="school-name">Paragon Public High School</span>
+    <a href="index.html">← Back to Home</a>
+</div>
+
+<div class="page-wrap">
+
+    <!-- Hero Header -->
+    <div class="hero">
+        <div class="pill">Legal &amp; Compliance · Pakistan Law</div>
+        <h1>Privacy Policy</h1>
+        <p class="hero-sub">This policy explains how Paragon Public High School collects, uses, and protects your personal information in accordance with applicable Pakistani laws.</p>
+        <div class="meta-row">
+            <div class="meta-item">Effective: <span>June 2026</span></div>
+            <div class="meta-item">Last Reviewed: <span>June 2026</span></div>
+            <div class="meta-item">Jurisdiction: <span>Pakistan</span></div>
+        </div>
+    </div>
+
+    <!-- Table of Contents -->
+    <div class="toc">
+        <div class="toc-title">Contents</div>
+        <ol>
+            <li><a href="#s1">Introduction</a></li>
+            <li><a href="#s2">Legal Compliance</a></li>
+            <li><a href="#s3">Information We Collect</a></li>
+            <li><a href="#s4">Children's Privacy</a></li>
+            <li><a href="#s5">How We Use Information</a></li>
+            <li><a href="#s6">Information Sharing</a></li>
+            <li><a href="#s7">Data Security</a></li>
+            <li><a href="#s8">Cookies &amp; Website</a></li>
+            <li><a href="#s9">Your Rights</a></li>
+            <li><a href="#s10">Data Retention</a></li>
+            <li><a href="#s11">Third-Party Services</a></li>
+            <li><a href="#s12">Limitation of Liability</a></li>
+            <li><a href="#s13">Photo &amp; Media Consent</a></li>
+            <li><a href="#s14">Accuracy of Information</a></li>
+            <li><a href="#s15">Policy Updates</a></li>
+            <li><a href="#s16">Contact Us</a></li>
+        </ol>
+    </div>
+
+    <!-- Section 1 -->
+    <div class="section" id="s1">
+        <div class="section-header">
+            <div class="section-num">01</div>
+            <h2>Introduction</h2>
+        </div>
+        <div class="section-body">
+            <p>Paragon Public High School ("School", "we", "us", or "our"), located at Gulberg III, Lahore, Punjab, Pakistan, operates this website to provide information about our programs, admissions, and academic activities.</p>
+            <p>This Privacy Policy describes how we collect, use, store, and protect personal information submitted through our website, admission forms, and digital communication channels. By using our website or submitting any information to us, you agree to the terms of this Privacy Policy.</p>
+            <p>If you do not agree with this policy, please do not use our website or submit any personal information to us.</p>
+        </div>
+    </div>
+
+    <div class="divider"></div>
+
+    <!-- Section 2 -->
+    <div class="section" id="s2">
+        <div class="section-header">
+            <div class="section-num">02</div>
+            <h2>Legal Compliance</h2>
+        </div>
+        <div class="section-body">
+            <p>This Privacy Policy is designed to comply with the following applicable laws and regulations of Pakistan:</p>
+
+            <div class="law-box">
+                <div class="law-label">PECA 2016 — Prevention of Electronic Crimes Act</div>
+                <p>We operate in compliance with PECA 2016, which governs data privacy, unauthorized access to data, and the protection of personal information in electronic form. We do not engage in or facilitate unauthorized interception, access, or misuse of any user data.</p>
+            </div>
+
+            <div class="law-box">
+                <div class="law-label">Punjab Child Protection Act 2016</div>
+                <p>As an educational institution serving minors, we strictly comply with the Punjab Child Protection Act 2016. We take all reasonable steps to ensure the safety, dignity, and privacy of every child enrolled in or associated with our School.</p>
+            </div>
+
+            <div class="law-box">
+                <div class="law-label">Constitution of Pakistan — Article 14</div>
+                <p>We recognize the right to dignity and privacy as protected under Article 14 of the Constitution of Pakistan and reflect that commitment in all our data handling practices.</p>
+            </div>
+
+            <div class="law-box">
+                <div class="law-label">Pakistan Telecommunication (Re-organization) Act 1996</div>
+                <p>All electronic communications and data transmissions on our platform are handled in compliance with applicable telecommunication regulations.</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="divider"></div>
+
+    <!-- Section 3 -->
+    <div class="section" id="s3">
+        <div class="section-header">
+            <div class="section-num">03</div>
+            <h2>Information We Collect</h2>
+        </div>
+        <div class="section-body">
+            <p>We collect personal information only when it is necessary for providing our educational services and managing admissions. The types of information we may collect include:</p>
+
+            <table class="data-table">
+                <thead>
+                    <tr>
+                        <th>Category</th>
+                        <th>Examples</th>
+                        <th>Purpose</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Student Information</td>
+                        <td>Full name, date of birth, B-Form number, class/grade, previous school</td>
+                        <td>Admission processing &amp; student records</td>
+                    </tr>
+                    <tr>
+                        <td>Parent/Guardian Information</td>
+                        <td>Name, CNIC, phone number, email address, home address</td>
+                        <td>Communication &amp; emergency contact</td>
+                    </tr>
+                    <tr>
+                        <td>Academic Records</td>
+                        <td>Previous marksheets, test results, documents submitted</td>
+                        <td>Enrollment eligibility &amp; school records</td>
+                    </tr>
+                    <tr>
+                        <td>Contact &amp; Inquiry Data</td>
+                        <td>Name, phone, email, message submitted via contact form</td>
+                        <td>Responding to general inquiries</td>
+                    </tr>
+                    <tr>
+                        <td>Technical / Usage Data</td>
+                        <td>IP address, browser type, pages visited, session duration</td>
+                        <td>Website functionality &amp; security</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <div class="safe-box">
+                <p>✅ We collect only the minimum information necessary. We do not ask for any sensitive information beyond what is required for school operations.</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="divider"></div>
+
+    <!-- Section 4 -->
+    <div class="section" id="s4">
+        <div class="section-header">
+            <div class="section-num">04</div>
+            <h2>Children's Privacy (Students Under 18)</h2>
+        </div>
+        <div class="section-body">
+            <p>Paragon Public High School serves students who are minors (under the age of 18). We take the protection of children's data with the highest seriousness and comply fully with the <strong>Punjab Child Protection Act 2016</strong>.</p>
+            <ul>
+                <li>We <strong>do not</strong> knowingly collect personal data directly from children without explicit parental or guardian consent.</li>
+                <li>All admission information for students is collected from parents or legal guardians.</li>
+                <li>We <strong>do not</strong> share, sell, or disclose any student personal data to third parties for commercial purposes.</li>
+                <li>We <strong>do not</strong> display, publish, or distribute photographs, videos, or identifying information of students without written consent from a parent or guardian.</li>
+                <li>Any staff or affiliated persons who misuse student data will be subject to disciplinary action and may be reported to relevant authorities under PECA 2016 and the Punjab Child Protection Act.</li>
+            </ul>
+
+            <div class="warn-box">
+                <span class="warn-icon">⚠️</span>
+                <p>If you believe that your child's information has been collected or used in a manner that violates this policy, please contact us immediately at the details provided in Section 12. We will investigate and take corrective action within 7 working days.</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="divider"></div>
+
+    <!-- Section 5 -->
+    <div class="section" id="s5">
+        <div class="section-header">
+            <div class="section-num">05</div>
+            <h2>How We Use Your Information</h2>
+        </div>
+        <div class="section-body">
+            <p>We use the personal information we collect strictly for the following lawful purposes:</p>
+            <ul>
+                <li>Processing and evaluating student admission applications</li>
+                <li>Maintaining official student and parent records</li>
+                <li>Communicating with parents/guardians about school activities, fees, and academic progress</li>
+                <li>Responding to inquiries submitted through our website or WhatsApp</li>
+                <li>Sending administrative notifications such as exam schedules, results, and school announcements</li>
+                <li>Improving the functionality, security, and performance of our website</li>
+                <li>Complying with legal obligations under Pakistani law</li>
+            </ul>
+
+            <div class="warn-box">
+                <span class="warn-icon">🚫</span>
+                <p>We do <strong>not</strong> use your information for targeted advertising, selling to third-party marketers, or any purpose not listed above. We do not engage in profiling or automated decision-making that affects individuals.</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="divider"></div>
+
+    <!-- Section 6 -->
+    <div class="section" id="s6">
+        <div class="section-header">
+            <div class="section-num">06</div>
+            <h2>Information Sharing &amp; Disclosure</h2>
+        </div>
+        <div class="section-body">
+            <p>We do <strong>not</strong> sell, rent, or trade your personal information. We may share information only in the following strictly limited circumstances:</p>
+            <ul>
+                <li><strong>Legal Obligation:</strong> When required by Pakistani law, court order, or a lawful government authority (e.g., FIA, law enforcement) under PECA 2016 or other applicable legislation.</li>
+                <li><strong>Child Safety:</strong> If we reasonably believe disclosure is necessary to protect the safety or welfare of a student or the public, in accordance with the Punjab Child Protection Act 2016.</li>
+                <li><strong>Service Providers:</strong> With trusted third-party service providers (e.g., Firebase / Google for data storage) who are contractually bound to maintain confidentiality and process data only on our behalf.</li>
+                <li><strong>Educational Authorities:</strong> With official education boards (e.g., BISE Lahore, Punjab Education Department) solely for academic or regulatory purposes.</li>
+            </ul>
+
+            <div class="law-box">
+                <div class="law-label">Important — Third-Party Transfers</div>
+                <p>Any third party with whom we share data is required to handle that data securely and in a manner consistent with this Privacy Policy and applicable Pakistani law. We do not share data across international borders except where required by our technical infrastructure (e.g., Google Firebase servers), which is disclosed here transparently.</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="divider"></div>
+
+    <!-- Section 7 -->
+    <div class="section" id="s7">
+        <div class="section-header">
+            <div class="section-num">07</div>
+            <h2>Data Security</h2>
+        </div>
+        <div class="section-body">
+            <p>We implement appropriate technical and administrative security measures to protect personal information against unauthorized access, disclosure, alteration, or destruction. Our security practices include:</p>
+            <ul>
+                <li>Use of Firebase Firestore with access controls and security rules to restrict data access</li>
+                <li>HTTPS/SSL encryption for all data transmitted through our website</li>
+                <li>Restricted staff access — only authorized personnel can access student data</li>
+                <li>Regular security reviews of our website and data storage systems</li>
+            </ul>
+
+            <div class="warn-box">
+                <span class="warn-icon">⚠️</span>
+                <p>While we take all reasonable precautions, no method of electronic transmission or storage is 100% secure. In the event of a data breach affecting personal information, we will notify affected individuals within a reasonable time and take all steps required by law.</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="divider"></div>
+
+    <!-- Section 8 -->
+    <div class="section" id="s8">
+        <div class="section-header">
+            <div class="section-num">08</div>
+            <h2>Cookies &amp; Website Usage</h2>
+        </div>
+        <div class="section-body">
+            <p>Our website may use cookies and similar technologies to enhance the browsing experience. We use the following types of cookies:</p>
+            <ul>
+                <li><strong>Essential Cookies:</strong> Required for the website to function correctly (e.g., session management). These cannot be disabled.</li>
+                <li><strong>Analytics Cookies:</strong> Used to understand how visitors use our site (e.g., Google Analytics). These are anonymized and do not identify individuals.</li>
+            </ul>
+            <p>You may disable cookies at any time through your browser settings. Disabling essential cookies may affect website functionality.</p>
+            <p>We do not use advertising cookies, tracking pixels, or any cookie that sells or profiles user data.</p>
+        </div>
+    </div>
+
+    <div class="divider"></div>
+
+    <!-- Section 9 -->
+    <div class="section" id="s9">
+        <div class="section-header">
+            <div class="section-num">09</div>
+            <h2>Your Rights</h2>
+        </div>
+        <div class="section-body">
+            <p>You have the following rights with respect to your personal information held by us:</p>
+            <ul>
+                <li><strong>Right to Access:</strong> Request a copy of the personal information we hold about you or your child.</li>
+                <li><strong>Right to Correction:</strong> Request correction of any inaccurate or incomplete information.</li>
+                <li><strong>Right to Deletion:</strong> Request deletion of personal information where it is no longer required for the purpose it was collected, subject to any legal retention obligations.</li>
+                <li><strong>Right to Object:</strong> Object to the use of your personal information for any purpose other than those stated in this policy.</li>
+                <li><strong>Right to Withdraw Consent:</strong> Where processing is based on consent, you may withdraw that consent at any time.</li>
+            </ul>
+            <p>To exercise any of these rights, please contact us using the details in Section 12. We will respond within <strong>14 working days</strong>.</p>
+
+            <div class="safe-box">
+                <p>✅ Parents and guardians may exercise these rights on behalf of their minor children at any time. No request will be penalized.</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="divider"></div>
+
+    <!-- Section 10 -->
+    <div class="section" id="s10">
+        <div class="section-header">
+            <div class="section-num">10</div>
+            <h2>Data Retention</h2>
+        </div>
+        <div class="section-body">
+            <p>We retain personal information only for as long as necessary for the purposes outlined in this policy, or as required by law:</p>
+            <ul>
+                <li><strong>Admission Applications:</strong> Records of enrolled students are retained for the duration of enrollment and for a minimum of 5 years after leaving, in accordance with standard educational record-keeping practices.</li>
+                <li><strong>Unsuccessful Admission Enquiries:</strong> Deleted within 6 months if admission is not pursued.</li>
+                <li><strong>Website Inquiry / Contact Form Data:</strong> Retained for up to 12 months, then deleted.</li>
+                <li><strong>Technical/Usage Data:</strong> Retained for a maximum of 12 months for security and analytics, then anonymized or deleted.</li>
+            </ul>
+            <p>Upon request, we will delete information earlier than the stated retention period unless legally required to retain it.</p>
+        </div>
+    </div>
+
+    <div class="divider"></div>
+
+    <!-- Section 11 -->
+    <div class="section" id="s11">
+        <div class="section-header">
+            <div class="section-num">11</div>
+            <h2>Third-Party Services</h2>
+        </div>
+        <div class="section-body">
+            <p>Our website uses the following third-party services which may process limited data:</p>
+
+            <table class="data-table">
+                <thead>
+                    <tr>
+                        <th>Service</th>
+                        <th>Purpose</th>
+                        <th>Data Processed</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Google Firebase</td>
+                        <td>Secure form submission &amp; database</td>
+                        <td>Admission form data, submitted by parents</td>
+                    </tr>
+                    <tr>
+                        <td>Google Fonts</td>
+                        <td>Website typography</td>
+                        <td>IP address (standard web request)</td>
+                    </tr>
+                    <tr>
+                        <td>WhatsApp (Meta)</td>
+                        <td>Communication via school contact number</td>
+                        <td>Messages sent by user voluntarily</td>
+                    </tr>
+                    <tr>
+                        <td>AI Chatbot (OpenRouter)</td>
+                        <td>Answering common school queries on website</td>
+                        <td>Text of user messages only — no personal data stored</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <p>Each of these services has its own privacy policy. We encourage you to review them. We are not responsible for the data practices of external third-party platforms.</p>
+
+            <div class="warn-box">
+                <span class="warn-icon">⚠️</span>
+                <p>Please do not submit sensitive personal information (such as CNIC numbers, financial details, or health data) through our AI chatbot or contact form. Use official admission channels for such documents.</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="divider"></div>
+
+    <!-- Section 12 — Limitation of Liability -->
+    <div class="section" id="s12">
+        <div class="section-header">
+            <div class="section-num">12</div>
+            <h2>Limitation of Liability</h2>
+        </div>
+        <div class="section-body">
+            <p>The School takes all reasonable steps to protect user data and provide accurate information. However, the following limitations of liability apply in all cases:</p>
+
+            <div class="law-box">
+                <div class="law-label">AI Chatbot Disclaimer</div>
+                <p>The AI assistant on this website is provided for general informational purposes only. Responses generated by the AI chatbot do not constitute official School communication and should not be relied upon for admission, fee, or policy decisions. The School bears no responsibility for any action taken based on chatbot responses. For official information, always contact the School directly.</p>
+            </div>
+
+            <div class="law-box">
+                <div class="law-label">Data Security — Third-Party Cyberattacks</div>
+                <p>The School implements reasonable technical security measures to protect personal data. However, in the event of an unauthorized data breach resulting from a third-party cyberattack or force majeure event beyond the School's reasonable control, the School's liability shall be limited to notifying affected parties promptly and taking corrective action. The School shall not be liable for indirect damages arising from such incidents.</p>
+            </div>
+
+            <div class="law-box">
+                <div class="law-label">Voluntary Disclosure of Sensitive Information</div>
+                <p>Users are strictly advised not to share sensitive personal information — including CNIC numbers, financial details, passwords, or health information — through the website chat, contact forms, or any channel other than official admission submissions. The School is not responsible for any consequences arising from personal information voluntarily disclosed by users through unofficial channels.</p>
+            </div>
+
+            <div class="law-box">
+                <div class="law-label">Third-Party Services (Firebase, WhatsApp, Google)</div>
+                <p>The School uses third-party services including Google Firebase and WhatsApp for operational purposes. These platforms operate under their own independent privacy policies. The School is not responsible for the data handling, breaches, or policies of these third-party providers. Users are encouraged to review the respective privacy policies of these services independently.</p>
+            </div>
+
+            <div class="law-box">
+                <div class="law-label">Government / Legal Authority Disclosure</div>
+                <p>The School may be required to disclose personal information when ordered by a competent court, government authority, or applicable Pakistani law including PECA 2016 and the Punjab Child Protection Act 2016. Such disclosure shall not constitute a breach of this Privacy Policy. The School shall bear no liability for disclosures made in good-faith compliance with legal obligations.</p>
+            </div>
+
+            <div class="law-box">
+                <div class="law-label">Failure to Read This Policy</div>
+                <p>This Privacy Policy is publicly available on the School's website at all times. Continued use of the website or submission of any form constitutes acknowledgment and acceptance of this Privacy Policy in its entirety. The School shall not be held liable for any claims arising from a user's failure to read this publicly available policy.</p>
+            </div>
+
+            <div class="warn-box">
+                <span class="warn-icon">⚠️</span>
+                <p>In no event shall Paragon Public High School, its administration, staff, or representatives be liable for any indirect, incidental, or consequential damages arising from the use of this website, the AI chatbot, or third-party services integrated herein.</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="divider"></div>
+
+    <!-- Section 13 — Photo & Media Consent -->
+    <div class="section" id="s13">
+        <div class="section-header">
+            <div class="section-num">13</div>
+            <h2>Photo &amp; Media Consent</h2>
+        </div>
+        <div class="section-body">
+            <p>The School may photograph or record video during official school events, ceremonies, sports days, and academic activities for educational and promotional purposes.</p>
+
+            <div class="law-box">
+                <div class="law-label">Default Consent Upon Enrollment</div>
+                <p>By enrolling a student at this School, parents or guardians grant the School a non-exclusive, royalty-free right to use photographs or videos of the enrolled student taken during official school events for educational and institutional promotional purposes — including the school website, official notice boards, and school social media accounts.</p>
+            </div>
+
+            <ul>
+                <li>Photos and videos will only be used for school-related, non-commercial purposes.</li>
+                <li>Student images will never be shared with third-party advertisers or commercial entities.</li>
+                <li>No student will be individually identified by full name alongside their photograph on public-facing platforms without explicit written parental consent.</li>
+                <li>Parents who <strong>do not consent</strong> to their child's media use must notify the School in writing at the time of admission or at any point thereafter. The School will honour such requests promptly.</li>
+            </ul>
+
+            <div class="safe-box">
+                <p>✅ To withdraw media consent at any time, submit a written request to the School office. Your request will be honoured within 7 working days and existing published content will be removed where feasible.</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="divider"></div>
+
+    <!-- Section 14 — Accuracy of Information -->
+    <div class="section" id="s14">
+        <div class="section-header">
+            <div class="section-num">14</div>
+            <h2>Accuracy of Information Submitted</h2>
+        </div>
+        <div class="section-body">
+            <p>The School relies entirely on the accuracy of information provided by parents, guardians, and applicants during the admission and registration process.</p>
+
+            <div class="law-box">
+                <div class="law-label">Parent / Guardian Responsibility</div>
+                <p>The School shall not be held liable for any consequences — including admission cancellation, academic record errors, or legal complications — arising from false, incomplete, inaccurate, or misleading information submitted by parents or guardians. It is the sole responsibility of the submitting party to ensure all information is truthful and correct at the time of submission.</p>
+            </div>
+
+            <ul>
+                <li>Submission of forged documents (e.g., fake B-Form, marksheets) may be reported to relevant authorities under PECA 2016 and applicable Pakistani law.</li>
+                <li>The School reserves the right to cancel admission at any stage if submitted information is found to be materially false.</li>
+                <li>Parents are responsible for updating the School promptly if any submitted information changes (e.g., contact number, address).</li>
+            </ul>
+
+            <div class="warn-box">
+                <span class="warn-icon">⚠️</span>
+                <p>By submitting any form on this website or in person, the parent or guardian confirms that all information provided is accurate, complete, and truthful to the best of their knowledge.</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="divider"></div>
+
+    <!-- Section 15 — Policy Updates -->
+    <div class="section" id="s15">
+        <div class="section-header">
+            <div class="section-num">15</div>
+            <h2>Policy Updates</h2>
+        </div>
+        <div class="section-body">
+            <p>We may update this Privacy Policy from time to time to reflect changes in our practices, services, or applicable legal requirements under Pakistani law.</p>
+            <ul>
+                <li>Any updates will be posted on this page with a revised "Last Updated" date at the top.</li>
+                <li>Continued use of our website after any update constitutes acceptance of the revised policy.</li>
+                <li>The School shall not be liable for claims arising from policy changes that were publicly posted on this page.</li>
+                <li>For significant changes affecting student data handling, we will notify parents and guardians through official school communication channels.</li>
+            </ul>
+            <p>We encourage all parents and guardians to review this page periodically to stay informed.</p>
+        </div>
+    </div>
+
+    <div class="divider"></div>
+
+    <!-- Section 16 — Contact -->
+    <div class="section" id="s16">
+        <div class="section-header">
+            <div class="section-num">16</div>
+            <h2>Contact Us</h2>
+        </div>
+        <div class="section-body">
+            <p>For any questions, concerns, or requests regarding this Privacy Policy or your personal data, please contact us through any of the following:</p>
+
+            <div class="contact-card">
+                <div class="contact-item">
+                    <div class="label">School Name</div>
+                    <div class="value">Paragon Public High School</div>
+                </div>
+                <div class="contact-item">
+                    <div class="label">Location</div>
+                    <div class="value">Gulberg III, Lahore, Punjab, Pakistan</div>
+                </div>
+                <div class="contact-item">
+                    <div class="label">Email</div>
+                    <div class="value"><a href="mailto:info@paragonschool.edu.pk">info@paragonschool.edu.pk</a></div>
+                </div>
+                <div class="contact-item">
+                    <div class="label">Phone / WhatsApp</div>
+                    <div class="value"><a href="tel:+92XXXXXXXXXX">+92-XXX-XXXXXXX</a></div>
+                </div>
+                <div class="contact-item">
+                    <div class="label">Response Time</div>
+                    <div class="value">Within 14 working days</div>
+                </div>
+                <div class="contact-item">
+                    <div class="label">Office Hours</div>
+                    <div class="value">Monday–Saturday, 8:00 AM – 3:00 PM</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Admission Consent Notice -->
+    <div class="section">
+        <div class="safe-box" style="border-radius:12px; border:1px solid rgba(76,175,118,0.25); padding:1.4rem 1.6rem;">
+            <p style="font-size:0.95rem !important; color:#88c8a4 !important; font-weight:600; margin-bottom:0.5rem !important;">📋 Admission Form Acknowledgment</p>
+            <p style="font-size:0.88rem !important; color:#88c8a4 !important;">By submitting the admission form (online or in person), the parent or guardian confirms: <em>"I have read and agree to Paragon Public High School's Privacy Policy. I confirm that all information provided is accurate and complete."</em> This acknowledgment constitutes legal acceptance of this policy in its entirety.</p>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <div class="footer">
+        <p>&copy; 2026 Paragon Public High School. All rights reserved.</p>
+        <a href="index.html" class="btn-home">← Back to Home</a>
+    </div>
+
+</div>
+</body>
+</html>
